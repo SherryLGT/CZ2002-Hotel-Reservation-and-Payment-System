@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.io.IOException;
 import java.io.FileWriter;
@@ -8,6 +8,8 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import model.Professor;
 
 public class TextDB {
 	public static final String SEPARATOR = "|";
