@@ -1,12 +1,8 @@
-package view;
-import java.io.IOException;
-import java.util.ArrayList;
+package ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.ReservationController;
-import database.ReservationDB;
-import model.Reservation;
 
 public class HRPSApp {
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -37,13 +33,12 @@ public class HRPSApp {
 		
 		System.out.println("=================================\n|\t WELCOME TO HRPS \t|\n=================================");
 		System.out.println("| Options: \t\t\t|");
-		System.out.println("|\t1. Guest\t\t|");
+		System.out.println("|\t1. Check In\t\t|");
 		System.out.println("|\t2. Make Reservation\t|");
-		System.out.println("|\t3. Check In\t\t|");
-		System.out.println("|\t4. Room Service\t\t|");
-		System.out.println("|\t5. Payment\t\t|");
-		System.out.println("|\t6. Occupancy Report\t|");
-		System.out.println("|\t7. Exit\t\t\t|");
+		System.out.println("|\t3. Room Service\t\t|");
+		System.out.println("|\t4. Payment\t\t|");
+		System.out.println("|\t5. Occupancy Report\t|");
+		System.out.println("|\t6. Exit\t\t\t|");
 		System.out.println("=================================");
 		
 		do {
@@ -65,25 +60,22 @@ public class HRPSApp {
 		
 		switch(option) {
 			case 1:
-				System.out.print("Guest");
+				reservationControl.checkIn();
 				break;
 			case 2:
 				reservationControl.createReservation();
 				break;
 			case 3:
-				reservationControl.checkIn();
-				break;
-			case 4:
 				System.out.print("Room Service");
 				break;
-			case 5:
+			case 4:
 				System.out.print("Payment");
 				reservationControl.checkOut();
 				break;
-			case 6:
+			case 5:
 				System.out.print("Occupancy Report");
 				break;
-			case 7:
+			case 6:
 				System.exit(0);
 				break;
 		}

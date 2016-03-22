@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import model.Professor;
+import entity.Professor;
 
 public class TextDB {
 	public static final String SEPARATOR = "|";

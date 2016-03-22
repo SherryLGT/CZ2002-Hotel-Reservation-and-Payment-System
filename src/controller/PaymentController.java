@@ -1,6 +1,6 @@
 package controller;
 
-import model.Payment;
+import entity.Payment;
 
 public class PaymentController {
 	Payment payment;

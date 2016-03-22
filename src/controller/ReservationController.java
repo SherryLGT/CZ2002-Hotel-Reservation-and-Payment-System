@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 import database.ReservationDB;
-import model.Guest;
-import model.Reservation;
-import model.Room;
+import entity.Guest;
+import entity.Reservation;
+import entity.Room;
 
 public class ReservationController {
 	private ReservationDB reservationDB = new ReservationDB();

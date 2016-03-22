@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 import java.io.Serializable;
 
@@ -10,8 +10,7 @@ import java.io.Serializable;
  */
 
 public class Payment implements Serializable{
-	private Guest guest;
-	private Room room;
+	private Reservation reservation;
 	private double charges;
 	private double tax;
 	private RoomService roomService;
@@ -25,16 +24,14 @@ public class Payment implements Serializable{
 	/**
 	 *  Creates a new Payment with the room and room service details.
 	 *  With the addition of charges, tax and discount(s) taken into consideration.
-	 *  @param guest This Payment for which guest.
-	 *  @param room This Payment for which room.
+	 *  @param reservation This Payment for which reservation
 	 *  @param charges This Payment's charges.
 	 *  @param tax This Payment's tax.
 	 *  @param roomService This Payment's room service.
 	 *  @param discount This Payment's discount.
 	 */	
-	public Payment(Guest guest, Room room, double charges, double tax, RoomService roomService, double discount) {
-		this.guest = guest;
-		this.room = room;
+	public Payment(Reservation reservation, double charges, double tax, RoomService roomService, double discount) {
+		this.reservation = reservation;
 		this.charges = charges;
 		this.tax = tax;
 		this.roomService = roomService;

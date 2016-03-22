@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import model.Guest;
-import model.Payment;
-import model.Reservation;
-import model.Room;
+import entity.Guest;
+import entity.Payment;
+import entity.Reservation;
+import entity.Room;
 
 public class ReservationDB {
 	private static final String SEPARATOR = "|";
