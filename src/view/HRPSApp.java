@@ -1,6 +1,12 @@
 package view;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import controller.ReservationController;
+import database.ReservationDB;
+import model.Reservation;
 
 public class HRPSApp {
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -27,17 +33,25 @@ public class HRPSApp {
 	public static void main(String[] aArgs)  {
 		Scanner sc = new Scanner(System.in);
 		int option = -1;
+		ReservationController reservationControl = new ReservationController();
 		
 		System.out.println("=================================\n|\t WELCOME TO HRPS \t|\n=================================");
-		System.out.println("| Options: \t\t\t|\n|\t1. Guest\t\t|\n|\t2. Reservation\t\t|\n|\t3. Room Service\t\t|\n|\t4. Payment\t\t|\n|\t5. Occupancy Report\t|\n|\t6. Exit\t\t\t|");
+		System.out.println("| Options: \t\t\t|");
+		System.out.println("|\t1. Guest\t\t|");
+		System.out.println("|\t2. Make Reservation\t|");
+		System.out.println("|\t3. Check In\t\t|");
+		System.out.println("|\t4. Room Service\t\t|");
+		System.out.println("|\t5. Payment\t\t|");
+		System.out.println("|\t6. Occupancy Report\t|");
+		System.out.println("|\t7. Exit\t\t\t|");
 		System.out.println("=================================");
 		
 		do {
 			System.out.print("Select an option: ");
 			try {
 				option = sc.nextInt();
-				if (option < 1 || option > 6) {
-					System.out.println("You have not selected option between 1-6. Please try again.");
+				if (option < 1 || option > 7) {
+					System.out.println("You have not selected option between 1-7. Please try again.");
 					continue;
 				}
 				else
@@ -54,18 +68,22 @@ public class HRPSApp {
 				System.out.print("Guest");
 				break;
 			case 2:
-				System.out.print("Reservation");
+				reservationControl.createReservation();
 				break;
 			case 3:
-				System.out.print("Room Service");
+				reservationControl.checkIn();
 				break;
 			case 4:
-				System.out.print("Payment");
+				System.out.print("Room Service");
 				break;
 			case 5:
-				System.out.print("Occupancy Report");
+				System.out.print("Payment");
+				reservationControl.checkOut();
 				break;
 			case 6:
+				System.out.print("Occupancy Report");
+				break;
+			case 7:
 				System.exit(0);
 				break;
 		}
