@@ -2,6 +2,7 @@ package ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controller.PaymentController;
 import controller.ReservationController;
 
 public class HRPSApp {
@@ -30,6 +31,7 @@ public class HRPSApp {
 		Scanner sc = new Scanner(System.in);
 		int option = -1;
 		ReservationController reservationControl = new ReservationController();
+		PaymentController paymentControl = new PaymentController();
 		
 		System.out.println("=================================\n|\t WELCOME TO HRPS \t|\n=================================");
 		System.out.println("| Options: \t\t\t|");
@@ -37,8 +39,9 @@ public class HRPSApp {
 		System.out.println("|\t2. Make Reservation\t|");
 		System.out.println("|\t3. Room Service\t\t|");
 		System.out.println("|\t4. Payment\t\t|");
-		System.out.println("|\t5. Occupancy Report\t|");
-		System.out.println("|\t6. Exit\t\t\t|");
+		System.out.println("|\t5. Search Guest\t\t|");
+		System.out.println("|\t6. Occupancy Report\t|");
+		System.out.println("|\t7. Exit\t\t\t|");
 		System.out.println("=================================");
 		
 		do {
@@ -69,13 +72,17 @@ public class HRPSApp {
 				System.out.print("Room Service");
 				break;
 			case 4:
-				System.out.print("Payment");
+				paymentControl.createPayment();
 				reservationControl.checkOut();
 				break;
 			case 5:
-				System.out.print("Occupancy Report");
+				System.out.print("Search Guest");
 				break;
 			case 6:
+				System.out.print("Occupancy Report");
+				break;
+			case 7:
+				System.out.print("Thank you for using HRPS!");
 				System.exit(0);
 				break;
 		}

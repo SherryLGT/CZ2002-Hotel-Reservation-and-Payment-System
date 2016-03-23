@@ -80,6 +80,11 @@ public class ReservationController {
 		
 		
 	}
+	
+	public Reservation getReservation(String reservationID) {
+		Reservation reservation = new Reservation();
+		return reservation;		
+	}
 
 	public void checkIn() {
 	}

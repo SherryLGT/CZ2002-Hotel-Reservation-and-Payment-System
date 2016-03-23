@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /** 
  * Represents the total bill for payment for the guest
@@ -15,6 +16,8 @@ public class Payment implements Serializable{
 	private double tax;
 	private RoomService roomService;
 	private double discount;
+	private double total;
+	private Date date;
 	
 	/**
 	 *  Default constructor
@@ -29,13 +32,33 @@ public class Payment implements Serializable{
 	 *  @param tax This Payment's tax.
 	 *  @param roomService This Payment's room service.
 	 *  @param discount This Payment's discount.
+	 *  @param total This Payment's total bill.
+	 *  @param date This Payment's date.
 	 */	
-	public Payment(Reservation reservation, double charges, double tax, RoomService roomService, double discount) {
+	public Payment(Reservation reservation, double charges, double tax, RoomService roomService, double discount, double total, Date date) {
 		this.reservation = reservation;
 		this.charges = charges;
 		this.tax = tax;
 		this.roomService = roomService;
 		this.discount = discount;
+		this.total = total;
+		this.date = date;
+	}
+
+	/**
+	 * Gets the reservation details for this Payments.
+	 * @return this Payment's reservation.
+	 */
+	public Reservation getReservation() {
+		return reservation;
+	}
+
+	/**
+	 * Changes the reservation details of this Payment.
+	 * @param reservation the reservation to set
+	 */
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 
 	/**
@@ -71,6 +94,22 @@ public class Payment implements Serializable{
 	}
 
 	/**
+	 * Gets the roomService details for this Payments.
+	 * @return this Payment's roomService.
+	 */
+	public RoomService getRoomService() {
+		return roomService;
+	}
+
+	/**
+	 * Changes the roomService details of this Payment.
+	 * @param roomService the roomService to set
+	 */
+	public void setRoomService(RoomService roomService) {
+		this.roomService = roomService;
+	}
+
+	/**
 	 * Gets the discount of this Payments.
 	 * @return the discount
 	 */
@@ -84,5 +123,37 @@ public class Payment implements Serializable{
 	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;
+	}
+
+	/**
+	 * Gets the total bill of this Payments.
+	 * @return the total
+	 */
+	public double getTotal() {
+		return total;
+	}
+
+	/**
+	 * Changes the total of this Payment.
+	 * @param total the total to set
+	 */
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	/**
+	 * Gets the date of this Payments.
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * Changes the date of this Payment.
+	 * @param date the date to set
+	 */
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

@@ -1,12 +1,11 @@
 package entity;
 
 import java.io.Serializable;
-
-import org.joda.time.DateTime;
+import java.util.Date;
 
 public class RoomService implements Serializable{
 	private MenuItem items;
-	private DateTime date;
+	private Date date;
 	private String remarks;
 	private String status;
 	
@@ -16,7 +15,7 @@ public class RoomService implements Serializable{
 	
 	public RoomService() {}
 	
-	public RoomService(MenuItem items, DateTime date, String remarks, String status) {
+	public RoomService(MenuItem items, Date date, String remarks, String status) {
 		this.items = items;
 		this.date = date;
 		this.remarks = remarks;
@@ -31,11 +30,11 @@ public class RoomService implements Serializable{
 		this.items = items;
 	}
 
-	public DateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(DateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
