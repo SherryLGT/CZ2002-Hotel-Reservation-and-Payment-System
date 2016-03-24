@@ -69,7 +69,8 @@ public class HRPSApp {
 				reservationControl.createReservation();
 				break;
 			case 3:
-				System.out.print("Room Service");
+				System.out.println("Room Service");
+				System.out.print("Select a menu item: ");
 				break;
 			case 4:
 				paymentControl.createPayment();
