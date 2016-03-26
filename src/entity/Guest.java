@@ -11,15 +11,66 @@ public class Guest implements Serializable{
 	private String nationality;
 	private int contact;
 
-	private class CreditCard {
+	public class CreditCard {
+		
+		private String type;
+		private String num;
+		private String cvv;
+		private String exp;
+		
+		public String getType() {return type;}
+		public void setType(String type) {this.type = type;}
+		
+		public String getNum() {return num;	}
+		public void setNum(String num) {this.num = num;}
+		
+		public String getCvv() {return cvv;	}
+		public void setCvv(String cvv) {this.cvv = cvv;	}
+		
+		public String getExp() {return exp;	}
+		public void setExp(String exp) {this.exp = exp;	}
+		
+		public CreditCard(){}
 		
 	}
 	
-	private class Address {
+	public class Address {
+		private String add1;
+		private String add2;
+		private String city;
+		private String state;
+		private String zip;
+	
+		public String getAdd1() {return add1;}
+		public void setAdd1(String add1) {this.add1 = add1;}
 		
+		public String getAdd2() {return add2;}
+		public void setAdd2(String add2) {this.add2 = add2;}
+		
+		public String getCity() {return city;}
+		public void setCity(String city) {this.city = city;}
+		
+		public String getState() {return state;}
+		public void setState(String state) {this.state = state;}
+		
+		public String getZip() {return zip;}
+		public void setZip(String zip) {this.zip = zip;}
+		
+		public Address(){}	
 	}
 	
-	private class Identity {
+	public class Identity {
+		
+		private String lic;
+		private String pp;
+		
+		public String getLic() {return lic;	}
+		public void setLic(String lic) {this.lic = lic;	}
+		
+		public String getPp() {return pp;	}
+		public void setPp(String pp) {this.pp = pp;	}
+		
+		public Identity(){}
 		
 	}
 	
