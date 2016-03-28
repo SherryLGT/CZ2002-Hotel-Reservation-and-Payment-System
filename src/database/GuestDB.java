@@ -31,6 +31,8 @@ public class GuestDB {
 			Guest guest = new Guest();
 			guest.setName(star.nextToken().trim());
 			
+			guest.setGender(star.nextToken().trim());
+			
 			guest.getCard().setType(star.nextToken().trim());	
 			guest.getCard().setNum(star.nextToken().trim());	
 			guest.getCard().setCvv(star.nextToken().trim());	
@@ -92,6 +94,8 @@ public class GuestDB {
 			st.append(guest.getIdentity().getLic().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getIdentity().getPp().trim());
+			st.append(SEPARATOR);
+			st.append(guest.getGender().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getNationality().trim());
 			st.append(SEPARATOR);

@@ -19,8 +19,8 @@ public class GuestController {
 		println("GUEST REGISTRATION");
 		
 		//initialize attributes
-		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "";
-		int cardType = 0;
+		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "", country = "", lic = "", pp = "", nationality = "", contact = "";
+		int genderType = 0, cardType = 0;
 		
 		//prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
@@ -37,6 +37,16 @@ public class GuestController {
 			}
 		}while(name.equals(""));
 		
+		println("\nGender: ");
+		
+		print("(1) Male (2) Female ");
+		genderType = sc.nextInt();
+		switch(genderType){
+			case 1: guest.setGender("Male");break;
+			case 2: guest.setGender("Female");break;
+			default: println("Oops, error...");
+		}
+		
 		println("\nCredit Card Details");
 		
 		print("Card Type - (1) Visa (2) Master (3) Amex: ");
@@ -45,7 +55,7 @@ public class GuestController {
 			case 1: guest.getCard().setType("Visa");break;
 			case 2: guest.getCard().setType("Master");break;
 			case 3: guest.getCard().setType("Amex");break;
-			default: println("Opps, error...");
+			default: println("Oops, error...");
 		}
 		
 		print("Card Number: ");
@@ -82,7 +92,24 @@ public class GuestController {
 		zip = sc.nextLine();
 		guest.getAddress().setZip(zip);
 		
-		//CONTINUE TO PROMPT FOR THE REMAINING INFO
+		println("\nCountry");
+		
+		print("Country: ");
+		country = sc.nextLine();
+		guest.setCountry(country);
+		
+		println("\nIdentity");
+		
+		//Missing out identity
+		
+		print("Nationality: ");
+		nationality = sc.nextLine();
+		guest.setNationality(nationality);
+		
+		print("Contact: ");
+		contact = sc.nextLine();
+
+		//Parse string to integer
 		
 		try {
 			// read file containing Guest records.

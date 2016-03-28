@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Guest implements Serializable{
 	private String name;
+	private String gender;
 	private CreditCard card;
 	private Address address;
 	private String country;
@@ -76,8 +77,9 @@ public class Guest implements Serializable{
 	
 	public Guest() {}
 	
-	public Guest(String name, CreditCard card, Address address, String country, Identity identity, String nationality, int contact) {
+	public Guest(String name, String gender, CreditCard card, Address address, String country, Identity identity, String nationality, int contact) {
 		this.name = name;
+		this.gender = gender;
 		this.card = card;
 		this.address = address;
 		this.country = country;
@@ -94,6 +96,14 @@ public class Guest implements Serializable{
 		this.name = name;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
 	public CreditCard getCard() {
 		return card;
 	}
