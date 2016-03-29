@@ -16,6 +16,8 @@ import entity.Room;
 public class ReservationController {
 	private ReservationDB reservationDB = new ReservationDB();
 	private String filename = "reservation.txt";
+	private int position = 0;
+	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
 	public void createReservation() {
 		String reservationID;
@@ -26,12 +28,13 @@ public class ReservationController {
 		Date checkOut = null;
 		int numAdult;
 		int numChild;
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+		RoomController roomControl = new RoomController();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Make Reservation");
+		System.out.println("\n~~~ Make Reservation ~~~\n");
 
 		Date date = new Date();
 		reservationID = dateFormat.format(date).trim();
@@ -39,6 +42,8 @@ public class ReservationController {
 
 		System.out.println("GuestID/Name");
 		guest.setName(sc.nextLine());
+
+		roomControl.printRooms();
 		System.out.println("RoomID/Type");
 		room.setRoomNo(sc.nextInt());
 		System.out.println("Billing type? (1) Cash (2) Credit Card");
@@ -64,32 +69,167 @@ public class ReservationController {
 		Reservation reservation = new Reservation(reservationID, guest, room, billType, checkIn, checkOut, numAdult,
 				numChild, "Waitlist");
 
+		ArrayList al = getReservation();
+		al.add(reservation);
+
 		try {
-			// read file containing Reservation records.
-			ArrayList al = reservationDB.readReservation(filename);
-			for (int i = 0; i < al.size(); i++) {
-				Reservation reserv = (Reservation) al.get(i);
-			}
-			al.add(reservation);
 			// write Reservation record/s to file.
 			reservationDB.saveReservation(filename, al);
+
 			System.out.println("Resevation Details");
+
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
 		}
-		
-		
-	}
-	
-	public Reservation getReservation(String reservationID) {
-		Reservation reservation = new Reservation();
-		return reservation;		
+
 	}
 
 	public void checkIn() {
+		String guest;
+		Boolean check = false;
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("\n~~~ Check In ~~~\n");
+
+		System.out.println("GuestID/Name");
+		guest = sc.nextLine();
+
+		ArrayList al = getReservation();
+
+		Date date = new Date();
+
+		for (int i = 0; i < al.size(); i++) {
+			Reservation reserv = (Reservation) al.get(i);
+
+			if (guest.equals(reserv.getGuest().getName())
+					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
+					&& reserv.getStatus().equals("Waitlist")) {
+				reserv = updateReservation(reserv, 1);
+				al.set(i, reserv);
+				check = true;
+			}
+		}
+
+		if (check) {
+			try {
+				// write Reservation record/s to file.
+				reservationDB.saveReservation(filename, al);
+
+				System.out.println("Checked In!");
+
+			} catch (IOException e) {
+				System.out.println("IOException > " + e.getMessage());
+			}
+		} else {
+			System.out.println("Error In Checked In!");
+		}
 	}
 
-	public void checkOut() {
+	public void kickOut() {
+		ArrayList al = getReservation();
+		Date date = new Date();
+
+		for (int i = 0; i < al.size(); i++) {
+			Reservation reserv = (Reservation) al.get(i);
+			if ((formatter.format(date)).equals(formatter.format(reserv.getCheckIn())) && reserv.getStatus().equals("Waitlist")) {
+				reserv = updateReservation(reserv, 2);
+				al.set(i, reserv);
+			}
+		}
+
+		try {
+			// write Reservation record/s to file.
+			reservationDB.saveReservation(filename, al);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+	}
+
+	public void deleteReservation() {
+		String guest;
+		Boolean check = false;
+		Date date = null;
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("\n~~~ Delete Reservation ~~~\n");
+
+		System.out.println("GuestID/Name");
+		guest = sc.nextLine();
+
+		ArrayList al = getReservation();
+
+		System.out.println("Check In Date (MM/dd/yyyy):");
+		try {
+			date = (Date) formatter.parse(sc.nextLine());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		for (int i = 0; i < al.size(); i++) {
+			Reservation reserv = (Reservation) al.get(i);
+
+			if (guest.equals(reserv.getGuest().getName()) && date.equals(reserv.getCheckIn())
+					&& reserv.getStatus().equals("Waitlist")) {
+				reserv = updateReservation(reserv, 1);
+				al.remove(i);
+				check = true;
+			}
+		}
+
+		if (check) {
+			try {
+				// write Reservation record/s to file.
+				reservationDB.saveReservation(filename, al);
+
+				System.out.println("Delete!");
+
+			} catch (IOException e) {
+				System.out.println("IOException > " + e.getMessage());
+			}
+		} else {
+			System.out.println("Error In Delete!");
+		}
+	}
+
+	public Reservation updateReservation(Reservation reservation, int type) {
+		switch (type) {
+		case 1:
+			reservation.setStatus("Checked-In");
+			break;
+		case 2:
+			reservation.setStatus("Expired");
+			break;
+		}
+
+		return reservation;
+	}
+
+	public ArrayList getReservation() {
+		ArrayList al = null;
+		try {
+			// read file containing Reservation records.
+			al = reservationDB.readReservation(filename);
+
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+		return al;
+	}
+	
+	public Reservation searchReservation(String reservationID) {
+		ArrayList al = getReservation();
+		
+		for (int i = 0; i < al.size(); i++) {
+			Reservation reserv = (Reservation) al.get(i);
+
+			if (reserv.getReservationID().equals(reservationID)) {
+				return reserv;
+			}
+		}
+		
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.PaymentController;
 import controller.ReservationController;
+import controller.RoomController;
 
 public class HRPSApp {
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -37,19 +38,20 @@ public class HRPSApp {
 		System.out.println("| Options: \t\t\t|");
 		System.out.println("|\t1. Check In\t\t|");
 		System.out.println("|\t2. Make Reservation\t|");
-		System.out.println("|\t3. Room Service\t\t|");
-		System.out.println("|\t4. Payment\t\t|");
-		System.out.println("|\t5. Search Guest\t\t|");
-		System.out.println("|\t6. Occupancy Report\t|");
-		System.out.println("|\t7. Exit\t\t\t|");
+		System.out.println("|\t3. Delete Reservation\t|");
+		System.out.println("|\t4. Room Service\t\t|");
+		System.out.println("|\t5. Payment\t\t|");
+		System.out.println("|\t6. Search Guest\t\t|");
+		System.out.println("|\t7. Occupancy Report\t|");
+		System.out.println("|\t8. Exit\t\t\t|");
 		System.out.println("=================================");
 		
 		do {
 			System.out.print("Select an option: ");
 			try {
 				option = sc.nextInt();
-				if (option < 1 || option > 7) {
-					System.out.println("You have not selected option between 1-7. Please try again.");
+				if (option < 1 || option > 8) {
+					System.out.println("You have not selected option between 1-8. Please try again.");
 					continue;
 				}
 				else
@@ -59,30 +61,58 @@ public class HRPSApp {
 				sc.next();
 				continue;
 			}
-		} while(option < 1 || option > 6);
+		} while(option < 1 || option > 8);
 		
 		switch(option) {
 			case 1:
 				reservationControl.checkIn();
 				break;
 			case 2:
+				reservationControl.kickOut();
 				reservationControl.createReservation();
 				break;
 			case 3:
+				reservationControl.deleteReservation();
+				break;
+			case 4:
 				System.out.println("Room Service");
 				System.out.print("Select a menu item: ");
 				break;
-			case 4:
-				paymentControl.createPayment();
-				reservationControl.checkOut();
-				break;
 			case 5:
-				System.out.print("Search Guest");
+				paymentControl.createPayment();
 				break;
 			case 6:
-				System.out.print("Occupancy Report");
+				System.out.print("Search Guest");
 				break;
 			case 7:
+				System.out.println("Occupancy Report");
+				System.out.println("1. Print Room Occupancy Status");
+				System.out.println("2. Print Room Satus\n");
+				do {
+					System.out.print("Select an option: ");
+					try {
+						option = sc.nextInt();
+						if (option < 1 || option > 2) {
+							System.out.println("You have not selected option between 1-2. Please try again.");
+							continue;
+						}
+						else
+							break;
+					} catch(InputMismatchException e) {
+						System.out.println("You have entered an invalid input. Please try again.");
+						sc.next();
+						continue;
+					}
+				} while(option < 1 || option > 2);
+			
+				RoomController roomControl = new RoomController();
+				if(option == 1)
+					roomControl.printRoomOccupancy();
+				else
+					roomControl.printRoomStatus();
+				
+				break;
+			case 8:
 				System.out.print("Thank you for using HRPS!");
 				System.exit(0);
 				break;

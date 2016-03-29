@@ -35,7 +35,7 @@ public class PaymentController {
 		
 		System.out.println("\nMake Payment\n-------------");
 		System.out.print("Enter reservation ID: ");
-		reservation = reservationControl.getReservation(sc.nextLine());
+		reservation = reservationControl.searchReservation(sc.nextLine());
 		
 		c.setTime(reservation.getCheckOut());
 		int day = c.get(Calendar.DAY_OF_WEEK);

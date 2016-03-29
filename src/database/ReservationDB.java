@@ -48,8 +48,6 @@ public class ReservationDB {
 			guest.setName(star.nextToken().trim());
 			Room room = new Room();
 			room.setRoomNo(Integer.parseInt(star.nextToken().trim()));
-			Payment payment = new Payment();
-			payment.setCharges(Double.parseDouble(star.nextToken().trim()));
 			int billType = Integer.parseInt(star.nextToken().trim());
 			Date checkIn = null;
 			try {
@@ -68,7 +66,7 @@ public class ReservationDB {
 			String status = star.nextToken().trim();
 
 			// create reserv object from file data
-			Reservation reserv = new Reservation(reservationID, guest, room, payment, billType, checkIn,
+			Reservation reserv = new Reservation(reservationID, guest, room, billType, checkIn,
 					checkOut, numAdult, numChild, status);
 			// add to Reservation list
 			alr.add(reserv);
@@ -88,8 +86,6 @@ public class ReservationDB {
 			st.append(reserv.getGuest().getName().trim());
 			st.append(SEPARATOR);
 			st.append(reserv.getRoom().getRoomNo());
-			st.append(SEPARATOR);
-			st.append(reserv.getPayment().getCharges());
 			st.append(SEPARATOR);
 			st.append(reserv.getBillType());
 			st.append(SEPARATOR);

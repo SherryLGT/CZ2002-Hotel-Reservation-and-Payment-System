@@ -15,7 +15,6 @@ public class Reservation implements Serializable {
 	private String reservationID;
 	private Guest guest;
 	private Room room;
-	private Payment payment;
 	private int billType;
 	private Date checkIn;
 	private Date checkOut;
@@ -33,23 +32,6 @@ public class Reservation implements Serializable {
 		this.reservationID = reservationID;
 		this.guest = guest;
 		this.room = room;
-		this.payment = new Payment();
-		payment.setCharges(0.0);
-		this.billType = billType;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.numAdult = numAdult;
-		this.numChild = numChild;
-		this.status = status;
-	}
-	
-	public Reservation(String reservationID, Guest guest, Room room, Payment payment, int billType, Date checkIn,
-			Date checkOut, int numAdult, int numChild, String status) {
-		super();
-		this.reservationID = reservationID;
-		this.guest = guest;
-		this.room = room;
-		this.payment = payment;
 		this.billType = billType;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -80,14 +62,6 @@ public class Reservation implements Serializable {
 
 	public void setRoom(Room room) {
 		this.room = room;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
 	}
 
 	public int getBillType() {
