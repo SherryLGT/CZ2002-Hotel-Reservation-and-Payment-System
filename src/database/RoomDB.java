@@ -19,29 +19,31 @@ public class RoomDB {
     /*
      * Read Room
      */
+	
 	@SuppressWarnings("rawtypes")
 	public static ArrayList readRoom(String filename) throws IOException {
 		
-		// read String from text file
+		// Read String from text file
 		ArrayList stringArray = (ArrayList)read(filename);
-		ArrayList alr = new ArrayList() ;// to store Room data
+		// To store Room date
+		ArrayList alr = new ArrayList() ;
 
         for (int i = 0 ; i < stringArray.size() ; i++) {
 			String st = (String)stringArray.get(i);
-			// get individual 'fields' of the string separated by SEPARATOR
+			// Get individual 'fields' of the string separated by SEPARATOR
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
 			
 			Room room = new Room();
 			room.setRoomNo(Integer.parseInt(star.nextToken().trim()));
 			
-			//room.setDetails(star.nextToken().trim());
+			// room.setDetails(star.nextToken().trim());
 			
 			// Missing out array 
 			
 			room.setStatus(star.nextToken().trim());
 			
 			
-			// add to Guest list
+			// Add to Guest list
 			alr.add(room) ;
 		}
 		return alr ;

@@ -2,6 +2,13 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * Contains Guest details which can be updated and read
+ * 
+ * @author Nicole Liow Wei Xuan
+ * @since 2016-03-29
+ */
+
 public class Guest implements Serializable{
 	private String name;
 	private String gender;

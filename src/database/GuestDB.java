@@ -16,16 +16,19 @@ public class GuestDB {
     /*
      * Read Guest
      */
+	
 	@SuppressWarnings("rawtypes")
 	public static ArrayList readGuest(String filename) throws IOException {
 		
-		// read String from text file
+		// Read String from text file
 		ArrayList stringArray = (ArrayList)read(filename);
-		ArrayList<Guest> guestList = new ArrayList<Guest>() ;// to store guest data
+		// To store Guest data
+		ArrayList<Guest> guestList = new ArrayList<Guest>() ;
 
         for (int i = 0 ; i < stringArray.size() ; i++) {
 			String st = (String)stringArray.get(i);
-			// get individual 'fields' of the string separated by SEPARATOR
+			
+			// Get individual 'fields' of the string separated by SEPARATOR
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
 			
 			Guest guest = new Guest();
@@ -53,7 +56,7 @@ public class GuestDB {
 			
 			guest.setContact(Integer.parseInt(star.nextToken().trim()));
 			
-			// add to Guest list
+			// Add to Guest list
 			guestList.add(guest) ;
 		}
 		return guestList ;
@@ -62,9 +65,11 @@ public class GuestDB {
 	/*
 	 * Save Guest
 	 */
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void saveGuest(String filename, List al) throws IOException {
-		List alw = new ArrayList() ;// to store Guest data
+		// To store Guest data
+		List alw = new ArrayList() ;
 
         for (int i = 0 ; i < al.size() ; i++) {
         	Guest guest = (Guest)al.get(i);

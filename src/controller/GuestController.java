@@ -18,11 +18,11 @@ public class GuestController {
 	public void createGuest(){
 		println("GUEST REGISTRATION");
 		
-		//initialize attributes
+		// Initialize attributes
 		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "", country = "", lic = "", pp = "", nationality = "";
 		int contact = 0, genderType = 0, cardType = 0, identityType = 0;
 		
-		//prompt user for guest details and set it into a guest object
+		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
 		println("Please enter the following guest information");
 		
@@ -127,7 +127,7 @@ public class GuestController {
 
 		
 		try {
-			// read file containing Guest records.
+			// Read file containing Guest records
 			ArrayList al = guestDb.readGuest(filename);
 			for (int i = 0; i < al.size(); i++) {
 				Guest g = (Guest) al.get(i);

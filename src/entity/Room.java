@@ -2,6 +2,13 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * Contains Room details 
+ * 
+ * @author Nicole Liow Wei Xuan
+ * @since 2016-03-29
+ */
+
 public class Room implements Serializable{
 	private int roomNo;
 	private String[] details;
