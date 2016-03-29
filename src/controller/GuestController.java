@@ -19,8 +19,8 @@ public class GuestController {
 		println("GUEST REGISTRATION");
 		
 		//initialize attributes
-		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "", country = "", lic = "", pp = "", nationality = "", contact = "";
-		int genderType = 0, cardType = 0;
+		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "", country = "", lic = "", pp = "", nationality = "";
+		int contact = 0, genderType = 0, cardType = 0, identityType = 0;
 		
 		//prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
@@ -100,16 +100,31 @@ public class GuestController {
 		
 		println("\nIdentity");
 		
-		//Missing out identity
+		print("Identity Type - (1) Driving License (2) Passport: ");
+		identityType = sc.nextInt();
+		switch(cardType){
+		
+			case 1: 
+				lic = sc.nextLine();
+				guest.getIdentity().setLic(lic);
+				break;
+				
+			case 2: 
+				pp = sc.nextLine();
+				guest.getIdentity().setPp(pp);
+				break;
+
+			default: println("Oops, error...");
+		}
 		
 		print("Nationality: ");
 		nationality = sc.nextLine();
 		guest.setNationality(nationality);
 		
 		print("Contact: ");
-		contact = sc.nextLine();
+		contact = sc.nextInt();
+		guest.setContact(contact);
 
-		//Parse string to integer
 		
 		try {
 			// read file containing Guest records.
