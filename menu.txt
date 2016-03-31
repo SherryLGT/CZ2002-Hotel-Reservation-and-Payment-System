@@ -1,0 +1,8 @@
+1|Calamari Rings|Deep-Fried Fresh Squid Rings|10.5
+2|Aglio Olio|Olive Oil Based Pasta with Prawn, Salmon & Squid|16.9
+3|Grilled Chicken Chop|Black Pepper Sauce, Potato Wedges & Fresh Salad|17.5
+4|Baked Salmon Fillet|Lemon Butter Sauce, Mashed Potatoes & Fresh Salad|18.5
+5|Ribeye Steak|Black Pepper Gravy, Ragout Mushrooms & Fresh Salad|29.5
+6|Lemon Meringue Tart|Fresh Lemon Curd & Toasted Meringue|5.0
+7|Milo Dinosaur|Iced Milo topped with Milo Powder|4.0
+8|Fishball Soup|Fishball Soup served with Rice|6.5
