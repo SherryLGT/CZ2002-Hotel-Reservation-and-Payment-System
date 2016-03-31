@@ -24,8 +24,8 @@ public class GuestController {
 
 		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
-		CreditCard cc = new CreditCard(); 
-		Guest.CreditCard = cc;
+		
+		// Initialize the other classes within the class here
 				
 		println("Please enter the following guest information");
 
