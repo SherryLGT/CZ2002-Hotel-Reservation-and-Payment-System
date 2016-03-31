@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import database.ReservationDB;
@@ -16,55 +17,137 @@ import entity.Room;
 public class ReservationController {
 	private ReservationDB reservationDB = new ReservationDB();
 	private String filename = "reservation.txt";
-	private int position = 0;
 	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
 	public void createReservation() {
 		String reservationID;
 		Guest guest = new Guest();
 		Room room = new Room();
-		int billType;
+		int billType = 0;
 		Date checkIn = null;
 		Date checkOut = null;
-		int numAdult;
-		int numChild;
+		int numAdult = 0;
+		int numChild = 0;
+		boolean check = false;
 
 		RoomController roomControl = new RoomController();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("\n~~~ Make Reservation ~~~\n");
+		System.out.println("\n-------- Make Reservation --------\n");
 
 		Date date = new Date();
 		reservationID = dateFormat.format(date).trim();
-		System.out.println();
 
-		System.out.println("GuestID/Name");
+		System.out.print("GuestID/Name: ");
 		guest.setName(sc.nextLine());
 
+		// TODO guest
+
 		roomControl.printRooms();
-		System.out.println("RoomID/Type");
-		room.setRoomNo(sc.nextInt());
-		System.out.println("Billing type? (1) Cash (2) Credit Card");
-		billType = sc.nextInt();
+
+		System.out.print("Room Number: ");
+		room.setRoomNo(sc.nextLine());
+
+		room = roomControl.searchRoom(room.getRoomNo());
+
+		while (room == null || !room.getStatus().equals("Vacant")) {
+
+			if (room == null)
+				System.out.println("Sorry! Room not found. Please try again.");
+			else if (!room.getStatus().equals("Vacant"))
+				System.out.println("Sorry! Room not not avaliable. Please try other rooms.");
+
+			room = new Room();
+			
+			System.out.print("Room Number: ");
+			room.setRoomNo(sc.nextLine());
+
+			room = roomControl.searchRoom(room.getRoomNo());
+		}
+
+		do {
+			System.out.println("Billing type? (1) Cash (2) Credit Card ");
+			try {
+				billType = sc.nextInt();
+				if (billType < 1 || billType > 2) {
+					System.out.println("You have not selected option between 1-2. Please try again.");
+					continue;
+				} else
+					break;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+				continue;
+			}
+		} while (billType < 1 || billType > 2);
+
 		sc.nextLine();
-		System.out.println("Check In Date (MM/dd/yyyy):");
-		try {
-			checkIn = (Date) formatter.parse(sc.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Check Out Date (MM/dd/yyyy):");
-		try {
-			checkOut = (Date) formatter.parse(sc.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Number of Adults:");
-		numAdult = sc.nextInt();
-		System.out.println("Number of Children: ");
-		numChild = sc.nextInt();
+
+		do {
+			System.out.print("Check In Date (MM/dd/yyyy):");
+
+			try {
+				checkIn = (Date) formatter.parse(sc.nextLine());
+				Date date1 = new Date();
+				date1 = (Date) formatter.parse(formatter.format(date1));
+				
+				if (checkIn.equals(date1) || checkIn.after(date1))
+					check = true;
+				else {
+					check = false;
+					System.out.println("Sorry! Date must be today or later. Please try again.");
+				}
+
+			} catch (ParseException e) {
+				System.out.println("Sorry! Wrong format. Please try again.");
+			}
+		} while (!check);
+
+		check = false;
+
+		do {
+			System.out.print("Check Out Date (MM/dd/yyyy):");
+
+			try {
+				checkOut = (Date) formatter.parse(sc.nextLine());
+
+				if (checkIn.before(checkOut))
+					check = true;
+				else {
+					check = false;
+					System.out.println("Sorry! Check out date must be after check in date. Please try again.");
+				}
+
+			} catch (ParseException e) {
+				System.out.println("Sorry! Wrong format. Please try again.");
+			}
+		} while (!check);
+
+		check = false;
+
+		do {
+			System.out.print("Number of Adults: ");
+			try {
+				numAdult = sc.nextInt();
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
+
+		do {
+			System.out.print("Number of Children: ");
+			try {
+				numChild = sc.nextInt();
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
 
 		Reservation reservation = new Reservation(reservationID, guest, room, billType, checkIn, checkOut, numAdult,
 				numChild, "Waitlist");
@@ -76,7 +159,17 @@ public class ReservationController {
 			// write Reservation record/s to file.
 			reservationDB.saveReservation(filename, al);
 
-			System.out.println("Resevation Details");
+			roomControl.updateRoom(room, 4);
+
+			System.out.println("****** RECEIPT ******");
+			System.out.println("Name: ");
+			System.out.println("xxx");
+			System.out.println("Room Details");
+			System.out.println("Room No: " + room.getRoomNo());
+			System.out.println("Room Type: " + room.getType());
+			System.out.println();
+			System.out.println("Check in date: " + formatter.format(reservation.getCheckIn()));
+			System.out.println("Check out date: " + formatter.format(reservation.getCheckOut()));
 
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
@@ -85,15 +178,20 @@ public class ReservationController {
 	}
 
 	public void checkIn() {
+		RoomController roomControl = new RoomController();
+		Room room = new Room();
+
 		String guest;
 		Boolean check = false;
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("\n~~~ Check In ~~~\n");
+		System.out.println("\n-------- Check In --------\n");
 
-		System.out.println("GuestID/Name");
+		System.out.print("GuestID/Name: ");
 		guest = sc.nextLine();
+
+		// TODO search guest
 
 		ArrayList al = getReservation();
 
@@ -106,6 +204,7 @@ public class ReservationController {
 					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
 					&& reserv.getStatus().equals("Waitlist")) {
 				reserv = updateReservation(reserv, 1);
+				room = reserv.getRoom();
 				al.set(i, reserv);
 				check = true;
 			}
@@ -116,24 +215,32 @@ public class ReservationController {
 				// write Reservation record/s to file.
 				reservationDB.saveReservation(filename, al);
 
-				System.out.println("Checked In!");
+				roomControl.updateRoom(room, 1);
+
+				System.out.println("\nGuest successfully checked in.");
 
 			} catch (IOException e) {
 				System.out.println("IOException > " + e.getMessage());
 			}
 		} else {
-			System.out.println("Error In Checked In!");
+			System.out.println("\nSorry! No reserevation found. Guest cannot be checked in.");
 		}
 	}
 
 	public void kickOut() {
+		RoomController roomControl = new RoomController();
+		Room room = null;
+
 		ArrayList al = getReservation();
 		Date date = new Date();
 
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
-			if ((formatter.format(date)).equals(formatter.format(reserv.getCheckIn())) && reserv.getStatus().equals("Waitlist")) {
+			if ((formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
+					&& reserv.getStatus().equals("Waitlist")) {
 				reserv = updateReservation(reserv, 2);
+				room = reserv.getRoom();
+
 				al.set(i, reserv);
 			}
 		}
@@ -141,31 +248,47 @@ public class ReservationController {
 		try {
 			// write Reservation record/s to file.
 			reservationDB.saveReservation(filename, al);
+
+			if (room != null)
+				roomControl.updateRoom(room, 3);
+
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
 		}
 	}
 
 	public void deleteReservation() {
+		RoomController roomControl = new RoomController();
+		Room room = new Room();
+
 		String guest;
 		Boolean check = false;
 		Date date = null;
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("\n~~~ Delete Reservation ~~~\n");
+		System.out.println("\n-------- Delete Reservation ---------\n");
 
-		System.out.println("GuestID/Name");
+		System.out.print("GuestID/Name: ");
 		guest = sc.nextLine();
+
+		// TODO search guest
 
 		ArrayList al = getReservation();
 
-		System.out.println("Check In Date (MM/dd/yyyy):");
-		try {
-			date = (Date) formatter.parse(sc.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		do {
+			System.out.print("Check In Date (MM/dd/yyyy): ");
+
+			try {
+				date = (Date) formatter.parse(sc.nextLine());
+				check = true;
+
+			} catch (ParseException e) {
+				System.out.println("Sorry! Wrong format. Please try again.");
+			}
+		} while (!check);
+
+		check = false;
 
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
@@ -173,6 +296,7 @@ public class ReservationController {
 			if (guest.equals(reserv.getGuest().getName()) && date.equals(reserv.getCheckIn())
 					&& reserv.getStatus().equals("Waitlist")) {
 				reserv = updateReservation(reserv, 1);
+				room = reserv.getRoom();
 				al.remove(i);
 				check = true;
 			}
@@ -183,13 +307,15 @@ public class ReservationController {
 				// write Reservation record/s to file.
 				reservationDB.saveReservation(filename, al);
 
-				System.out.println("Delete!");
+				roomControl.updateRoom(room, 3);
+
+				System.out.println("\nReservation deleted successfully.");
 
 			} catch (IOException e) {
 				System.out.println("IOException > " + e.getMessage());
 			}
 		} else {
-			System.out.println("Error In Delete!");
+			System.out.println("\nSorry! No reservation found.");
 		}
 	}
 
@@ -220,10 +346,10 @@ public class ReservationController {
 		}
 		return al;
 	}
-	
+
 	public Reservation searchReservation(String reservationID) {
 		ArrayList al = getReservation();
-		
+
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 
@@ -231,8 +357,11 @@ public class ReservationController {
 				return reserv;
 			}
 		}
-		
+
 		return null;
 	}
 
+	public void printReservation() {
+
+	}
 }

@@ -22,7 +22,6 @@ public class ReservationDB {
 	private static final String SEPARATOR = "|";
 	private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
-	// an example of reading
 	public ArrayList readReservation(String filename) throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList) read(filename);
@@ -31,23 +30,13 @@ public class ReservationDB {
 		for (int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
 			// get individual 'fields' of the string separated by SEPARATOR
-			StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass
-																		// in
-																		// the
-																		// string
-																		// to
-																		// the
-																		// string
-																		// tokenizer
-																		// using
-																		// delimiter
-																		// ","
+			StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using delimiter ","
 			
 			String reservationID = star.nextToken().trim();
 			Guest guest = new Guest();
 			guest.setName(star.nextToken().trim());
 			Room room = new Room();
-			room.setRoomNo(Integer.parseInt(star.nextToken().trim()));
+			room.setRoomNo(star.nextToken().trim());
 			int billType = Integer.parseInt(star.nextToken().trim());
 			Date checkIn = null;
 			try {
@@ -68,13 +57,13 @@ public class ReservationDB {
 			// create reserv object from file data
 			Reservation reserv = new Reservation(reservationID, guest, room, billType, checkIn,
 					checkOut, numAdult, numChild, status);
+			
 			// add to Reservation list
 			alr.add(reserv);
 		}
 		return alr;
 	}
 
-	// an example of saving
 	public void saveReservation(String filename, List al) throws IOException {
 		List alw = new ArrayList();// to store Reservation data
 
@@ -85,7 +74,7 @@ public class ReservationDB {
 			st.append(SEPARATOR);
 			st.append(reserv.getGuest().getName().trim());
 			st.append(SEPARATOR);
-			st.append(reserv.getRoom().getRoomNo());
+			st.append(reserv.getRoom().getRoomNo().trim());
 			st.append(SEPARATOR);
 			st.append(reserv.getBillType());
 			st.append(SEPARATOR);
