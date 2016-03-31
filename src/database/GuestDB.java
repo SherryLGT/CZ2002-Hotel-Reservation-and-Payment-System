@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import entity.Guest;
+import entity.Guest.Address;
+import entity.Guest.CreditCard;
+import entity.Guest.Identity;
 
 public class GuestDB {
 	public static final String SEPARATOR = "|";
@@ -35,12 +38,16 @@ public class GuestDB {
 			guest.setName(star.nextToken().trim());
 			
 			guest.setGender(star.nextToken().trim());
-			
+
+			CreditCard cc = guest.new CreditCard();
+			guest.setCard(cc);
 			guest.getCard().setType(star.nextToken().trim());	
 			guest.getCard().setNum(star.nextToken().trim());	
 			guest.getCard().setCvv(star.nextToken().trim());	
 			guest.getCard().setExp(star.nextToken().trim());	
 			
+			Address add = guest.new Address();
+			guest.setAddress(add);
 			guest.getAddress().setAdd1(star.nextToken().trim());
 			guest.getAddress().setAdd2(star.nextToken().trim());
 			guest.getAddress().setCity(star.nextToken().trim());
@@ -49,6 +56,8 @@ public class GuestDB {
 			
 			guest.setCountry(star.nextToken().trim());
 			
+			Identity ident = guest.new Identity();
+			guest.setIdentity(ident);
 			guest.getIdentity().setLic(star.nextToken().trim());
 			guest.getIdentity().setPp(star.nextToken().trim());
 			
