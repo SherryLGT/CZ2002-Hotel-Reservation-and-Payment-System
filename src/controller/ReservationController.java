@@ -201,6 +201,9 @@ public class ReservationController {
 		case 2:
 			reservation.setStatus("Expired");
 			break;
+		case 3:
+			reservation.setStatus("Checked-Out");
+			break;
 		}
 
 		return reservation;
