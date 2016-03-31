@@ -95,7 +95,7 @@ public class HRPSApp {
 						reservationControl.checkIn();
 						break;
 					case 2:
-						System.out.println("Update Guest Details");
+						guestControl.createGuest();
 						break;
 					case 3:
 						System.out.println("Search Guest");
