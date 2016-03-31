@@ -1,8 +1,27 @@
 package controller;
 
+import java.io.IOException;
+import java.util.Scanner;
+import database.RoomDB;
+
 public class RoomController {
 
+	
+	// Create Room by Nicole
+	
+	private RoomDB roomDb = new RoomDB();
+	private String filename = "room.txt";
+	Scanner sc = new Scanner (System.in);
+	
+		// Initialize attributes
+		
+		
+		
+		
+
+	
 	// Request from ReservationController by Geraldine
+	
 	/*
 	 * print rooms with details when status is not "Under Maintenance"
 	 */
