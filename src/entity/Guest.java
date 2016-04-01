@@ -21,7 +21,7 @@ public class Guest implements Serializable{
 	private String country;
 	private Identity identity;
 	private String nationality;
-	private int contact;
+	private String contact;
 
 	public class CreditCard {
 		
@@ -88,7 +88,7 @@ public class Guest implements Serializable{
 	
 	public Guest() {}
 	
-	public Guest(String name, String gender, CreditCard card, Address address, String country, Identity identity, String nationality, int contact) {
+	public Guest(String name, String gender, CreditCard card, Address address, String country, Identity identity, String nationality, String contact) {
 		this.name = name;
 		this.gender = gender;
 		this.card = card;
@@ -99,6 +99,10 @@ public class Guest implements Serializable{
 		this.contact = contact;
 	}
 	
+	public Guest(String name2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -155,11 +159,20 @@ public class Guest implements Serializable{
 		this.nationality = nationality;
 	}
 
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof Guest) {
+			Guest g = (Guest)o;
+			return (getName().equals(g.getName()));
+		}
+		return false;
+	}
+	
 }

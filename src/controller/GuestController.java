@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import database.GuestDB;
 import entity.Guest;
 import entity.Reservation;
@@ -13,22 +12,34 @@ import entity.Guest.Identity;
 
 public class GuestController {
 
-	private GuestDB guestDb = new GuestDB();
+	private GuestDB guestDB = new GuestDB();
 	private String filename = "guest.txt";
 	Scanner sc = new Scanner(System.in);
 
 	public void createGuest() {
-		println("\n----- Guest Registration -----");
+		println("\n------------ Guest Registration ------------");
 
 		// Initialize attributes
-		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "",
-				country = "", lic = "", pp = "", nationality = "";
-		int contact = 0, genderType = 0, cardType = 0, identityType = 0;
+		String name = "";
+		String cardNum = "";
+		String cvv = "";
+		String exp = "";
+		String add1 = ""; 
+		String add2 = "";
+		String city = "";
+		String state = ""; 
+		String zip = "";
+		String country = "";
+		String lic = "";
+		String pp = "";
+		String nationality = "";
+		String contact = "";
+		int genderType = 0;
+		int cardType = 0;
+		int identityType = 0;
 
 		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
-
-		// Initialize the other classes within the class here
 
 		println("Please enter the following guest information");
 
@@ -46,6 +57,7 @@ public class GuestController {
 
 		print("(1) Male (2) Female ");
 		genderType = sc.nextInt();
+		sc.nextLine();
 		switch (genderType) {
 		case 1:
 			guest.setGender("Male");
@@ -56,14 +68,15 @@ public class GuestController {
 		default:
 			println("Oops, error...");
 		}
+		
+		println("\nCredit Card Details ");
+		println("...................... \n ");
 
-		println("\nCredit Card Details: ");
-
-		print("Card Type - (1) Visa (2) Master (3) Amex ");
-		cardType = sc.nextInt();
-
+		print("Card Type - (1) Visa (2) Master (3) Amex: ");
 		CreditCard cc = guest.new CreditCard();
 		guest.setCard(cc);
+		cardType = sc.nextInt();
+		sc.nextLine();
 
 		switch (cardType) {
 
@@ -91,15 +104,16 @@ public class GuestController {
 		cvv = sc.nextLine();
 		guest.getCard().setCvv(cvv);
 
-		println("EXP (MM/YY): ");
+		print("EXP (MM/YY): ");
 		exp = sc.nextLine();
 		guest.getCard().setExp(exp);
 
 		println("\nAddress");
-
+		println(".......... \n ");
+		
 		print("Address Line 1: ");
-		add1 = sc.nextLine();
 		Address add = guest.new Address();
+		add1 = sc.nextLine();
 		guest.setAddress(add);
 		guest.getAddress().setAdd1(add1);
 
@@ -119,27 +133,29 @@ public class GuestController {
 		zip = sc.nextLine();
 		guest.getAddress().setZip(zip);
 
-		println("\nCountry");
-
-		print("Country: ");
+		print("\nCountry: ");
 		country = sc.nextLine();
 		guest.setCountry(country);
 
 		println("\nIdentity");
+		println("........... \n ");
 
 		print("Identity Type - (1) Driving License (2) Passport: ");
-		identityType = sc.nextInt();
 		Identity ident = guest.new Identity();
 		guest.setIdentity(ident);
+		identityType = sc.nextInt();
+		sc.nextLine();
 
 		switch (identityType) {
 
 		case 1:
+			print("Driving License: ");
 			lic = sc.nextLine();
 			guest.getIdentity().setLic(lic);
 			break;
 
 		case 2:
+			print("Passport No.: ");
 			pp = sc.nextLine();
 			guest.getIdentity().setPp(pp);
 			break;
@@ -148,24 +164,29 @@ public class GuestController {
 			println("Oops, error...");
 		}
 
-		print("Nationality: ");
+		print("\nNationality: ");
 		nationality = sc.nextLine();
 		guest.setNationality(nationality);
 
-		print("Contact: ");
-		contact = sc.nextInt();
+		print("\nContact: ");
+		contact = sc.nextLine();
 		guest.setContact(contact);
-
-		ArrayList al = getGuest();
-		al.add(guest);
+		
+		sc.close();
+		
+		ArrayList<Guest> alr = getGuest();
+		alr.add(guest);
 
 		try {
 			// Write Guest records to file
-			guestDb.saveGuest(filename, al);
+			guestDB.saveGuest(filename, alr);
+			
+			System.out.println("New guest details has been successfully saved!");
+			
 		} catch (IOException e) {
 			println("IOException > " + e.getMessage());
 		}
-
+		
 	}
 
 	public void updateGuest() {
@@ -173,8 +194,8 @@ public class GuestController {
 
 		// Initialize attributes
 		String name = "", cardNum = "", cvv = "", exp = "", add1 = "", add2 = "", city = "", state = "", zip = "",
-				country = "", lic = "", pp = "", nationality = "";
-		int contact = 0, genderType = 0, cardType = 0, identityType = 0;
+				country = "", lic = "", pp = "", nationality = "", contact = "";
+		int genderType = 0, cardType = 0, identityType = 0;
 		int updateType = 0;
 
 		// Prompt user for guest details
@@ -186,10 +207,10 @@ public class GuestController {
 			print("Please enter driving license: ");
 			lic = sc.nextLine();
 
-			ArrayList al = getGuest();
+			ArrayList<Guest> alr = getGuest();
 
-			for (int i = 0; i < al.size(); i++) {
-				Guest updateguest = (Guest) al.get(i);
+			for (int i = 0; i <= alr.size(); i++) {
+				Guest updateguest = (Guest) alr.get(i);
 
 				if (lic.equals(updateguest.getIdentity().getLic())) {
 
@@ -235,25 +256,25 @@ public class GuestController {
 
 	}
 
-	public ArrayList getGuest() {
-		ArrayList al = null;
+	public ArrayList<Guest> getGuest() {
+		ArrayList<Guest> alr = null;
 		try {
-			// read file containing Reservation records.
-			al = guestDb.readGuest(filename);
+			// read file containing Guest records
+			alr = guestDB.readGuest(filename);
 
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
 		}
-		return al;
+		return alr;
 	}
-
+	
 	public Guest searchGuest(String pp) {
 		println("SEARCH GUEST");
 
-		ArrayList al = getGuest();
+		ArrayList<Guest> alr = getGuest();
 
-		for (int i = 0; i < al.size(); i++) {
-			Guest searchguestpp = (Guest) al.get(i);
+		for (int i = 0; i <= alr.size(); i++) {
+			Guest searchguestpp = (Guest) alr.get(i);
 
 			if (searchguestpp.getIdentity().getPp().equals(pp)) {
 				return searchguestpp;
