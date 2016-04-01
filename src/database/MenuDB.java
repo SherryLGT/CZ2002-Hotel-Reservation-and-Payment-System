@@ -29,6 +29,7 @@ public class MenuDB {
 				String  name = star.nextToken().trim();	// first token
 				String  description = star.nextToken().trim();	// second token
 				double  price = Double.parseDouble(star.nextToken().trim()); // third token
+				
 				// create Professor object from file data
 				Menu menu = new Menu(id, name, description, price);
 				// add to Menu list

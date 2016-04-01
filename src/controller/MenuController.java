@@ -73,7 +73,7 @@ public class MenuController {
 		
 		// Prompt user to input item details
 		Menu item = new Menu();
-		//update = null;
+		//item = null;
 		
 		System.out.println("Enter Item ID: ");
 		id = sc.nextInt();
@@ -88,20 +88,28 @@ public class MenuController {
 				sc.nextLine();
 				System.out.println("Update Item Name: ");
 				name = sc.nextLine();
+
 				System.out.println("Update Item Description: ");
 				description = sc.nextLine();
+
 				System.out.println("Update Item Price: ");
 				price = sc.nextDouble();
+				
 				if ((name.equals(" ")) || (description.equals(" "))) {
 					System.out.println("Please enter a valid item name / description.");
 				} else {
-					item.setID(id);
-					item.setName(name);
-					item.setDescription(description);
-					item.setPrice(price);
-					System.out.println("Hey");
+					updateitem.setName(name);
+					updateitem.setDescription(description);
+					updateitem.setPrice(price);
 				}
+				
 			}
+		}
+		try {
+			menuDb.saveMenu(filename, al);
+			
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
 		}
 	}
 	
