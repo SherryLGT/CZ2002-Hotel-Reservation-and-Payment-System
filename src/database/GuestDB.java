@@ -100,8 +100,9 @@ public class GuestDB {
 			st.append(guest.getName().trim());
 			st.append(SEPARATOR);
 			
-			CreditCard cc = guest.new CreditCard();
-			guest.setCard(cc);
+			st.append(guest.getGender().trim());
+			st.append(SEPARATOR);
+			
 			st.append(guest.getCard().getType().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getCard().getNum().trim());
@@ -111,8 +112,6 @@ public class GuestDB {
 			st.append(guest.getCard().getExp().trim());
 			st.append(SEPARATOR);
 			
-			Address add = guest.new Address();
-			guest.setAddress(add);
 			st.append(guest.getAddress().getAdd1().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getAddress().getAdd2().trim());
@@ -127,14 +126,9 @@ public class GuestDB {
 			st.append(guest.getCountry().trim());
 			st.append(SEPARATOR);
 			
-			Identity ident = guest.new Identity();
-			guest.setIdentity(ident);
 			st.append(guest.getIdentity().getLic().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getIdentity().getPp().trim());
-			st.append(SEPARATOR);
-			
-			st.append(guest.getGender().trim());
 			st.append(SEPARATOR);
 			
 			st.append(guest.getNationality().trim());
@@ -152,7 +146,7 @@ public class GuestDB {
 		PrintWriter out = new PrintWriter(new FileWriter(fileName));
 
 		try {
-			for (int i =0; i <= data.size() ; i++) {
+			for (int i =0; i < data.size() ; i++) {
 				out.println((String)data.get(i));
 			}
 		}

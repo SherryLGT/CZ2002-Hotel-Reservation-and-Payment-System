@@ -1,2 +1,4 @@
 1|1|1|1|1|1|1|1|1|1|1|Male|1|Visa|1|1
-1|Visa|||1|1|1|1|1|1|1|||Male|1|1
+1|Visa|null|null|1|1|1|1|1|1|1|null|null|Male|1|1
+TESTING123|Male|Master|3|1|2|3|1|2|3|1|2|null|null|1|2
+BAD NICOLE|Female|Master|2|2|2|2|2|2|2|2|2|null|2|2|2

@@ -25,10 +25,10 @@ public class Guest implements Serializable{
 
 	public class CreditCard {
 		
-		private String type="";
-		private String num="";
-		private String cvv="";
-		private String exp="";
+		private String type="null";
+		private String num="null";
+		private String cvv="null";
+		private String exp="null";
 		
 		public String getType() {return type;}
 		public void setType(String type) {this.type = type;}
@@ -73,8 +73,8 @@ public class Guest implements Serializable{
 	
 	public class Identity {
 		
-		private String lic="";
-		private String pp="";
+		private String lic="null";
+		private String pp="null";
 		
 		public String getLic() {return lic;	}
 		public void setLic(String lic) {this.lic = lic;	}
