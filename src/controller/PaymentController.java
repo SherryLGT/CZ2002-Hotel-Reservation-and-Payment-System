@@ -58,7 +58,7 @@ public class PaymentController {
         // roomService
          
         System.out.print("Enter any discount: ");
-        discount = sc.nextDouble();
+        // discount = sc.nextDouble();
          
         daysStayed = (int) ((reservation.getCheckOut().getTime() - reservation.getCheckIn().getTime()) / (24 * 60 * 60 * 1000));
          
@@ -77,12 +77,13 @@ public class PaymentController {
             paymentDB.savePayment(filename, al);
              
             System.out.println("\nPayment Successful!\n");
-            System.out.println("****** BILL INVOICE ******");
-            System.out.println("Days of stay: " + daysStayed);
-            System.out.println("Room service order items: " + 0);
-            System.out.println("Total price of room service: " + 0);
-            System.out.println("Tax: " + tax);
-            System.out.println("Total amount: " + total);
+            System.out.println("****************** BILL INVOICE *****************");
+            System.out.println("*\tDays of stay: " + daysStayed + "\t\t\t*");
+            System.out.println("*\tRoom service order items: " + 0 + "\t\t*");
+            System.out.println("*\tTotal price of room service: " + 0 + "\t\t*");
+            System.out.println("*\tTax: " + tax + "\t\t\t\t*");
+            System.out.println("*\tTotal amount: " + total + "\t\t\t*");
+            System.out.println("*************************************************");
         } catch (IOException e) {
             System.out.println("IOException > " + e.getMessage());
         }
