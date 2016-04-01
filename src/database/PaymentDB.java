@@ -1,5 +1,6 @@
 package database;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import entity.RoomService;
 
 public class PaymentDB {
 	private static final String SEPARATOR = "|";
-	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
 	public ArrayList readPayment(String filename) throws IOException {
 		ArrayList stringArray = (ArrayList) read(filename);
@@ -28,7 +29,13 @@ public class PaymentDB {
 		for(int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
 			StringTokenizer star = new StringTokenizer(st, SEPARATOR);
-			
+
+			Date date = null;
+			try {
+				date = formatter.parse(star.nextToken().trim());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			Reservation reservation = new Reservation();
 			reservation.setReservationID(star.nextToken().trim());
 			double charges = (Double.parseDouble(star.nextToken().trim()));
@@ -38,12 +45,6 @@ public class PaymentDB {
 			//roomService.(star.nextToken().trim());
 			double discount = (Double.parseDouble(star.nextToken().trim()));
 			double total = (Double.parseDouble(star.nextToken().trim()));
-			Date date = null;
-			try {
-				date = (Date) formatter.parse(formatter.format(new Date()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
 			
 			Payment payment = new Payment(reservation, charges, tax, roomService, discount, total, date);
 			alr.add(payment);
@@ -57,7 +58,7 @@ public class PaymentDB {
 		for (int i = 0; i < al.size(); i++) {
 			Payment payment = (Payment) al.get(i);
 			StringBuilder st = new StringBuilder();
-			st.append(payment.getDate());
+			st.append(formatter.format(payment.getDate()));
 			st.append(SEPARATOR);
 			st.append(payment.getReservation().getReservationID().trim());
 			st.append(SEPARATOR);
@@ -89,6 +90,12 @@ public class PaymentDB {
 	
 	public List read(String fileName) throws IOException {
 		List data = new ArrayList();
+		
+	    File file = new File(".", fileName);
+
+	    if (!file.isFile() && !file.createNewFile()) {
+	        throw new IOException("Error creating new file: " + file.getAbsolutePath());
+	    }
 		Scanner scanner = new Scanner(new FileInputStream(fileName));
 		try {
 			while (scanner.hasNextLine()) {
