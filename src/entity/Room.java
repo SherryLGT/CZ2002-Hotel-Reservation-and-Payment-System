@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Room implements Serializable {
 	private String roomNo;
 	private String type;
-	private String price;
+	private double price;
 	private String status;
 	private String[] details;
 
@@ -38,7 +38,7 @@ public class Room implements Serializable {
 	 * @param details
 	 *            This room's details
 	 */
-	public Room(String roomNo, String type, String price, String status, String[] details) {
+	public Room(String roomNo, String type, double price, String status, String[] details) {
 		super();
 		this.roomNo = roomNo;
 		this.type = type;
@@ -90,7 +90,7 @@ public class Room implements Serializable {
 	 * 
 	 * @return this room's price
 	 */
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -100,7 +100,7 @@ public class Room implements Serializable {
 	 * @param price
 	 *            This room's price
 	 */
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

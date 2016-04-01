@@ -34,7 +34,7 @@ public class RoomDB {
 
 			String roomNo = star.nextToken().trim();
 			String type = star.nextToken().trim();
-			String price = star.nextToken().trim();
+			double price = (Double.parseDouble(star.nextToken().trim()));
 			String status = star.nextToken().trim();
 			String[] details = (star.nextToken().trim()).split(", ");
 
@@ -57,7 +57,7 @@ public class RoomDB {
 			st.append(SEPARATOR);
 			st.append(room.getType().trim());
 			st.append(SEPARATOR);
-			st.append(room.getPrice().trim());
+			st.append(room.getPrice());
 			st.append(SEPARATOR);
 			st.append(room.getStatus());
 			st.append(SEPARATOR);
