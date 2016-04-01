@@ -72,34 +72,36 @@ public class MenuController {
 		double price = 0;
 		
 		// Prompt user to input item details
-		Menu item = null;
-		System.out.println("Enter Item ID");
+		Menu item = new Menu();
+		//update = null;
+		
+		System.out.println("Enter Item ID: ");
 		id = sc.nextInt();
 		
 		ArrayList al = getItem();
 		for(int i = 0; i < al.size(); i++){
 			Menu updateitem = (Menu) al.get(i);
 			
-			System.out.println(id + "_" + updateitem.getID());
-			System.out.println(id.equals(updateitem.getID()));
 			if (id.equals(updateitem.getID())){
 				
 				// UPDATE MENU ITEMS HERE
+				sc.nextLine();
 				System.out.println("Update Item Name: ");
 				name = sc.nextLine();
 				System.out.println("Update Item Description: ");
 				description = sc.nextLine();
 				System.out.println("Update Item Price: ");
 				price = sc.nextDouble();
-				if ((name.equals("")) || (description.equals(""))) {
+				if ((name.equals(" ")) || (description.equals(" "))) {
 					System.out.println("Please enter a valid item name / description.");
 				} else {
+					item.setID(id);
 					item.setName(name);
 					item.setDescription(description);
 					item.setPrice(price);
+					System.out.println("Hey");
 				}
 			}
-			System.out.println("ID Invalid.");
 		}
 	}
 	

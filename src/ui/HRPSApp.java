@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.GuestController;
+import controller.MenuController;
 import controller.PaymentController;
 import controller.ReservationController;
 import controller.RoomController;
@@ -35,7 +36,8 @@ public class HRPSApp {
 		ReservationController reservationControl = new ReservationController();
 		RoomController roomControl = new RoomController();
 		RoomServiceController roomServiceControl = new RoomServiceController();
-
+		MenuController menuControl = new MenuController();
+		
 		System.out.println(
 				"=================================\n|\t WELCOME TO HRPS \t|\n=================================");
 		System.out.println("| Options: \t\t\t|");
@@ -139,6 +141,7 @@ public class HRPSApp {
 				break;
 			case 2:
 				System.out.println("Menu Items");
+				menuControl.updateItem();
 				break;
 			}
 			break;
