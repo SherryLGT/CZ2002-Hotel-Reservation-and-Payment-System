@@ -55,14 +55,14 @@ public class HRPSApp {
 		System.out.println("=================================");
 
 		do {
-			System.out.print("Select an option: ");option=5;
+			System.out.print("Select an option: ");
 			try {
-//				option = sc.nextInt();
+				option = sc.nextInt();
 				if (option < 0 || option > 6)
 					System.out.println("You have not selected option between 0-6. Please try again.");
 			} catch (InputMismatchException e) {
 				System.out.println("You have entered an invalid input. Please try again.");
-//				sc.next();
+				sc.next();
 				continue;
 			}
 		} while (option < 0 || option > 6);
