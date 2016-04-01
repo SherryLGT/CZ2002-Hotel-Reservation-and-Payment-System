@@ -96,8 +96,12 @@ public class GuestDB {
 		for (int i = 0 ; i < al.size() ; i++) {
 			Guest guest = (Guest)al.get(i);
 			StringBuilder st =  new StringBuilder();
+			
 			st.append(guest.getName().trim());
 			st.append(SEPARATOR);
+			
+			CreditCard cc = guest.new CreditCard();
+			guest.setCard(cc);
 			st.append(guest.getCard().getType().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getCard().getNum().trim());
@@ -106,6 +110,9 @@ public class GuestDB {
 			st.append(SEPARATOR);
 			st.append(guest.getCard().getExp().trim());
 			st.append(SEPARATOR);
+			
+			Address add = guest.new Address();
+			guest.setAddress(add);
 			st.append(guest.getAddress().getAdd1().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getAddress().getAdd2().trim());
@@ -116,16 +123,23 @@ public class GuestDB {
 			st.append(SEPARATOR);
 			st.append(guest.getAddress().getZip().trim());
 			st.append(SEPARATOR);
+			
 			st.append(guest.getCountry().trim());
 			st.append(SEPARATOR);
+			
+			Identity ident = guest.new Identity();
+			guest.setIdentity(ident);
 			st.append(guest.getIdentity().getLic().trim());
 			st.append(SEPARATOR);
 			st.append(guest.getIdentity().getPp().trim());
 			st.append(SEPARATOR);
+			
 			st.append(guest.getGender().trim());
 			st.append(SEPARATOR);
+			
 			st.append(guest.getNationality().trim());
 			st.append(SEPARATOR);
+			
 			st.append(guest.getContact().trim());
 			als.add(st.toString());
 		}
