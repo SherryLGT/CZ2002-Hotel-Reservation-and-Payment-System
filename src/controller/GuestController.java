@@ -38,156 +38,352 @@ public class GuestController {
 		int cardType = 0;
 		int identityType = 0;
 
+		// To be used for data validation
+		String digit = "\\d+";
+		String alpha = "[a-zA-Z.*\\s+.]+";
+
 		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
 
 		println("Please enter the following guest information");
 
+		// Guest Name
 		do {
 			print("\nName: ");
 			name = sc.nextLine();
-			if (name.equals("")) {
-				println("Please enter a valid name.");
+
+			if (name.equals("") || !name.matches(alpha)) {
+
+				println("Please enter a valid name");
+
 			} else {
+
 				guest.setName(name);
+
 			}
-		} while (name.equals(""));
 
-		println("\nGender: ");
+		} while (name.equals("") || !name.matches(alpha));
 
-		print("(1) Male (2) Female ");
-		genderType = sc.nextInt();
-		sc.nextLine();
-		switch (genderType) {
-		case 1:
-			guest.setGender("Male");
-			break;
-		case 2:
-			guest.setGender("Female");
-			break;
-		default:
-			println("Oops, error...");
-		}
-		
+
+		// Guest Gender
+		do {
+			println("\nGender: ");
+
+			print("(1) Male (2) Female ");
+			genderType = sc.nextInt();
+			sc.nextLine();
+
+			if (genderType != 1 && genderType != 2) {
+
+				println("Please select a valid gender");
+
+			} else {
+
+				switch (genderType) {
+
+				case 1:
+					guest.setGender("Male");
+					break;
+
+				case 2:
+					guest.setGender("Female");
+					break;
+
+				}
+
+			}
+
+		} while (genderType != 1 && genderType != 2);
+
+
+		// Guest Credit Card Details
 		println("\nCredit Card Details ");
 		println("...................... \n ");
 
-		print("Card Type - (1) Visa (2) Master (3) Amex: ");
-		CreditCard cc = guest.new CreditCard();
-		guest.setCard(cc);
-		cardType = sc.nextInt();
-		sc.nextLine();
 
-		switch (cardType) {
+		// Guest Credit Card - Type
+		do {
+			print("Card Type - (1) Visa (2) Master (3) Amex: ");
+			CreditCard cc = guest.new CreditCard();
+			guest.setCard(cc);
+			cardType = sc.nextInt();
+			sc.nextLine();
 
-		case 1:
-			guest.getCard().setType("Visa");
-			break;
+			if (cardType != 1 && cardType != 2 && cardType != 3) {
 
-		case 2:
-			guest.getCard().setType("Master");
-			break;
+				println("Please select a valid credit card type\n");
 
-		case 3:
-			guest.getCard().setType("Amex");
-			break;
+			} else {
 
-		default:
-			println("Oops, error...");
-		}
+				switch (cardType) {
 
-		print("Card Number: ");
-		cardNum = sc.nextLine();
-		guest.getCard().setNum(cardNum);
+				case 1:
+					guest.getCard().setType("Visa");
+					break;
 
-		print("CVV: ");
-		cvv = sc.nextLine();
-		guest.getCard().setCvv(cvv);
+				case 2:
+					guest.getCard().setType("Master");
+					break;
 
+				case 3:
+					guest.getCard().setType("Amex");
+					break;
+
+				}
+
+			} 
+
+		} while (cardType != 1 && cardType != 2 && cardType != 3);
+
+
+		// Guest Credit Card - No.
+		do {
+			print("Card Number: ");
+			cardNum = sc.nextLine();
+
+			if (cardNum.equals("") || !cardNum.matches(digit)) {
+
+				println("Please enter a valid credit card no.\n");
+
+			} else {
+
+				guest.getCard().setNum(cardNum);
+
+			}
+
+		} while (cardNum.equals("") || !cardNum.matches(digit));
+
+
+		// Guest Credit Card - CVV
+		do {
+			print("CVV: ");
+			cvv = sc.nextLine();
+
+			if (cvv.equals("") || !cvv.matches(digit)) {
+
+				println("Please enter a valid credit card CVV.\n");
+
+			} else {
+
+				guest.getCard().setCvv(cvv);
+
+			}
+
+		} while (cvv.equals("") || !cvv.matches(digit));
+
+
+		// Guest Credit Card - Exp Date
 		print("EXP (MM/YY): ");
 		exp = sc.nextLine();
 		guest.getCard().setExp(exp);
 
+
+		// Guest Address
 		println("\nAddress");
 		println(".......... \n ");
+
+
+		// Guest Address - Line 1
+		do {
+			print("Address Line 1: ");
+			Address add = guest.new Address();
+			add1 = sc.nextLine();
+
+			if (add1.equals("")) {
+
+				println("Please enter a valid address line 1\n");
+
+			} else {
+
+				guest.setAddress(add);
+				guest.getAddress().setAdd1(add1);
+
+			}
+
+		} while (add1.equals(""));
+
+
+		// Guest Address - Line 2
+		do {
+			print("Address Line 2: ");
+			add2 = sc.nextLine();
+
+			if (add2.equals("")) {
+
+				println("Please enter a valid address line 2\n");
+
+			} else {
+
+				guest.getAddress().setAdd2(add2);
+
+			}
+
+		} while (add2.equals(""));
+
+
+		// Guest Address - City
+		do {
+			print("City: ");
+			city = sc.nextLine();
+
+			if (city.equals("")) {
+
+				println("Please enter a valid city\n");
+
+			} else {
+
+				guest.getAddress().setCity(city);
+
+			}
+
+		} while (city.equals(""));
+
+
+		// Guess Address - State
+		do {
+			print("State: ");
+			state = sc.nextLine();
+
+			if (state.equals("")) {
+
+				println("Please enter a valid state\n");
+
+			} else {
+
+				guest.getAddress().setState(state);
+
+			}
+
+		} while (state.equals(""));
+
+
+		// Guest Address - Zip
+		do {
+			print("Zip Code: ");
+			zip = sc.nextLine();
+
+			if (zip.equals("")) {
+
+				println("Please enter a valid zip code\n");
+
+			} else {
+
+				guest.getAddress().setZip(zip);
+
+			}
+
+		} while (state.equals(""));
 		
-		print("Address Line 1: ");
-		Address add = guest.new Address();
-		add1 = sc.nextLine();
-		guest.setAddress(add);
-		guest.getAddress().setAdd1(add1);
 
-		print("Address Line 2: ");
-		add2 = sc.nextLine();
-		guest.getAddress().setAdd2(add2);
+		// Guest Country
+		do {
+			print("\nCountry: ");
+			country = sc.nextLine();
 
-		print("City: ");
-		city = sc.nextLine();
-		guest.getAddress().setCity(city);
+			if (country.equals("") || !country.matches(alpha)) {
 
-		print("State: ");
-		state = sc.nextLine();
-		guest.getAddress().setState(state);
+				println("Please enter a valid country");
 
-		print("Zip: ");
-		zip = sc.nextLine();
-		guest.getAddress().setZip(zip);
+			} else {
 
-		print("\nCountry: ");
-		country = sc.nextLine();
-		guest.setCountry(country);
+				guest.setCountry(country);
 
+			}
+
+		} while (country.equals("") || !country.matches(alpha));
+
+
+		// Guest Identity
 		println("\nIdentity");
 		println("........... \n ");
-
-		print("Identity Type - (1) Driving License (2) Passport: ");
-		Identity ident = guest.new Identity();
-		guest.setIdentity(ident);
-		identityType = sc.nextInt();
-		sc.nextLine();
-
-		switch (identityType) {
-
-		case 1:
-			print("Driving License: ");
-			lic = sc.nextLine();
-			guest.getIdentity().setLic(lic);
-			break;
-
-		case 2:
-			print("Passport No.: ");
-			pp = sc.nextLine();
-			guest.getIdentity().setPp(pp);
-			break;
-
-		default:
-			println("Oops, error...");
-		}
-
-		print("\nNationality: ");
-		nationality = sc.nextLine();
-		guest.setNationality(nationality);
-
-		print("\nContact: ");
-		contact = sc.nextLine();
-		guest.setContact(contact);
 		
+		do {
+
+			print("Identity Type - (1) Driving License (2) Passport: ");
+			Identity ident = guest.new Identity();
+			guest.setIdentity(ident);
+			identityType = sc.nextInt();
+			sc.nextLine();
+
+			if (identityType != 1 && identityType !=2) {
+
+				println("Please select a valid identity type\n");
+
+			} else {
+
+				switch (identityType) {
+
+				case 1:
+					print("Driving License: ");
+					lic = sc.nextLine();
+					guest.getIdentity().setLic(lic);
+					break;
+
+				case 2:
+					print("Passport No.: ");
+					pp = sc.nextLine();
+					guest.getIdentity().setPp(pp);
+					break;
+
+				}
+			}
+
+		} while (identityType != 1 && identityType !=2);
+
+
+		// Guest Nationality
+		do {
+			print("\nNationality: ");
+			nationality = sc.nextLine();
+
+			if (nationality.equals("") || !nationality.matches(alpha)) {
+
+				println("Please enter a valid nationality");
+
+			} else {
+
+				guest.setNationality(nationality);
+
+			}
+
+		} while (nationality.equals("") || !nationality.matches(alpha));
+
+
+		// Guest Contact
+		do {
+			print("\nContact: ");
+			contact = sc.nextLine();
+
+			if (contact.equals("") || !contact.matches(digit)) {
+
+				println("Please enter a valid contact no.");
+
+			} else {
+
+				guest.setContact(contact);
+
+			}
+
+		} while (contact.equals("") || !contact.matches(digit));
+
+
 		sc.close();
-		
+
 		ArrayList<Guest> alr = getGuest();
 		alr.add(guest);
 
 		try {
 			// Write Guest records to file
 			guestDB.saveGuest(filename, alr);
-			
+
 			System.out.println("New guest details has been successfully saved!");
-			
+
 		} catch (IOException e) {
 			println("IOException > " + e.getMessage());
 		}
-		
+
 	}
+
 
 	public void updateGuest() {
 		println("UPDATE GUEST");
@@ -267,7 +463,7 @@ public class GuestController {
 		}
 		return alr;
 	}
-	
+
 	public Guest searchGuest(String pp) {
 		println("SEARCH GUEST");
 

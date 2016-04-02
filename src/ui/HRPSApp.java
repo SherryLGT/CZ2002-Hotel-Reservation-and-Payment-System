@@ -94,7 +94,7 @@ public class HRPSApp {
 				guestControl.createGuest();
 				break;
 			case 3:
-				System.out.println("Search Guest");
+				guestControl.updateGuest();
 				break;
 			}
 			break;
