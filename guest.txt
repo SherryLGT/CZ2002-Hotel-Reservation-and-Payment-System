@@ -4,3 +4,4 @@ TESTING123|Male|Master|3|1|2|3|1|2|3|1|2|null|null|1|2
 BAD NICOLE|Female|Master|2|2|2|2|2|2|2|2|2|null|2|2|2
 nicole|Female|Master|1233434g34g|234|12/12|amk|bishan|tpy|novena|china|singapore|null|34tg3g34g|singaporean|1242342
 nic|Female|Amex|12312312|323|12/12|1231231|12312312|f34f34f34|3g34g34|45h45h|sg|null|23r3243g421222|sgporean|3333
+nicole|Female|Master|12345|888|12/20|amk central|amk ave 10|ang  mo kio|singapore|560111|singapore|null|1q2w3e|singaporean|90299999
