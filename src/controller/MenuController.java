@@ -49,6 +49,7 @@ public class MenuController {
 			for (int i = 0; i < al.size(); i++){
 				Menu m = (Menu) al.get(i);
 			}
+			item.setID(al.size()+1);
 			al.add(item);
 			
 			//write item record/s to file.
