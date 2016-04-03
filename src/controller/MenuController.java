@@ -23,53 +23,57 @@ public class MenuController {
 		Menu item =  new Menu();
 		System.out.println("Please enter the menu item details: ");
 		
-		ArrayList al = menuDb.readMenu(filename);
-		String repeated = new String(new char[92]).replace("\0", "-");
-		System.out.println(repeated);
-	    System.out.printf("%3s %23s %53s %10s", "ID", "NAME", "DESCRIPTION", "S$ PRICE");
-	    System.out.println();
-	    System.out.println(repeated);
-		for (int i = 0 ; i < al.size() ; i++) {
-				Menu menu = (Menu)al.get(i);
-				System.out.format("%3s %23s %53s %10s", menu.getID(), menu.getName(), menu.getDescription(), menu.getPrice());
-				System.out.println();
-		}
-			    System.out.println(repeated);
-			
-		do {
-			System.out.println("Item Name: ");
-			name = sc.nextLine();
-			if(name.equals("")){
-				System.out.println("Please enter a valid name.");
-			} 
-			else {
-				item.setName(name);
-			}
-		} while(name.equals(""));
-		
-		System.out.println("Item Description: ");
-		description = sc.nextLine();
-		item.setDescription(description);
-		
-		System.out.println("Item Price: ");
-		price = sc.nextDouble();
-		item.setPrice(price);
-		
+		ArrayList al;
 		try {
-			//ArrayList al = menuDb.readMenu(filename);
-			Menu m = (Menu) al.get(al.size()-1);
-			item.setID(al.size()+1);
-			al.add(item);
+			al = menuDb.readMenu(filename);
+			String repeated = new String(new char[92]).replace("\0", "-");
+			System.out.println(repeated);
+		    System.out.printf("%3s %23s %53s %10s", "ID", "NAME", "DESCRIPTION", "S$ PRICE");
+		    System.out.println();
+		    System.out.println(repeated);
+			for (int i = 0 ; i < al.size() ; i++) {
+					Menu menu = (Menu)al.get(i);
+					System.out.format("%3s %23s %53s %10s", menu.getID(), menu.getName(), menu.getDescription(), menu.getPrice());
+					System.out.println();
+			}
+				    System.out.println(repeated);
+				
+			do {
+				System.out.println("Item Name: ");
+				name = sc.nextLine();
+				if(name.equals("")){
+					System.out.println("Please enter a valid name.");
+				} 
+				else {
+					item.setName(name);
+				}
+			} while(name.equals(""));
 			
-			//write item record/s to file.
-			menuDb.saveMenu(filename, al);
-			System.out.println("Item stored successfully!");
+			System.out.println("Item Description: ");
+			description = sc.nextLine();
+			item.setDescription(description);
 			
-		} catch (IOException e){
-			System.out.println("IOException > " + e.getMessage());
+			System.out.println("Item Price: ");
+			price = sc.nextDouble();
+			item.setPrice(price);
+			
+			try {
+				//ArrayList al = menuDb.readMenu(filename);
+				Menu m = (Menu) al.get(al.size()-1);
+				item.setID(al.size()+1);
+				al.add(item);
+				
+				//write item record/s to file.
+				menuDb.saveMenu(filename, al);
+				System.out.println("Item stored successfully!");
+				
+			} catch (IOException e){
+				System.out.println("IOException > " + e.getMessage());
+			}
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
-	
-		
 	}
 	
 	

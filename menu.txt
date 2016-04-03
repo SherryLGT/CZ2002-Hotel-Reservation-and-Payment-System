@@ -6,3 +6,4 @@
 6|Lemon Meringue Tart|Fresh Lemon Curd & Toasted Meringue|5.0
 7|Milo Dinosaur|Iced Milo topped with Milo Powder|4.0
 8|Fishball Soup|Fishball Soup served with Rice|6.5
+9|item|blah|10.0
