@@ -22,7 +22,19 @@ public class MenuController {
 		// Prompt user to input item details
 		Menu item =  new Menu();
 		System.out.println("Please enter the menu item details: ");
-
+		
+		ArrayList al = menuDb.readMenu(filename);
+		String repeated = new String(new char[92]).replace("\0", "-");
+		System.out.println(repeated);
+	    System.out.printf("%3s %23s %53s %10s", "ID", "NAME", "DESCRIPTION", "S$ PRICE");
+	    System.out.println();
+	    System.out.println(repeated);
+		for (int i = 0 ; i < al.size() ; i++) {
+				Menu menu = (Menu)al.get(i);
+				System.out.format("%3s %23s %53s %10s", menu.getID(), menu.getName(), menu.getDescription(), menu.getPrice());
+				System.out.println();
+		}
+			    System.out.println(repeated);
 			
 		do {
 			System.out.println("Item Name: ");
@@ -44,11 +56,8 @@ public class MenuController {
 		item.setPrice(price);
 		
 		try {
-			ArrayList al = menuDb.readMenu(filename);
-			System.out.println(al.size()+1);
-			for (int i = 0; i < al.size(); i++){
-				Menu m = (Menu) al.get(i);
-			}
+			//ArrayList al = menuDb.readMenu(filename);
+			Menu m = (Menu) al.get(al.size()-1);
 			item.setID(al.size()+1);
 			al.add(item);
 			
