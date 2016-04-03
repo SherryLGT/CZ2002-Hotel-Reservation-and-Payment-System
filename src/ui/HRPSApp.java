@@ -147,8 +147,33 @@ public class HRPSApp {
 				System.out.println("Order Room Service");
 				break;
 			case 2:
-				menuControl.updateItem();
-				break;
+				System.out.println("1. Create Menu Item");
+				System.out.println("2. Update Menu Item");
+				System.out.println("3. Delete Menu Item");
+				
+				do {
+					System.out.print("Select an option: ");
+					try {
+						option = sc.nextInt();
+						if (option < 1 || option > 3) 
+							System.out.println("You have not selected option between 1-3. Please try again.");
+					} catch (InputMismatchException e) {
+						System.out.println("You have entered an invalid input. Please try again.");
+						sc.next();
+					}
+				} while (option < 1 || option > 3);
+				switch (option) {
+				case 1:
+					menuControl.createItem();
+					break;
+				case 2:
+					menuControl.updateItem();
+					break;
+				case 3:
+					menuControl.removeItem();
+					break;
+					}
+					break;
 			}
 			break;
 		case 4: // Room Maintenance

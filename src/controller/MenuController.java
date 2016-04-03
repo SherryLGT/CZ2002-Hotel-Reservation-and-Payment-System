@@ -22,8 +22,8 @@ public class MenuController {
 		// Prompt user to input item details
 		Menu item =  new Menu();
 		System.out.println("Please enter the menu item details: ");
-		
-		
+
+			
 		do {
 			System.out.println("Item Name: ");
 			name = sc.nextLine();
@@ -43,13 +43,12 @@ public class MenuController {
 		price = sc.nextDouble();
 		item.setPrice(price);
 		
-
 		try {
 			ArrayList al = menuDb.readMenu(filename);
+			System.out.println(al.size()+1);
 			for (int i = 0; i < al.size(); i++){
 				Menu m = (Menu) al.get(i);
 			}
-
 			al.add(item);
 			
 			//write item record/s to file.
@@ -59,6 +58,7 @@ public class MenuController {
 		} catch (IOException e){
 			System.out.println("IOException > " + e.getMessage());
 		}
+	
 		
 	}
 	
@@ -72,8 +72,6 @@ public class MenuController {
 		double price = 0;
 		
 		// Prompt user to input item details
-		Menu item = new Menu();
-		//item = null;
 		
 		System.out.println("Enter Item ID: ");
 		id = sc.nextInt();
@@ -107,13 +105,14 @@ public class MenuController {
 		}
 		try {
 			menuDb.saveMenu(filename, al);
+			System.out.println("Menu Item ID " + id + " updated accordingly!");
 			
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
 		}
 	}
 	
-	public ArrayList getItem() {
+	public ArrayList getItem(){
 		ArrayList al = null;
 		try {
 			al = menuDb.readMenu(filename);
@@ -124,10 +123,40 @@ public class MenuController {
 	}
 	
 	
+	public void removeItem(){
+	System.out.println("~~~~~REMOVE ITEM~~~~~");
 	
+	// Initialize attributes 
+	Integer id = 0;
+			
+	// Prompt user to input item details
+
+	System.out.println("Enter Item ID: ");
+	id = sc.nextInt();
 	
+	ArrayList al = getItem();
+	for (int i = 0; i < al.size(); i++) {
+		Menu removeitem = (Menu) al.get(i);
+		
+		if (id.equals(removeitem.getID())){
+			removeitem.getName();
+			removeitem.getDescription();
+			removeitem.getPrice();
+			al.remove(i);
+		}
+	}
 	
+	try {
+		menuDb.saveMenu(filename, al);
+		System.out.println("Menu item ID " + id + " removed!");
+		
+	} catch (IOException e) {
+		System.out.println("IOException > " + e.getMessage());
+	}
+
 	
+	}
 	
+
 
 }
