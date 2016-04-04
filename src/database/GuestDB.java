@@ -34,8 +34,6 @@ public class GuestDB {
 
 			// Get individual 'fields' of the string separated by SEPARATOR
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
-
-			
 			
 			Guest guest = new Guest();
 

@@ -394,6 +394,8 @@ public class GuestController {
 
 	}
 
+
+
 	public void updateGuest() {
 		println("\n------------ Update Guest ------------");
 
@@ -426,443 +428,646 @@ public class GuestController {
 		// Prompt user for guest details
 		Guest guest = null;
 
-		print("Please select identity type - (1) Driving License (2) Passport: ");
-		identityType = sc.nextInt();
-		sc.nextLine();
-
-		if (identityType == 1) {
-			print("Please enter driving license: ");
-			lic = sc.nextLine();
-		} else {
-			print("Please enter passport no.: ");
-			pp = sc.nextLine();
-		}
-
 		ArrayList<Guest> alr = getGuest();
 
-		for (int i = 0; i < alr.size(); i++) {
-			Guest updateguest = (Guest) alr.get(i);
+		do {
 
-			if (lic.equals(updateguest.getIdentity().getLic()) && pp.equals(updateguest.getIdentity().getPp())) {
+			print("Please select identity type - (1) Driving License (2) Passport: ");
+			identityType = sc.nextInt();
+			sc.nextLine();
 
-				print("Please select guest details to update - (1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
-				updateType = sc.nextInt();
-				switch (updateType) {
+			if (identityType == 1) {
+				for (int i = 0; i < alr.size(); i++) {
+					Guest updateguest = (Guest) alr.get(i);	
 
-				case 1:
-					// Guest Name
 					do {
-						print("\nUpdate Name: ");
-						name = sc.nextLine();
 
-						if (name.equals("") || !name.matches(alpha)) {
+						print("Please enter driving license: ");
+						lic = sc.nextLine();
 
-							println("Please enter a valid name to be updated");
-
-						} else {
-
-							guest.setName(name);
-
+						if (!lic.equals(updateguest.getIdentity().getLic())) {
+							println("\nError - Please enter a valid driving license");
+							break;
+						}
+						
+						else {
+							break;
 						}
 
-					} while (name.equals("") || !name.matches(alpha));
+					} while (!lic.equals(updateguest.getIdentity().getLic()));
 					break;
+				}
 
-				case 2:
-					// Guest Gender
+			}
+
+			else if (identityType == 2) {
+				for (int i = 0; i < alr.size(); i++) {
+					Guest updateguest = (Guest) alr.get(i);	
+
 					do {
-						println("\nUpdate Gender: ");
 
-						print("(1) Male (2) Female ");
-						genderType = sc.nextInt();
-						sc.nextLine();
+						print("Please enter passport no.: ");
+						pp = sc.nextLine();
 
-						if (genderType != 1 && genderType != 2) {
+						if (!pp.equals(updateguest.getIdentity().getPp())) {
+							println("\nError - Please enter a valid passport no.");
+							break;
+						}
+						
+						else {
+							break;
+						}
 
-							println("Please select a valid gender to be updated");
+					} while (!pp.equals(updateguest.getIdentity().getPp()));
+					break;
+				}
 
-						} else {
+			}
 
-							switch (genderType) {
+			else
+			{
+				println("Error - Please select a valid identity type\n");
+			}
 
-							case 1:
-								guest.setGender("Male");
-								break;
+		} while (identityType != 1 && identityType != 2);
 
-							case 2:
-								guest.setGender("Female");
+
+
+			for (int i = 0; i < alr.size(); i++) {
+				Guest updateguest = (Guest) alr.get(i);			
+				
+				if (lic.equals(updateguest.getIdentity().getLic()) && pp.equals(updateguest.getIdentity().getPp())) {
+
+					print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
+					updateType = sc.nextInt();
+					sc.nextLine();
+
+					switch (updateType) {
+
+
+					case 1:
+						// Guest Name
+						do {
+							print("\nNew Guest Name: ");
+							name = sc.nextLine();
+
+							if (name.equals("") || !name.matches(alpha)) {
+
+								println("Please enter a valid name to be updated");
+
+							} 
+
+							else if ((name.equals(updateguest.getName()))) {
+
+								println("Error - Current name and new name is the same");
+
+							} 
+
+							else {
+
+								updateguest.setName(name);
 								break;
 
 							}
 
-						}
+						} while (name.equals("") || (name.equals(updateguest.getName())) || !name.matches(alpha));	
+						break;
 
-					} while (genderType != 1 && genderType != 2);
-					break;
 
-				case 3:
-					// Guest Credit Card
-					do {
-						println("\nUpdate Credit Card Details - (1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
+					case 2:
+						// Guest Gender
+						do {
+							println("\nNew Guest Gender: ");
+							print("(1) Male (2) Female ");
 
-						updateCardType = sc.nextInt();
-						sc.nextLine();
+							genderType = sc.nextInt();
+							sc.nextLine();
 
-						if (updateCardType != 1 && updateCardType != 2 && updateCardType != 3 && updateCardType != 4) {
+							if ((genderType != 1 && genderType != 2)) {
 
-							println("Please select a valid credit card detail to be updated");
+								println("Please enter a valid gender to be updated");
 
-						} else {
+							} 
 
-							switch (updateCardType) {
+							else if ((genderType == 1 && (updateguest.getGender().equals("Male"))) || (genderType == 2 && (updateguest.getGender().equals("Female")))) {
 
-							case 1:
-								// Guest Credit Card - Type
-								do {
-									print("Update Credit Card Type - (1) Visa (2) Master (3) Amex: ");
-									CreditCard cc = guest.new CreditCard();
-									guest.setCard(cc);
-									cardType = sc.nextInt();
-									sc.nextLine();
+								println("Error - Current gender and new gender is the same");
 
-									if (cardType != 1 && cardType != 2 && cardType != 3) {
+							} 
 
-										println("Please select a valid credit card type to be updated\n");
+							else {
 
-									} else {
+								switch (genderType) {
 
-										switch (cardType) {
+								case 1:
+									updateguest.setGender("Male");
+									break;
 
-										case 1:
-											guest.getCard().setType("Visa");
+								case 2:
+									updateguest.setGender("Female");
+									break;
+
+								}
+								break;
+							}
+
+						} while ((genderType != 1 && genderType != 2) || (genderType == 1 && (updateguest.getGender().equals("Male"))) || (genderType == 2 && (updateguest.getGender().equals("Female"))));	
+						break;
+
+
+					case 3:
+						// Guest Credit Card
+						do {
+							println("\nUpdate Credit Card Details - \n(1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
+
+							CreditCard cc = updateguest.getCard();
+							updateguest.setCard(cc);
+							updateCardType = sc.nextInt();
+							sc.nextLine();
+
+							if (updateCardType != 1 && updateCardType != 2 && updateCardType != 3 && updateCardType != 4) {
+
+								println("Please select a valid credit card detail to be updated");
+
+							} else {
+
+								switch (updateCardType) {
+
+
+								case 1:
+									// Guest Credit Card - Type
+									do {
+										print("\nNew Credit Card Type - (1) Visa (2) Master (3) Amex: ");
+										cardType = sc.nextInt();
+										sc.nextLine();
+
+										if (cardType != 1 && cardType != 2 && cardType != 3) {
+
+											println("Please enter a valid credit card type to be updated");
+
+										} 
+
+										else if ((cardType == 1 && (updateguest.getCard().getType().equals("Visa")) || (cardType == 2 && (updateguest.getCard().getType().equals("Master")) || (cardType == 3 && (updateguest.getCard().getType().equals("Amex")))))) {
+
+											println("Error - Current credit card type and new credit card type is the same");
+
+										} 
+
+										else {
+
+											switch (cardType) {
+
+											case 1:
+												updateguest.getCard().setType("Visa");
+												break;
+
+											case 2:
+												updateguest.getCard().setType("Master");
+												break;
+
+											case 3:
+												updateguest.getCard().setType("Amex");
+												break;
+
+											}
 											break;
+										}
 
-										case 2:
-											guest.getCard().setType("Master");
-											break;
+									} while ((cardType != 1 && cardType != 2 && cardType != 3) || (cardType == 1 && (updateguest.getCard().getType().equals("Visa")) || (cardType == 2 && (updateguest.getCard().getType().equals("Master")) || (cardType == 3 && (updateguest.getCard().getType().equals("Amex"))))));	
+									break;
 
-										case 3:
-											guest.getCard().setType("Amex");
+
+								case 2:
+									// Guest Credit Card - No.
+									do {
+										print("\nNew Credit Card Number: ");
+										cardNum = sc.nextLine();
+
+										if (cardNum.equals("") || !cardNum.matches(digit)) {
+
+											println("Please enter a valid credit card number to be updated");
+
+										} 
+
+										else if ((cardNum.equals(updateguest.getCard().getNum()))) {
+
+											println("Error - Current credit card number and new credit card number is the same");
+
+										} 
+
+										else {
+
+											updateguest.getCard().setNum(cardNum);
 											break;
 
 										}
 
-									}
+									} while (cardNum.equals("") || !cardNum.matches(digit) || (cardNum.equals(updateguest.getCard().getNum())));	
+									break;
 
-								} while (cardType != 1 && cardType != 2 && cardType != 3);
-								break;
 
-							case 2:
-								// Guest Credit Card - No.
-								do {
-									print("Update Credit Card Number: ");
-									cardNum = sc.nextLine();
+								case 3:
+									// Guest Credit Card - CVV
+									do {
+										print("\nNew Credit Card CVV: ");
+										cvv = sc.nextLine();
 
-									if (cardNum.equals("") || !cardNum.matches(digit)) {
+										if (cvv.equals("") || !cvv.matches(digit)) {
 
-										println("Please enter a valid credit card no. to be updated\n");
+											println("Please enter a valid credit card CVV to be updated");
 
-									} else {
+										} 
 
-										guest.getCard().setNum(cardNum);
+										else if ((cvv.equals(updateguest.getCard().getCvv()))) {
 
-									}
+											println("Error - Current credit card CVV and new credit card CVV is the same");
 
-								} while (cardNum.equals("") || !cardNum.matches(digit));
-								break;
+										} 
 
-							case 3:
-								// Guest Credit Card - CVV
-								do {
-									print("Update Credit Card CVV: ");
-									cvv = sc.nextLine();
+										else {
 
-									if (cvv.equals("") || !cvv.matches(digit)) {
+											updateguest.getCard().setCvv(cvv);
+											break;
 
-										println("Please enter a valid credit card CVV to be updated\n");
+										}
 
-									} else {
+									} while (cvv.equals("") || !cvv.matches(digit) || (cvv.equals(updateguest.getCard().getCvv())));	
+									break;
 
-										guest.getCard().setCvv(cvv);
 
-									}
+								case 4:
+									// !!! Need help for validation. For the while
+									// loop, unable to input
+									// "inputdate.before(todaysdate)" cos of the
+									// variables' placing? !!!
+									// Guest Credit Card - Exp Date
+									do {
+										print("\nNew Credit Card Exp (MM/YY): ");
+										exp = sc.nextLine();
 
-								} while (cvv.equals("") || !cvv.matches(digit));
-								break;
+										SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
+										sdf.setLenient(false);
+										Date todaysdate = new Date();
+										Date inputdate = null;
 
-							case 4:
-								// !!! Need help for validation. For the while
-								// loop, unable to input
-								// "inputdate.before(todaysdate)" cos of the
-								// variables' placing? !!!
-								// Guest Credit Card - Exp Date
-								do {
-									print("Update Credit Card Exp (MM/YY): ");
-									exp = sc.nextLine();
+										try {
+											inputdate = sdf.parse(exp);
+										} catch (ParseException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
 
-									SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
-									sdf.setLenient(false);
-									Date todaysdate = new Date();
-									Date inputdate = null;
+										if (exp == "" || inputdate.before(todaysdate)) {
 
-									try {
-										inputdate = sdf.parse(exp);
-									} catch (ParseException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+											println("Please enter a valid credit card exp date to be updated");
 
-									if (exp == "" || inputdate.before(todaysdate)) {
-										println("Please enter a valid credit card expiration date to be updated\n");
+										} 
 
-									} else {
+										else if ((exp.equals(updateguest.getCard().getExp()))) {
 
-										guest.getCard().setExp(exp);
+											println("Error - Current credit card exp date and new credit card exp date is the same");
 
-									}
-								} while (exp == "");
+										} 
+
+										else {
+
+											updateguest.getCard().setExp(exp);
+											break;
+
+										}
+
+									} while (exp == "" || (exp.equals(updateguest.getCard().getExp())) );	
+									break;
+
+								}
 
 							}
 
-						}
+						} while (updateCardType != 1 && updateCardType != 2 && updateCardType != 3 && updateCardType != 4);
+						break;
 
-					} while (updateCardType != 1 && updateCardType != 2 && updateCardType != 3 && updateCardType != 4);
-					break;
 
-				case 4:
-					// Guest Address
-					do {
-						print("\nUpdate Address - (1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
-						updateAddType = sc.nextInt();
+					case 4:
+						// Guest Address
+						do {
+							print("\nUpdate Address - \n(1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
 
-						if (updateAddType != 1 && updateAddType != 2 && updateAddType != 3 && updateAddType != 4
-								&& updateAddType != 5) {
+							Address add = updateguest.getAddress();
+							updateguest.setAddress(add);
+							updateAddType = sc.nextInt();
+							sc.nextLine();
 
-							println("Please enter a valid address detail to be updated");
+							if (updateAddType != 1 && updateAddType != 2 && updateAddType != 3 && updateAddType != 4
+									&& updateAddType != 5) {
 
-						} else {
+								println("Please enter a valid address detail to be updated");
 
-							switch (updateAddType) {
+							} else {
 
-							case 1:
-								// Guest Address - Line 1
-								do {
-									print("Update Address Line 1: ");
-									Address add = guest.new Address();
-									add1 = sc.nextLine();
+								switch (updateAddType) {
 
-									if (add1.equals("")) {
 
-										println("Please enter a valid address line 1 to be updated\n");
+								case 1:
+									// Guest Address - Line 1
+									do {
+										print("\nNew Address Line 1: ");
+										add1 = sc.nextLine();
 
-									} else {
+										if (add1.equals("")) {
 
-										guest.setAddress(add);
-										guest.getAddress().setAdd1(add1);
+											println("Please enter a valid address line 1 to be updated");
 
-									}
+										} 
 
-								} while (add1.equals(""));
-								break;
+										else if ((add1.equals(updateguest.getAddress().getAdd1()))) {
 
-							case 2:
-								// Guest Address - Line 2
-								do {
-									print("Update Address Line 2: ");
-									add2 = sc.nextLine();
+											println("Error - Current address line 1 and new address line 1 is the same");
 
-									if (add2.equals("")) {
+										} 
 
-										println("Please enter a valid address line 2 to be updated\n");
+										else {
 
-									} else {
+											updateguest.getAddress().setAdd1(add1);
+											break;
 
-										guest.getAddress().setAdd2(add2);
+										}
 
-									}
+									} while (add1.equals("") || (add1.equals(updateguest.getAddress().getAdd1())));	
+									break;
 
-								} while (add2.equals(""));
-								break;
 
-							case 3:
-								// Guest Address - City
-								do {
-									print("Update City: ");
-									city = sc.nextLine();
+								case 2:
+									// Guest Address - Line 2	
+									do {
+										print("\nNew Address Line 2: ");
+										add2 = sc.nextLine();
 
-									if (city.equals("")) {
+										if (add2.equals("")) {
 
-										println("Please enter a valid city to be updated\n");
+											println("Please enter a valid address line 2 to be updated");
 
-									} else {
+										} 
 
-										guest.getAddress().setCity(city);
+										else if ((add2.equals(updateguest.getAddress().getAdd2()))) {
 
-									}
+											println("Error - Current address line 2 and new address line 2 is the same");
 
-								} while (city.equals(""));
-								break;
+										} 
 
-							case 4:
-								// Guess Address - State
-								do {
-									print("Update State: ");
-									state = sc.nextLine();
+										else {
 
-									if (state.equals("")) {
+											updateguest.getAddress().setAdd2(add2);
+											break;
 
-										println("Please enter a valid state to be updated\n");
+										}
 
-									} else {
+									} while (add2.equals("") || (add2.equals(updateguest.getAddress().getAdd2())));	
+									break;
 
-										guest.getAddress().setState(state);
 
-									}
+								case 3:
+									// Guest Address - City	
+									do {
+										print("\nNew City: ");
+										city = sc.nextLine();
 
-								} while (state.equals(""));
-								break;
+										if (city.equals("")) {
 
-							case 5:
-								// Guest Address - Zip
-								do {
-									print("Update Zip Code: ");
-									zip = sc.nextLine();
+											println("Please enter a valid city to be updated");
 
-									if (zip.equals("")) {
+										} 
 
-										println("Please enter a valid zip code to be updated\n");
+										else if ((city.equals(updateguest.getAddress().getCity()))) {
 
-									} else {
+											println("Error - Current city and new city is the same");
 
-										guest.getAddress().setZip(zip);
+										} 
 
-									}
+										else {
 
-								} while (state.equals(""));
+											updateguest.getAddress().setCity(city);
+											break;
+
+										}
+
+									} while (city.equals("") || (city.equals(updateguest.getAddress().getCity())));	
+									break;
+
+
+								case 4:
+									// Guess Address - State		
+									do {
+										print("\nNew State: ");
+										state = sc.nextLine();
+
+										if (state.equals("")) {
+
+											println("Please enter a valid state to be updated");
+
+										} 
+
+										else if ((state.equals(updateguest.getAddress().getState()))) {
+
+											println("Error - Current state and new state is the same");
+
+										} 
+
+										else {
+
+											updateguest.getAddress().setState(state);
+											break;
+
+										}
+
+									} while (state.equals("") || (state.equals(updateguest.getAddress().getState())));	
+									break;
+
+
+								case 5:
+									// Guest Address - Zip
+									do {
+										print("\nNew Zip Code: ");
+										zip = sc.nextLine();
+
+										if (zip.equals("")) {
+
+											println("Please enter a valid zip code to be updated");
+
+										} 
+
+										else if ((zip.equals(updateguest.getAddress().getZip()))) {
+
+											println("Error - Current zip code and new zip code is the same");
+
+										} 
+
+										else {
+
+											updateguest.getAddress().setZip(zip);
+											break;
+
+										}
+
+									} while (zip.equals("") || (zip.equals(updateguest.getAddress().getZip())));	
+									break;
+
+								}
+
+							}
+
+						} while (updateAddType != 1 && updateAddType != 2 && updateAddType != 3 && updateAddType != 4
+								&& updateAddType != 5);
+						break;
+
+
+					case 5:
+						// Guest Country
+						do {
+							print("\nNew Country: ");
+							country = sc.nextLine();
+
+							if (country.equals("") || !country.matches(alpha)) {
+
+								println("Please enter a valid country to be updated");
+
+							} 
+
+							else if ((country.equals(updateguest.getCountry()))) {
+
+								println("Error - Current country and new country is the same");
+
+							} 
+
+							else {
+
+								updateguest.setCountry(country);
 								break;
 
 							}
 
-						}
+						} while (country.equals("") || !country.matches(alpha) || (country.equals(updateguest.getCountry())));	
+						break;
 
-					} while (updateAddType != 1 && updateAddType != 2 && updateAddType != 3 && updateAddType != 4
-							&& updateAddType != 5);
-					break;
 
-				case 5:
-					// Guest Country
-					do {
-						print("\nUpdate Country: ");
-						country = sc.nextLine();
+					case 6:
+						// Guest Identity
+						do {
 
-						if (country.equals("") || !country.matches(alpha)) {
+							print("\nUpdate identity type - (1) Driving License (2) Passport: ");
+							Identity ident = updateguest.new Identity();
+							updateguest.setIdentity(ident);
+							identityType = sc.nextInt();
+							sc.nextLine();
 
-							println("Please enter a valid country to be updated");
+							if (identityType != 1 && identityType != 2) {
 
-						} else {
+								println("Please select a valid identity type to be updated\n");
 
-							guest.setCountry(country);
+							} else {
 
-						}
+								switch (identityType) {
 
-					} while (country.equals("") || !country.matches(alpha));
-					break;
+								case 1:
+									print("Driving License: ");
+									lic = sc.nextLine();
+									updateguest.getIdentity().setLic(lic);
+									break;
 
-				case 6:
-					// Guest Identity
-					do {
+								case 2:
+									print("Passport No.: ");
+									pp = sc.nextLine();
+									updateguest.getIdentity().setPp(pp);
+									break;
 
-						print("\nUpdate identity type - (1) Driving License (2) Passport: ");
-						Identity ident = guest.new Identity();
-						guest.setIdentity(ident);
-						identityType = sc.nextInt();
-						sc.nextLine();
+								}
+							}
 
-						if (identityType != 1 && identityType != 2) {
+						} while (identityType != 1 && identityType != 2);
+						break;
 
-							println("Please select a valid identity type to be updated\n");
 
-						} else {
+					case 7:
+						// Guest Nationality		
+						do {
+							print("\nNew Nationality: ");
+							nationality = sc.nextLine();
 
-							switch (identityType) {
+							if (nationality.equals("") || !nationality.matches(alpha)) {
 
-							case 1:
-								print("Driving License: ");
-								lic = sc.nextLine();
-								guest.getIdentity().setLic(lic);
-								break;
+								println("Please enter a valid nationality to be updated");
 
-							case 2:
-								print("Passport No.: ");
-								pp = sc.nextLine();
-								guest.getIdentity().setPp(pp);
+							} 
+
+							else if ((nationality.equals(updateguest.getNationality()))) {
+
+								println("Error - Current nationality and new nationality is the same");
+
+							} 
+
+							else {
+
+								updateguest.setNationality(nationality);
 								break;
 
 							}
-						}
 
-					} while (identityType != 1 && identityType != 2);
+						} while (nationality.equals("") || !nationality.matches(alpha) || (nationality.equals(updateguest.getNationality())));	
+						break;
+
+
+					case 8:
+						// Guest Contact
+						do {
+							print("\nNew Contact No.: ");
+							contact = sc.nextLine();
+
+							if (contact.equals("")) {
+
+								println("Please enter a valid contact no. to be updated");
+
+							} 
+
+							else if ((contact.equals(updateguest.getContact()))) {
+
+								println("Error - Current contact no. and new contact no. is the same");
+
+							} 
+
+							else {
+
+								updateguest.setContact(contact);
+								break;
+
+							}
+
+						} while (contact.equals("") || (contact.equals(updateguest.getContact())));	
+						break;
+
+					}
+
 					break;
-
-				case 7:
-
-					// Guest Nationality
-					do {
-						print("\nNationality: ");
-						nationality = sc.nextLine();
-
-						if (nationality.equals("") || !nationality.matches(alpha)) {
-
-							println("Please enter a valid nationality to be updated");
-
-						} else {
-
-							guest.setNationality(nationality);
-
-						}
-
-					} while (nationality.equals("") || !nationality.matches(alpha));
-					break;
-
-				case 8:
-
-					// Guest Contact
-					do {
-						print("\nContact: ");
-						contact = sc.nextLine();
-
-						if (contact.equals("")) {
-
-							println("Please enter a valid contact no.  to be updated");
-
-						} else {
-
-							guest.setContact(contact);
-
-						}
-
-					} while (contact.equals(""));
-					break;
-
 				}
 
-				break;
+
 			}
+
+			sc.close();
+
+			try {
+				// Write Guest records to file
+				guestDB.saveGuest(filename, alr);
+
+				System.out.println("Guest details has been successfully updated!");
+
+			} catch (IOException e) {
+				println("IOException > " + e.getMessage());
+			}
+
+
 		}
 
-	}
 
-	public ArrayList<Guest> getGuest() {
-		ArrayList<Guest> alr = null;
-		try {
-			// read file containing Guest records
-			alr = guestDB.readGuest(filename);
 
-		} catch (IOException e) {
-			System.out.println("IOException > " + e.getMessage());
-		}
-		return alr;
-	}
 
 	public Guest searchGuest(String pp) {
 		println("SEARCH GUEST");
@@ -881,9 +1086,27 @@ public class GuestController {
 
 	}
 
+
+
+	public ArrayList<Guest> getGuest() {
+		ArrayList<Guest> alr = null;
+		try {
+			// read file containing Guest records
+			alr = guestDB.readGuest(filename);
+
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+		return alr;
+	}
+
+
+
 	private void println(String output) {
 		System.out.println(output);
 	}
+
+
 
 	private void print(String output) {
 		System.out.print(output);
