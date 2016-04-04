@@ -24,7 +24,7 @@ public class ReservationDB {
  
     public ArrayList readReservation(String filename) throws IOException {
         // read String from text file
-        ArrayList stringArray = (ArrayList) read(filename);
+        ArrayList stringArray = (ArrayList) UtilityDB.read(filename);
         ArrayList alr = new ArrayList();// to store Reservation data
  
         for (int i = 0; i < stringArray.size(); i++) {
@@ -89,34 +89,6 @@ public class ReservationDB {
             st.append(reserv.getStatus());
             alw.add(st.toString());
         }
-        write(filename, alw);
+        UtilityDB.write(filename, alw);
     }
- 
-    /** Write fixed content to the given file. */
-    public void write(String fileName, List data) throws IOException {
-        PrintWriter out = new PrintWriter(new FileWriter(fileName));
- 
-        try {
-            for (int i = 0; i < data.size(); i++) {
-                out.println((String) data.get(i));
-            }
-        } finally {
-            out.close();
-        }
-    }
- 
-    /** Read the contents of the given file. */
-    public List read(String fileName) throws IOException {
-        List data = new ArrayList();
-        Scanner scanner = new Scanner(new FileInputStream(fileName));
-        try {
-            while (scanner.hasNextLine()) {
-                data.add(scanner.nextLine());
-            }
-        } finally {
-            scanner.close();
-        }
-        return data;
-    }
- 
 }

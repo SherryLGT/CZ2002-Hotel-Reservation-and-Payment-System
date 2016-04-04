@@ -23,7 +23,7 @@ public class PaymentDB {
     DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
      
     public ArrayList readPayment(String filename) throws IOException {
-        ArrayList stringArray = (ArrayList) read(filename);
+        ArrayList stringArray = (ArrayList) UtilityDB.read(filename);
         ArrayList alr = new ArrayList();
          
         for(int i = 0; i < stringArray.size(); i++) {
@@ -73,37 +73,6 @@ public class PaymentDB {
             st.append(payment.getTotal());
             alw.add(st.toString());
         }
-        write(filename, alw);
-    }
-     
-    public void write(String fileName, List data) throws IOException {
-        PrintWriter out = new PrintWriter(new FileWriter(fileName));
- 
-        try {
-            for (int i = 0; i < data.size(); i++) {
-                out.println((String) data.get(i));
-            }
-        } finally {
-            out.close();
-        }
-    }
-     
-    public List read(String fileName) throws IOException {
-        List data = new ArrayList();
-         
-        File file = new File(".", fileName);
- 
-        if (!file.isFile() && !file.createNewFile()) {
-            throw new IOException("Error creating new file: " + file.getAbsolutePath());
-        }
-        Scanner scanner = new Scanner(new FileInputStream(fileName));
-        try {
-            while (scanner.hasNextLine()) {
-                data.add(scanner.nextLine());
-            }
-        } finally {
-            scanner.close();
-        }
-        return data;
+        UtilityDB.write(filename, alw);
     }
 }
