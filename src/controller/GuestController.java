@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import database.GuestDB;
 import entity.Guest;
@@ -157,7 +158,7 @@ public class GuestController {
 			print("CVV: ");
 			cvv = sc.nextLine();
 
-			if (cvv.equals("") || !cvv.matches(digit)) {
+			if (cvv.equals("")) {
 
 				println("Please enter a valid credit card CVV\n");
 
@@ -167,7 +168,7 @@ public class GuestController {
 
 			}
 
-		} while (cvv.equals("") || !cvv.matches(digit));
+		} while (cvv.equals(""));
 
 		// !!! Need help for validation. For the while loop, unable to input
 		// "inputdate.before(todaysdate)" cos of the variables' placing? !!!
@@ -672,7 +673,7 @@ public class GuestController {
 										print("\nNew Credit Card CVV: ");
 										cvv = sc.nextLine();
 
-										if (cvv.equals("") || !cvv.matches(digit)) {
+										if (cvv.equals("")) {
 
 											println("Please enter a valid credit card CVV to be updated");
 
@@ -691,7 +692,7 @@ public class GuestController {
 
 										}
 
-									} while (cvv.equals("") || !cvv.matches(digit) || (cvv.equals(updateguest.getCard().getCvv())));	
+									} while (cvv.equals("")|| (cvv.equals(updateguest.getCard().getCvv())));	
 									break;
 
 
@@ -1066,23 +1067,100 @@ public class GuestController {
 
 		}
 
+	
+	
+	public void searchGuest(String[] args) {
+		println("\n------------ Search Guest ------------");
+		
+		// Initialize attributes
+		String lic = "null";
+		String pp = "null";
+		int identityType = 0;
 
 
+		// To be used for data validation
+		String digit = "\\d+";
+		String alpha = "[a-zA-Z.*\\s+.]+";
+		
+		// Prompt user for guest details
+		Guest guest = null;
+		ArrayList<Guest> alr = getGuest();		
+		
+		do {
 
-	public Guest searchGuest(String pp) {
-		println("SEARCH GUEST");
+			print("Please select identity type - (1) Driving License (2) Passport: ");
+			identityType = sc.nextInt();
+			sc.nextLine();
 
-		ArrayList<Guest> alr = getGuest();
+			do {
 
-		for (int i = 0; i <= alr.size(); i++) {
-			Guest searchguestpp = (Guest) alr.get(i);
+				print("Please select identity type - (1) Driving License (2) Passport: ");
+				identityType = sc.nextInt();
+				sc.nextLine();
 
-			if (searchguestpp.getIdentity().getPp().equals(pp)) {
-				return searchguestpp;
-			}
-		}
+				if (identityType == 1) {
+					for (int i = 0; i < alr.size(); i++) {
+						Guest searchguest = (Guest) alr.get(i);	
 
-		return null;
+						do {
+
+							print("Please enter driving license: ");
+							lic = sc.nextLine();
+
+							if (!lic.equals(updateguest.getIdentity().getLic())) {
+								println("\nError - Please enter a valid driving license");
+								break;
+							}
+							
+							else {
+								break;
+							}
+
+						} while (!lic.equals(updateguest.getIdentity().getLic()));
+						break;
+					}
+
+				}
+
+				else if (identityType == 2) {
+					for (int i = 0; i < alr.size(); i++) {
+						Guest searchguest = (Guest) alr.get(i);	
+
+						do {
+
+							print("Please enter passport no.: ");
+							pp = sc.nextLine();
+
+							if (!pp.equals(updateguest.getIdentity().getPp())) {
+								println("\nError - Please enter a valid passport no.");
+								break;
+							}
+							
+							else {
+								break;
+							}
+
+						} while (!pp.equals(updateguest.getIdentity().getPp()));
+						break;
+					}
+
+				}
+
+				else
+				{
+					println("Error - Please select a valid identity type\n");
+				}
+
+			} while (identityType != 1 && identityType != 2);
+		
+			if (lic.equals(searchguest.getIdentity().getLic()) && pp.equals(searchguest.getIdentity().getPp())) {
+							
+				for (int i = 0; i < alr.size(); i++) {
+					Guest searchguest = (Guest) alr.get(i);
+					println("Name is: " + searchguest.getName());
+					println("Gender is: " + searchguest.getGender());
+					println("Address is: " +searchguest.getAddress().getAdd1());
+				}
 
 	}
 
