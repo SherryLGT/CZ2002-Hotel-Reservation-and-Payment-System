@@ -11,27 +11,6 @@ import controller.RoomController;
 import controller.RoomServiceController;
 
 public class HRPSApp {
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-
-	/**
-	 * \n new line character
-	 * \t is a tab
-	 * \b backspace
-	 * \f form feed in text at that point
-	 * \r carriage return
-	 * \' single quote character
-	 * \" double quote character
-	 * \\ backslash character
-	 */
-
 	public static void main(String[] aArgs) {
 		Scanner sc = new Scanner(System.in);
 		int option = -1;
@@ -43,177 +22,163 @@ public class HRPSApp {
 		RoomServiceController roomServiceControl = new RoomServiceController();
 		MenuController menuControl = new MenuController();
 		
-		System.out.println("=================================\n|\t WELCOME TO HRPS \t|\n=================================");
-		System.out.println("| Options: \t\t\t|");
-		System.out.println("|\t1. Guest\t\t|");
-		System.out.println("|\t2. Reservation\t\t|");
-		System.out.println("|\t3. Room Service\t\t|");
-		System.out.println("|\t4. Room Maintenance\t|");
-		System.out.println("|\t5. Payment\t\t|");
-		System.out.println("|\t6. Occupancy Report\t|");
-		System.out.println("|\t0. Exit\t\t\t|");
-		System.out.println("=================================");
-
+		do {
+			System.out.print("\033[H\033[2J");
+			
+			HRPSApp.line("=", 41);
+			System.out.format("%1s %26s %12s %n", "|", "WELCOME TO HRPS", "|");
+			HRPSApp.line("=", 41);
+			System.out.format("%1s %8s %30s %n", "|", "Options:", "|");
+			System.out.format("%1s %11s %1s %21s %n", "|", "1.", "Guest", "|");
+			System.out.format("%1s %11s %1s %15s %n", "|", "2.", "Reservation", "|");
+			System.out.format("%1s %11s %1s %14s %n", "|", "3.", "Room Service", "|");
+			System.out.format("%1s %11s %1s %10s %n", "|", "4.", "Room Maintenance", "|");
+			System.out.format("%1s %11s %1s %19s %n", "|", "5.", "Payment", "|");
+			System.out.format("%1s %11s %1s %10s %n", "|", "6.", "Occupancy Report", "|");
+			System.out.format("%1s %11s %1s %22s %n", "|", "0.", "Exit", "|");
+			HRPSApp.line("=", 41);
+			
+			option = optionChecking(0, 6);
+			System.out.println();
+			
+			switch (option) {
+			case 1: // Guest
+				HRPSApp.header("GUEST", "~", 36);
+				System.out.format("%1s %9s %8s %8s %n", "|", "1. ", "Check In (New Guest)", "|");
+				System.out.format("%1s %9s %8s %8s %n", "|", "2. ", "Update Guest Details", "|");
+				System.out.format("%1s %9s %8s %16s %n", "|", "3. ", "Search Guest", "|");
+				System.out.format("%1s %9s %3s %24s %n", "|", "0. ", "Back", "|");
+				HRPSApp.line("~", 41);
+				
+				option = optionChecking(0, 3);
+	
+				switch (option) {
+				case 1:
+					reservationControl.checkIn();
+					break;
+				case 2:
+					guestControl.createGuest();
+					break;
+				case 3:
+					guestControl.updateGuest();
+					break;
+				}
+				break;
+			case 2: // Reservation
+				reservationControl.kickOut();
+				HRPSApp.header("RESERVATION", "~", 30);
+				System.out.format("%1s %10s %8s %9s %n", "|", "1. ", "Create Reservation", "|");
+				System.out.format("%1s %10s %8s %9s %n", "|", "2. ", "Delete Reservation", "|");
+				System.out.format("%1s %10s %3s %23s %n", "|", "0. ", "Back", "|");
+				HRPSApp.line("~", 41);
+				
+				option = optionChecking(0, 2);
+	
+				switch (option) {
+				case 1:
+					reservationControl.createReservation();
+					break;
+				case 2:
+					reservationControl.deleteReservation();
+					break;
+				}
+				break;
+			case 3: // Room Service
+				HRPSApp.header("ROOM SERVICE", "~", 29);
+				System.out.format("%1s %13s %8s %12s %n", "|", "1. ", "Room Service", "|");
+				System.out.format("%1s %13s %8s %15s %n", "|", "2. ", "Menu Item", "|");
+				System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
+				HRPSApp.line("~", 41);
+				
+				option = optionChecking(0, 2);
+	
+				switch (option) {
+				case 1:
+					System.out.println("Order Room Service");
+					break;
+				case 2:
+					System.out.println("1. Add Menu Item");
+					System.out.println("2. Update Menu Item");
+					System.out.println("3. Remove Menu Item");
+					
+					option = optionChecking(0, 3);
+					
+					switch (option) {
+					case 1:
+						menuControl.createItem();
+						break;
+					case 2:
+						menuControl.updateItem();
+						break;
+					case 3:
+						menuControl.removeItem();
+						break;
+					}
+				}
+				break;
+			case 4: // Room Maintenance
+				HRPSApp.header("ROOM MAINTENANCE", "-", 25);
+				roomControl.updateRoomMaintenance();
+				break;
+			case 5: // Payment
+				HRPSApp.header("PAYMENT", "-", 34);
+				paymentControl.createPayment();
+				break;
+			case 6: // Occupancy Report
+				HRPSApp.header("OCCUPANCY REPORT", "~", 25);
+				System.out.format("%1s %6s %8s %4s %n", "|", "1. ", "Print Room Occupancy Status", "|");
+				System.out.format("%1s %6s %8s %14s %n", "|", "2. ", "Print Room Status", "|");
+				System.out.format("%1s %6s %3s %27s %n", "|", "0. ", "Back", "|");
+				HRPSApp.line("~", 41);
+				option = optionChecking(0, 2);
+	
+				switch (option) {
+				case 1:
+					roomControl.printRoomOccupancy();
+					break;
+				case 2:
+					roomControl.printRoomStatus();
+					break;
+				}
+				break;
+			case 0: // Exit
+				System.out.print("Thank you for using HRPS!");
+				System.exit(0);
+				break;
+			}
+			
+			System.out.print("Press any key to continue...");
+			sc.nextLine();
+			option = 0;
+		} while(option == 0);
+	}
+	
+	private static int optionChecking(int min, int max) {
+		Scanner sc = new Scanner(System.in);
+		int option = -1;
+		
 		do {
 			System.out.print("Select an option: ");
 			try {
 				option = sc.nextInt();
-				if (option < 0 || option > 6)
-					System.out.println("You have not selected option between 0-6. Please try again.");
+				if (option < min || option > max)
+					System.out.println("You have not selected option between " + min + "-" + max + ". Please try again.");
 			} catch (InputMismatchException e) {
 				System.out.println("You have entered an invalid input. Please try again.");
 				sc.next();
-				continue;
 			}
-		} while (option < 0 || option > 6);
-		
-		switch (option) {
-		case 1: // Guest
-			System.out.print("\n~~~~~~~~~~~~~ GUEST ~~~~~~~~~~~~~\n|");
-			System.out.format("%7s%8s", "1. ", "Check In (New Guest)\t|\n|");
-			System.out.format("%7s%8s", "2. ", "Update Guest Details\t|\n|");
-			System.out.format("%7s%8s", "3. ", "Search Guest\t\t|\n");
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			do {
-				System.out.print("Select an option: ");
-				try {
-					option = sc.nextInt();
-					if (option < 1 || option > 3)
-						System.out.println("You have not selected option between 1-3. Please try again.");
-				} catch (InputMismatchException e) {
-					System.out.println("You have entered an invalid input. Please try again.");
-					sc.next();
-				}
-			} while (option < 1 || option > 3);
-
-			switch (option) {
-			case 1:
-				reservationControl.checkIn();
-				break;
-			case 2:
-				guestControl.createGuest();
-				break;
-			case 3:
-				guestControl.updateGuest();
-				break;
-			}
-			break;
-		case 2: // Reservation
-			reservationControl.kickOut();
-			System.out.print("\n~~~~~~~~~~ RESERVATION ~~~~~~~~~~\n|");
-			System.out.format("%7s%8s", "1. ", "Create Reservation\t|\n|");
-			System.out.format("%7s%8s", "2. ", "Delete Reservation\t|\n");
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			do {
-				System.out.print("Select an option: ");
-				try {
-					option = sc.nextInt();
-					if (option < 1 || option > 2)
-						System.out.println("You have not selected option between 1-2. Please try again.");
-				} catch (InputMismatchException e) {
-					System.out.println("You have entered an invalid input. Please try again.");
-					sc.next();
-				}
-			} while (option < 1 || option > 2);
-
-			switch (option) {
-			case 1:
-				reservationControl.createReservation();
-				break;
-			case 2:
-				reservationControl.deleteReservation();
-				break;
-			}
-			break;
-		case 3: // Room Service
-			System.out.print("\n~~~~~~~~~ ROOM SERVICE ~~~~~~~~~~\n|");
-			System.out.format("%10s%8s", "1. ", "Room Service\t\t|\n|");
-			System.out.format("%10s%8s", "2. ", "Menu Item\t\t|\n");
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			do {
-				System.out.print("Select an option: ");
-				try {
-					option = sc.nextInt();
-					if (option < 1 || option > 2)
-						System.out.println("You have not selected option between 1-2. Please try again.");
-				} catch (InputMismatchException e) {
-					System.out.println("You have entered an invalid input. Please try again.");
-					sc.next();
-				}
-			} while (option < 1 || option > 2);
-
-			switch (option) {
-			case 1:
-				System.out.println("Order Room Service");
-				break;
-			case 2:
-				System.out.println("1. Create Menu Item");
-				System.out.println("2. Update Menu Item");
-				System.out.println("3. Delete Menu Item");
-				
-				do {
-					System.out.print("Select an option: ");
-					try {
-						option = sc.nextInt();
-						if (option < 1 || option > 3) 
-							System.out.println("You have not selected option between 1-3. Please try again.");
-					} catch (InputMismatchException e) {
-						System.out.println("You have entered an invalid input. Please try again.");
-						sc.next();
-					}
-				} while (option < 1 || option > 3);
-				switch (option) {
-				case 1:
-					menuControl.createItem();
-					break;
-				case 2:
-					menuControl.updateItem();
-					break;
-				case 3:
-					menuControl.removeItem();
-					break;
-					}
-					break;
-			}
-			break;
-		case 4: // Room Maintenance
-			System.out.println("\n------- ROOM MAINTENANCE --------");
-			roomControl.updateRoomMaintenance();
-			break;
-		case 5: // Payment
-			System.out.println("\n------------ PAYMENT ------------");
-			paymentControl.createPayment();
-			break;
-		case 6: // Occupancy Report
-			System.out.print("\n~~~~~~~~~~~ OCCUPANCY REPORT ~~~~~~~~~~~~\n|");
-			System.out.format("%7s%8s", "1. ", "Print Room Occupancy Status\t|\n|");
-			System.out.format("%7s%8s", "2. ", "Print Room Status\t\t|\n");
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			do {
-				System.out.print("Select an option: ");
-				try {
-					option = sc.nextInt();
-					if (option < 1 || option > 2)
-						System.out.println("You have not selected option between 1-2. Please try again.");
-				} catch (InputMismatchException e) {
-					System.out.println("You have entered an invalid input. Please try again.");
-					sc.next();
-				}
-			} while (option < 1 || option > 2);
-
-			switch (option) {
-			case 1:
-				roomControl.printRoomOccupancy();
-				break;
-			case 2:
-				roomControl.printRoomStatus();
-				break;
-			}
-			break;
-		case 0: // Exit
-			System.out.print("\nThank you for using HRPS!");
-			System.exit(0);
-			break;
-		}
+		} while (option < min || option > max);
+		return option;
 	}
+    
+    public static void line(String pattern, int size) {
+    	System.out.println(new String(new char[size]).replace("\0", pattern));
+    }
+    public static void header(String text, String pattern, int size) {
+    	System.out.print(new String(new char[(size/2)-1]).replace("\0", pattern));
+    	System.out.print(" " + text + " ");
+    	if(size%2!=0)
+    		System.out.print(pattern);
+    	System.out.println(new String(new char[(size/2)-1]).replace("\0", pattern));
+    }
 }
