@@ -1092,23 +1092,15 @@ public class GuestController {
 
 	}
 
-	public void findGuest() {
-		System.out.println("\n------------ Search Guest ------------");
-
+	public Guest getGuestDetails() {
 		// Initialize attributes
 		String lic = "null";
 		String pp = "null";
 		int identityType = 0;
-		boolean check = false;
-
-		// To be used for data validation
-		String digit = "\\d+";
-		String alpha = "[a-zA-Z.*\\s+.]+";
 
 		// Prompt user for guest details
 		Guest guest = new Guest();
 		Identity id = guest.new Identity();
-		ArrayList alr = getGuest();
 
 		guest.setIdentity(id);
 
@@ -1157,8 +1149,7 @@ public class GuestController {
 
 		} while (identityType != 1 && identityType != 2);
 
-		printGuest(searchGuest(guest));
-
+		return guest;
 	}
 
 
@@ -1209,11 +1200,4 @@ public class GuestController {
 		System.out.println("Contact: " + guest.getContact());
 	}
 
-	private void println(String output) {
-		System.out.println(output);
-	}
-
-	private void print(String output) {
-		System.out.print(output);
-	}
 }
