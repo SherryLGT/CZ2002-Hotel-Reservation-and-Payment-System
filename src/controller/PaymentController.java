@@ -47,8 +47,9 @@ public class PaymentController {
         Scanner sc = new Scanner(System.in);
          
         System.out.print("Enter guest ID: ");
-//        guest = guestControl.searchGuest(sc.nextLine()); // TODO getGuest function
-        reservation = reservControl.searchReservation("20160324012229"); // TODO by guestID && checked-in status
+        guest = guestControl.getGuestDetails(); // TODO getGuest function
+        reservation.setGuest(guest);
+        reservation = reservControl.searchReservation(reservation); // TODO by guestID && checked-in status
         room = roomControl.searchRoom(reservation.getRoom());
         
         daysStayed = (int) ((reservation.getCheckOut().getTime() - reservation.getCheckIn().getTime()) / (24 * 60 * 60 * 1000));

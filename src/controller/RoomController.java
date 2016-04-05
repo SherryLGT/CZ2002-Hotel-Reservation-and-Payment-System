@@ -3,10 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import database.RoomDB;
@@ -25,8 +23,7 @@ public class RoomController {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("Room Number: ");
-		room.setRoomNo(sc.nextInt());
-		sc.nextLine();
+		room.setRoomNo(sc.nextLine());
 
 		room = searchRoom(room);
 
@@ -36,8 +33,7 @@ public class RoomController {
 			System.out.println("Sorry! Room not found. Please try again.");
 
 			System.out.print("Room Number: ");
-			room.setRoomNo(sc.nextInt());
-			sc.nextLine();
+			room.setRoomNo(sc.nextLine());
 
 			room = searchRoom(room);
 		}
@@ -119,9 +115,6 @@ public class RoomController {
 	public void printRooms() {
 		ArrayList al = getRoom();
 
-		String roomFloor = "0";
-		String roomNo = "0";
-
 		System.out.println("\nRooms Avaliable: ");
 		HRPSApp.line("-", 139);
 		System.out.format("%1s %4s %18s %16s %52s %43s %n", "|", "NO.", "TYPE", "PRICE($)", "DETAILS", "|");
@@ -132,20 +125,7 @@ public class RoomController {
 
 			if (room.getStatus().equals("Vacant")) {
 
-				roomFloor = "0";
-				roomNo = "0";
-
-				if (room.getRoomNo() / 100 > 9)
-					roomFloor = Integer.toString(room.getRoomNo() / 100);
-				else
-					roomFloor += Integer.toString(room.getRoomNo() / 100);
-
-				if (room.getRoomNo() / 100 > 9)
-					roomNo = Integer.toString(room.getRoomNo() % 100);
-				else
-					roomNo += Integer.toString(room.getRoomNo() % 100);
-
-				System.out.format("%1s %2s %22s %9s %95s %2s %n", "|", roomFloor + "-" + roomNo, room.getType(),
+				System.out.format("%1s %2s %22s %9s %95s %2s %n", "|", room.getRoomNo(), room.getType(),
 						room.getPrice(),
 						(Arrays.toString(room.getDetails())).replace('[', ' ').replace(']', ' ').trim(), "|");
 
@@ -159,8 +139,6 @@ public class RoomController {
 	public void printRoomStatus() {
 		ArrayList al = getRoom();
 		String[] status = { "Vacant", "Reserved", "Occupied", "Under Maintenance" };
-		String roomFloor = "0";
-		String roomNo = "0";
 		int count = 0;
 
 		for (int i = 0; i < status.length; i++) {
@@ -174,23 +152,10 @@ public class RoomController {
 				if (room.getStatus().equals(status[i])) {
 					count++;
 
-					roomFloor = "0";
-					roomNo = "0";
-
-					if (room.getRoomNo() / 100 > 9)
-						roomFloor = Integer.toString(room.getRoomNo() / 100);
-					else
-						roomFloor += Integer.toString(room.getRoomNo() / 100);
-
-					if (room.getRoomNo() / 100 > 9)
-						roomNo = Integer.toString(room.getRoomNo() % 100);
-					else
-						roomNo += Integer.toString(room.getRoomNo() % 100);
-
 					if (count > 1)
-						System.out.print(", " + roomFloor + "-" + roomNo);
+						System.out.print(", " + room.getRoomNo());
 					else
-						System.out.print(roomFloor + "-" + roomNo);
+						System.out.print(room.getRoomNo());
 				}
 			}
 
@@ -271,7 +236,8 @@ public class RoomController {
 			al.sort(new Comparator<Room>() {
 
 				public int compare(Room room1, Room room2) {
-					return room1.getRoomNo() > room2.getRoomNo() ? +1 : room1.getRoomNo() < room2.getRoomNo() ? -1 : 0;
+					return Integer.parseInt(room1.getRoomNo()) > Integer.parseInt(room2.getRoomNo()) ? +1
+							: Integer.parseInt(room1.getRoomNo()) < Integer.parseInt(room2.getRoomNo()) ? -1 : 0;
 				}
 			});
 

@@ -483,54 +483,7 @@ public class GuestController {
 
 		// Prompt user for guest details
 		Guest updateguest = new Guest();
-		Identity id = updateguest.new Identity();
-
-		updateguest.setIdentity(id);
-
-		do {
-
-			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
-			identityType = sc.nextInt();
-			sc.nextLine();
-
-			if (identityType == 1) {
-
-				do {
-
-					System.out.print("Please enter driving license: ");
-					lic = sc.nextLine();
-
-					id.setLic(lic);
-
-					updateguest = searchGuest(updateguest);
-					if (updateguest == null)
-						System.out.println("\nError - Please enter a valid driving license");
-
-				} while (updateguest == null);
-			}
-
-			else if (identityType == 2) {
-
-				do {
-
-					System.out.print("Please enter passport no.: ");
-					pp = sc.nextLine();
-
-					id.setLic(lic);
-
-					updateguest = searchGuest(updateguest);
-
-					if (updateguest == null)
-						System.out.println("\nError - Please enter a valid passport no.");
-
-				} while (updateguest == null);
-			}
-
-			else {
-				System.out.println("Error - Please select a valid identity type\n");
-			}
-
-		} while (identityType != 1 && identityType != 2);
+		updateguest = getGuestDetails();
 
 		System.out.print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
 		updateType = sc.nextInt();
@@ -1114,7 +1067,8 @@ public class GuestController {
 		guest.setIdentity(id);
 
 		do {
-
+			Guest checkGuest = new Guest();
+			
 			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
 			identityType = sc.nextInt();
 			sc.nextLine();
@@ -1128,12 +1082,12 @@ public class GuestController {
 
 					id.setLic(lic);
 
-					guest = searchGuest(guest);
+					checkGuest = searchGuest(guest);
 
-					if (guest == null)
+					if (checkGuest == null)
 						System.out.println("\nError - Please enter a valid driving license");
 
-				} while (guest == null);
+				} while (checkGuest == null);
 			}
 
 			else if (identityType == 2) {
@@ -1143,13 +1097,14 @@ public class GuestController {
 					System.out.print("Please enter passport no.: ");
 					pp = sc.nextLine();
 
-
 					id.setPp(pp);
+					
+					checkGuest = searchGuest(guest);
 
-					if (guest == null)
+					if (checkGuest == null)
 						System.out.println("\nError - Please enter a valid passport no.");
 
-				} while (guest == null);
+				} while (checkGuest == null);
 			}
 
 			else {
@@ -1176,7 +1131,7 @@ public class GuestController {
 
 		return null;
 	}
-
+	
 	public ArrayList getGuest() {
 		ArrayList alr = null;
 		try {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import entity.Guest;
+import entity.Guest.Identity;
 import entity.Reservation;
 import entity.Room;
 
@@ -34,11 +35,15 @@ public class ReservationDB {
 			
 			// Guest ID
 			Guest guest = new Guest();
-			guest.setName(star.nextToken().trim());
+			String id = star.nextToken().trim();
+			Identity ident = guest. new Identity();
+			ident.setLic(id);
+			ident.setPp(id);
+			guest.setIdentity(ident);
 
 			// Room Number
 			Room room = new Room();
-			room.setRoomNo(Integer.parseInt(star.nextToken()));
+			room.setRoomNo(star.nextToken().trim());
 			
 			int billType = Integer.parseInt(star.nextToken().trim());
 			
@@ -84,11 +89,11 @@ public class ReservationDB {
 			st.append(SEPARATOR);
 
 			// Guest ID
-			st.append(reserv.getGuest().getName().trim());
+			st.append((!reserv.getGuest().getIdentity().getLic().trim().equals("null")) ? reserv.getGuest().getIdentity().getLic().trim() : reserv.getGuest().getIdentity().getPp().trim());
 			st.append(SEPARATOR);
 
 			// Room Number
-			st.append(reserv.getRoom().getRoomNo());
+			st.append(reserv.getRoom().getRoomNo().trim());
 			st.append(SEPARATOR);
 
 			st.append(reserv.getBillType());
