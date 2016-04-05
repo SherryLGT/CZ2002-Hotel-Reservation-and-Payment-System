@@ -60,7 +60,8 @@ public class HRPSApp {
 					guestControl.createGuest();
 					break;
 				case 3:
-					guestControl.updateGuest();
+//					guestControl.updateGuest();
+					guestControl.findGuest();
 					break;
 				}
 				break;
