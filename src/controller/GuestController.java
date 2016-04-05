@@ -484,7 +484,6 @@ public class GuestController {
 		// Prompt user for guest details
 		Guest updateguest = new Guest();
 		Identity id = updateguest.new Identity();
-		ArrayList alr = getGuest();
 
 		updateguest.setIdentity(id);
 
@@ -1077,6 +1076,16 @@ public class GuestController {
 		try
 
 		{
+			ArrayList alr = getGuest();
+			for (int i = 0; i < alr.size(); i++) {
+				Guest searchguest = (Guest) alr.get(i);
+
+				if (updateguest.getIdentity().getLic().equals(searchguest.getIdentity().getLic())
+						&& updateguest.getIdentity().getPp().equals(searchguest.getIdentity().getPp())) {
+					alr.set(i, updateguest);
+				}
+			}
+			
 			// Write Guest records to file
 			guestDB.saveGuest(filename, alr);
 
@@ -1151,7 +1160,6 @@ public class GuestController {
 
 		return guest;
 	}
-
 
 	public Guest searchGuest(Guest guest) {
 		ArrayList alr = getGuest();
