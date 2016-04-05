@@ -297,7 +297,7 @@ public class GuestController {
 
 			}
 
-		} while (state.equals(""));
+		} while (zip.equals(""));
 
 		// Guest Country
 		do {
@@ -355,7 +355,7 @@ public class GuestController {
 
 						else if (lic.equals(""))
 						{
-							System.out.println("Error - Please enter a valid passport no.\n");
+							System.out.println("Error - Please enter a valid driving license\n");
 						}
 
 						else
