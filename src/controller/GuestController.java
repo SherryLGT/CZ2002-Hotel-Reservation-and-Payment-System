@@ -21,7 +21,7 @@ public class GuestController {
 	Scanner sc = new Scanner(System.in);
 
 	public void createGuest() {
-		println("\n------------ Guest Registration ------------");
+		System.out.println("\n------------ Guest Registration ------------");
 
 		// Initialize attributes
 		String name = "";
@@ -49,17 +49,20 @@ public class GuestController {
 
 		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
+		Identity id = guest.new Identity();
 
-		println("Please enter the following guest information");
+		guest.setIdentity(id);
+
+		System.out.println("Please enter the following guest information");
 
 		// Guest Name
 		do {
-			print("\nName: ");
+			System.out.print("\nName: ");
 			name = sc.nextLine();
 
 			if (name.equals("") || !name.matches(alpha)) {
 
-				println("Please enter a valid name");
+				System.out.println("Please enter a valid name");
 
 			} else {
 
@@ -71,15 +74,15 @@ public class GuestController {
 
 		// Guest Gender
 		do {
-			println("\nGender: ");
+			System.out.println("\nGender: ");
 
-			print("(1) Male (2) Female ");
+			System.out.print("(1) Male (2) Female ");
 			genderType = sc.nextInt();
 			sc.nextLine();
 
 			if (genderType != 1 && genderType != 2) {
 
-				println("Please select a valid gender");
+				System.out.println("Please select a valid gender");
 
 			} else {
 
@@ -100,12 +103,12 @@ public class GuestController {
 		} while (genderType != 1 && genderType != 2);
 
 		// Guest Credit Card Details
-		println("\nCredit Card Details ");
-		println("...................... \n ");
+		System.out.println("\nCredit Card Details ");
+		System.out.println("...................... \n ");
 
 		// Guest Credit Card - Type
 		do {
-			print("Card Type - (1) Visa (2) Master (3) Amex: ");
+			System.out.print("Card Type - (1) Visa (2) Master (3) Amex: ");
 			CreditCard cc = guest.new CreditCard();
 			guest.setCard(cc);
 			cardType = sc.nextInt();
@@ -113,7 +116,7 @@ public class GuestController {
 
 			if (cardType != 1 && cardType != 2 && cardType != 3) {
 
-				println("Please select a valid credit card type\n");
+				System.out.println("Please select a valid credit card type\n");
 
 			} else {
 
@@ -139,12 +142,12 @@ public class GuestController {
 
 		// Guest Credit Card - No.
 		do {
-			print("Card Number: ");
+			System.out.print("Card Number: ");
 			cardNum = sc.nextLine();
 
 			if (cardNum.equals("") || !cardNum.matches(digit)) {
 
-				println("Please enter a valid credit card no.\n");
+				System.out.println("Please enter a valid credit card no.\n");
 
 			} else {
 
@@ -156,12 +159,12 @@ public class GuestController {
 
 		// Guest Credit Card - CVV
 		do {
-			print("CVV: ");
+			System.out.print("CVV: ");
 			cvv = sc.nextLine();
 
 			if (cvv.equals("")) {
 
-				println("Please enter a valid credit card CVV\n");
+				System.out.println("Please enter a valid credit card CVV\n");
 
 			} else {
 
@@ -175,7 +178,7 @@ public class GuestController {
 		check = false;
 
 		do {
-			print("Exp (MM/YY): ");
+			System.out.print("Exp (MM/YY): ");
 			exp = sc.nextLine();
 
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
@@ -189,7 +192,7 @@ public class GuestController {
 
 				if (inputdate.before(todaysdate)) {
 
-					println("Please enter a valid credit card expiration date\n");
+					System.out.println("Please enter a valid credit card expiration date\n");
 
 				} else {
 
@@ -202,25 +205,25 @@ public class GuestController {
 			} catch (ParseException e1) {
 				if (inputdate == null) {
 
-					println("Please enter a valid credit card expiration date\n");
+					System.out.println("Please enter a valid credit card expiration date\n");
 
 				}
 			}
 		} while (!check);
 
 		// Guest Address
-		println("\nAddress");
-		println(".......... \n ");
+		System.out.println("\nAddress");
+		System.out.println(".......... \n ");
 
 		// Guest Address - Line 1
 		do {
-			print("Address Line 1: ");
+			System.out.print("Address Line 1: ");
 			Address add = guest.new Address();
 			add1 = sc.nextLine();
 
 			if (add1.equals("")) {
 
-				println("Please enter a valid address line 1\n");
+				System.out.println("Please enter a valid address line 1\n");
 
 			} else {
 
@@ -233,12 +236,12 @@ public class GuestController {
 
 		// Guest Address - Line 2
 		do {
-			print("Address Line 2: ");
+			System.out.print("Address Line 2: ");
 			add2 = sc.nextLine();
 
 			if (add2.equals("")) {
 
-				println("Please enter a valid address line 2\n");
+				System.out.println("Please enter a valid address line 2\n");
 
 			} else {
 
@@ -250,12 +253,12 @@ public class GuestController {
 
 		// Guest Address - City
 		do {
-			print("City: ");
+			System.out.print("City: ");
 			city = sc.nextLine();
 
 			if (city.equals("")) {
 
-				println("Please enter a valid city\n");
+				System.out.println("Please enter a valid city\n");
 
 			} else {
 
@@ -267,12 +270,12 @@ public class GuestController {
 
 		// Guess Address - State
 		do {
-			print("State: ");
+			System.out.print("State: ");
 			state = sc.nextLine();
 
 			if (state.equals("")) {
 
-				println("Please enter a valid state\n");
+				System.out.println("Please enter a valid state\n");
 
 			} else {
 
@@ -284,12 +287,12 @@ public class GuestController {
 
 		// Guest Address - Zip
 		do {
-			print("Zip Code: ");
+			System.out.print("Zip Code: ");
 			zip = sc.nextLine();
 
 			if (zip.equals("")) {
 
-				println("Please enter a valid zip code\n");
+				System.out.println("Please enter a valid zip code\n");
 
 			} else {
 
@@ -301,12 +304,12 @@ public class GuestController {
 
 		// Guest Country
 		do {
-			print("\nCountry: ");
+			System.out.print("\nCountry: ");
 			country = sc.nextLine();
 
 			if (country.equals("") || !country.matches(alpha)) {
 
-				println("Please enter a valid country");
+				System.out.println("Please enter a valid country");
 
 			} else {
 
@@ -317,12 +320,12 @@ public class GuestController {
 		} while (country.equals("") || !country.matches(alpha));
 
 		// Guest Identity
-		println("\nIdentity");
-		println("........... \n ");
+		System.out.println("\nIdentity");
+		System.out.println("........... \n ");
 
 		do {
 
-			print("Identity Type - (1) Driving License (2) Passport: ");
+			System.out.print("Identity Type - (1) Driving License (2) Passport: ");
 			Identity ident = guest.new Identity();
 			guest.setIdentity(ident);
 			identityType = sc.nextInt();
@@ -330,40 +333,82 @@ public class GuestController {
 
 			if (identityType != 1 && identityType != 2) {
 
-				println("Please select a valid identity type\n");
+				System.out.println("Please select a valid identity type\n");
 
 			} else {
 
 				switch (identityType) {
 
 				case 1:
-					do {
-						print("Driving License: ");
-						lic = sc.nextLine();
-						guest.getIdentity().setLic(lic);
-					} while (lic.equals(guest.getIdentity().getLic()));
 
+					do
+					{
+						System.out.print("Driving License: ");
+						lic = sc.nextLine();
+
+						id.setLic(lic);
+
+						guest = searchGuest(guest);
+
+						if (guest != null) 
+						{
+							System.out.println("Error - Driving license exists! Please enter a new driving license\n");
+						} 
+
+						else if (lic.equals(""))
+						{
+							System.out.println("Error - Please enter a valid passport no.\n");
+						}
+
+						else
+						{
+							guest.setIdentity(id);
+						}
+					} while (guest != null || lic.equals(""));
 					break;
 
 				case 2:
-					print("Passport No.: ");
-					pp = sc.nextLine();
-					guest.getIdentity().setPp(pp);
+
+					do
+					{
+						System.out.print("Passport No.: ");
+						pp = sc.nextLine();
+
+						id.setPp(pp);
+
+						guest = searchGuest(guest);
+
+						if (guest != null) 
+						{
+							System.out.println("\nError - Passport no. exists! Please enter a new driving license");
+						} 
+
+						else if (pp.equals(""))
+						{
+							System.out.println("\nError - Please enter a valid passport no.");
+						}
+
+						else
+						{
+							guest.setIdentity(id);
+						}
+						break;
+
+					} while (guest != null || pp.equals(""));
 					break;
+				} 
 
-				}
-			}
-
+			} 
 		} while (identityType != 1 && identityType != 2);
 
 		// Guest Nationality
 		do {
-			print("\nNationality: ");
+			System.out.print("\nNationality: ");
 			nationality = sc.nextLine();
 
 			if (nationality.equals("") || !nationality.matches(alpha)) {
 
-				println("Please enter a valid nationality");
+				System.out.println("Please enter a valid nationality");
 
 			} else {
 
@@ -375,12 +420,12 @@ public class GuestController {
 
 		// Guest Contact
 		do {
-			print("\nContact: ");
+			System.out.print("\nContact: ");
 			contact = sc.nextLine();
 
 			if (contact.equals("")) {
 
-				println("Please enter a valid contact no.");
+				System.out.println("Please enter a valid contact no.");
 
 			} else {
 
@@ -402,13 +447,14 @@ public class GuestController {
 			System.out.println("New guest details has been successfully saved!");
 
 		} catch (IOException e) {
-			println("IOException > " + e.getMessage());
+			System.out.println("IOException > " + e.getMessage());
 		}
 
 	}
 
+
 	public void updateGuest() {
-		println("\n------------ Update Guest ------------");
+		System.out.println("\n------------ Update Guest ------------");
 
 		// Initialize attributes
 		String name = "";
@@ -446,7 +492,7 @@ public class GuestController {
 
 		do {
 
-			print("Please select identity type - (1) Driving License (2) Passport: ");
+			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
 			identityType = sc.nextInt();
 			sc.nextLine();
 
@@ -454,14 +500,14 @@ public class GuestController {
 
 				do {
 
-					print("Please enter driving license: ");
+					System.out.print("Please enter driving license: ");
 					lic = sc.nextLine();
 
 					id.setLic(lic);
 
 					updateguest = searchGuest(updateguest);
 					if (updateguest == null)
-						println("\nError - Please enter a valid driving license");
+						System.out.println("\nError - Please enter a valid driving license");
 
 				} while (updateguest == null);
 			}
@@ -470,7 +516,7 @@ public class GuestController {
 
 				do {
 
-					print("Please enter passport no.: ");
+					System.out.print("Please enter passport no.: ");
 					pp = sc.nextLine();
 
 					id.setLic(lic);
@@ -478,18 +524,18 @@ public class GuestController {
 					updateguest = searchGuest(updateguest);
 
 					if (updateguest == null)
-						println("\nError - Please enter a valid passport no.");
+						System.out.println("\nError - Please enter a valid passport no.");
 
 				} while (updateguest == null);
 			}
 
 			else {
-				println("Error - Please select a valid identity type\n");
+				System.out.println("Error - Please select a valid identity type\n");
 			}
 
 		} while (identityType != 1 && identityType != 2);
 
-		print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
+		System.out.print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
 		updateType = sc.nextInt();
 		sc.nextLine();
 
@@ -498,18 +544,18 @@ public class GuestController {
 		case 1:
 			// Guest Name
 			do {
-				print("\nNew Guest Name: ");
+				System.out.print("\nNew Guest Name: ");
 				name = sc.nextLine();
 
 				if (name.equals("") || !name.matches(alpha)) {
 
-					println("Please enter a valid name to be updated");
+					System.out.println("Please enter a valid name to be updated");
 
 				}
 
 				else if ((name.equals(updateguest.getName()))) {
 
-					println("Error - Current name and new name is the same");
+					System.out.println("Error - Current name and new name is the same");
 
 				}
 
@@ -526,22 +572,22 @@ public class GuestController {
 		case 2:
 			// Guest Gender
 			do {
-				println("\nNew Guest Gender: ");
-				print("(1) Male (2) Female ");
+				System.out.println("\nNew Guest Gender: ");
+				System.out.print("(1) Male (2) Female ");
 
 				genderType = sc.nextInt();
 				sc.nextLine();
 
 				if ((genderType != 1 && genderType != 2)) {
 
-					println("Please enter a valid gender to be updated");
+					System.out.println("Please enter a valid gender to be updated");
 
 				}
 
 				else if ((genderType == 1 && (updateguest.getGender().equals("Male")))
 						|| (genderType == 2 && (updateguest.getGender().equals("Female")))) {
 
-					println("Error - Current gender and new gender is the same");
+					System.out.println("Error - Current gender and new gender is the same");
 
 				}
 
@@ -569,7 +615,7 @@ public class GuestController {
 		case 3:
 			// Guest Credit Card
 			do {
-				println("\nUpdate Credit Card Details - \n(1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
+				System.out.println("\nUpdate Credit Card Details - \n(1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
 
 				CreditCard cc = updateguest.getCard();
 				updateguest.setCard(cc);
@@ -578,7 +624,7 @@ public class GuestController {
 
 				if (updateCardType != 1 && updateCardType != 2 && updateCardType != 3 && updateCardType != 4) {
 
-					println("Please select a valid credit card detail to be updated");
+					System.out.println("Please select a valid credit card detail to be updated");
 
 				} else {
 
@@ -587,21 +633,21 @@ public class GuestController {
 					case 1:
 						// Guest Credit Card - Type
 						do {
-							print("\nNew Credit Card Type - (1) Visa (2) Master (3) Amex: ");
+							System.out.print("\nNew Credit Card Type - (1) Visa (2) Master (3) Amex: ");
 							cardType = sc.nextInt();
 							sc.nextLine();
 
 							if (cardType != 1 && cardType != 2 && cardType != 3) {
 
-								println("Please enter a valid credit card type to be updated");
+								System.out.println("Please enter a valid credit card type to be updated");
 
 							}
 
 							else if ((cardType == 1 && (updateguest.getCard().getType().equals("Visa"))
 									|| (cardType == 2 && (updateguest.getCard().getType().equals("Master"))
-											|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex")))))) {
+									|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex")))))) {
 
-								println("Error - Current credit card type and new credit card type is the same");
+								System.out.println("Error - Current credit card type and new credit card type is the same");
 
 							}
 
@@ -627,27 +673,27 @@ public class GuestController {
 
 						} while ((cardType != 1 && cardType != 2 && cardType != 3)
 								|| (cardType == 1
-										&& (updateguest.getCard().getType().equals(
-												"Visa"))
+								&& (updateguest.getCard().getType().equals(
+										"Visa"))
 								|| (cardType == 2 && (updateguest.getCard().getType().equals("Master"))
-										|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex"))))));
+								|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex"))))));
 						break;
 
 					case 2:
 						// Guest Credit Card - No.
 						do {
-							print("\nNew Credit Card Number: ");
+							System.out.print("\nNew Credit Card Number: ");
 							cardNum = sc.nextLine();
 
 							if (cardNum.equals("") || !cardNum.matches(digit)) {
 
-								println("Please enter a valid credit card number to be updated");
+								System.out.println("Please enter a valid credit card number to be updated");
 
 							}
 
 							else if ((cardNum.equals(updateguest.getCard().getNum()))) {
 
-								println("Error - Current credit card number and new credit card number is the same");
+								System.out.println("Error - Current credit card number and new credit card number is the same");
 
 							}
 
@@ -665,18 +711,18 @@ public class GuestController {
 					case 3:
 						// Guest Credit Card - CVV
 						do {
-							print("\nNew Credit Card CVV: ");
+							System.out.print("\nNew Credit Card CVV: ");
 							cvv = sc.nextLine();
 
 							if (cvv.equals("")) {
 
-								println("Please enter a valid credit card CVV to be updated");
+								System.out.println("Please enter a valid credit card CVV to be updated");
 
 							}
 
 							else if ((cvv.equals(updateguest.getCard().getCvv()))) {
 
-								println("Error - Current credit card CVV and new credit card CVV is the same");
+								System.out.println("Error - Current credit card CVV and new credit card CVV is the same");
 
 							}
 
@@ -695,7 +741,7 @@ public class GuestController {
 						check = false;
 
 						do {
-							print("\nNew Credit Card Exp (MM/YY): ");
+							System.out.print("\nNew Credit Card Exp (MM/YY): ");
 							exp = sc.nextLine();
 
 							SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
@@ -709,11 +755,11 @@ public class GuestController {
 
 								if (inputdate.before(todaysdate)) {
 
-									println("Please enter a valid credit card expiration date to be updated");
+									System.out.println("Please enter a valid credit card expiration date to be updated");
 
 								} else if ((exp.equals(updateguest.getCard().getExp()))) {
 
-									println("Error - Current credit card expiration date and new credit card expiration date is the same");
+									System.out.println("Error - Current credit card expiration date and new credit card expiration date is the same");
 
 								} else {
 
@@ -726,7 +772,7 @@ public class GuestController {
 							} catch (ParseException e1) {
 								if (inputdate == null) {
 
-									println("Please enter a valid credit card expiration date to be updated");
+									System.out.println("Please enter a valid credit card expiration date to be updated");
 
 								}
 							}
@@ -743,7 +789,7 @@ public class GuestController {
 		case 4:
 			// Guest Address
 			do {
-				print("\nUpdate Address - \n(1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
+				System.out.print("\nUpdate Address - \n(1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
 
 				Address add = updateguest.getAddress();
 				updateguest.setAddress(add);
@@ -753,7 +799,7 @@ public class GuestController {
 				if (updateAddType != 1 && updateAddType != 2 && updateAddType != 3 && updateAddType != 4
 						&& updateAddType != 5) {
 
-					println("Please enter a valid address detail to be updated");
+					System.out.println("Please enter a valid address detail to be updated");
 
 				} else {
 
@@ -762,18 +808,18 @@ public class GuestController {
 					case 1:
 						// Guest Address - Line 1
 						do {
-							print("\nNew Address Line 1: ");
+							System.out.print("\nNew Address Line 1: ");
 							add1 = sc.nextLine();
 
 							if (add1.equals("")) {
 
-								println("Please enter a valid address line 1 to be updated");
+								System.out.println("Please enter a valid address line 1 to be updated");
 
 							}
 
 							else if ((add1.equals(updateguest.getAddress().getAdd1()))) {
 
-								println("Error - Current address line 1 and new address line 1 is the same");
+								System.out.println("Error - Current address line 1 and new address line 1 is the same");
 
 							}
 
@@ -790,18 +836,18 @@ public class GuestController {
 					case 2:
 						// Guest Address - Line 2
 						do {
-							print("\nNew Address Line 2: ");
+							System.out.print("\nNew Address Line 2: ");
 							add2 = sc.nextLine();
 
 							if (add2.equals("")) {
 
-								println("Please enter a valid address line 2 to be updated");
+								System.out.println("Please enter a valid address line 2 to be updated");
 
 							}
 
 							else if ((add2.equals(updateguest.getAddress().getAdd2()))) {
 
-								println("Error - Current address line 2 and new address line 2 is the same");
+								System.out.println("Error - Current address line 2 and new address line 2 is the same");
 
 							}
 
@@ -818,18 +864,18 @@ public class GuestController {
 					case 3:
 						// Guest Address - City
 						do {
-							print("\nNew City: ");
+							System.out.print("\nNew City: ");
 							city = sc.nextLine();
 
 							if (city.equals("")) {
 
-								println("Please enter a valid city to be updated");
+								System.out.println("Please enter a valid city to be updated");
 
 							}
 
 							else if ((city.equals(updateguest.getAddress().getCity()))) {
 
-								println("Error - Current city and new city is the same");
+								System.out.println("Error - Current city and new city is the same");
 
 							}
 
@@ -846,18 +892,18 @@ public class GuestController {
 					case 4:
 						// Guess Address - State
 						do {
-							print("\nNew State: ");
+							System.out.print("\nNew State: ");
 							state = sc.nextLine();
 
 							if (state.equals("")) {
 
-								println("Please enter a valid state to be updated");
+								System.out.println("Please enter a valid state to be updated");
 
 							}
 
 							else if ((state.equals(updateguest.getAddress().getState()))) {
 
-								println("Error - Current state and new state is the same");
+								System.out.println("Error - Current state and new state is the same");
 
 							}
 
@@ -874,18 +920,18 @@ public class GuestController {
 					case 5:
 						// Guest Address - Zip
 						do {
-							print("\nNew Zip Code: ");
+							System.out.print("\nNew Zip Code: ");
 							zip = sc.nextLine();
 
 							if (zip.equals("")) {
 
-								println("Please enter a valid zip code to be updated");
+								System.out.println("Please enter a valid zip code to be updated");
 
 							}
 
 							else if ((zip.equals(updateguest.getAddress().getZip()))) {
 
-								println("Error - Current zip code and new zip code is the same");
+								System.out.println("Error - Current zip code and new zip code is the same");
 
 							}
 
@@ -910,18 +956,18 @@ public class GuestController {
 		case 5:
 			// Guest Country
 			do {
-				print("\nNew Country: ");
+				System.out.print("\nNew Country: ");
 				country = sc.nextLine();
 
 				if (country.equals("") || !country.matches(alpha)) {
 
-					println("Please enter a valid country to be updated");
+					System.out.println("Please enter a valid country to be updated");
 
 				}
 
 				else if ((country.equals(updateguest.getCountry()))) {
 
-					println("Error - Current country and new country is the same");
+					System.out.println("Error - Current country and new country is the same");
 
 				}
 
@@ -939,7 +985,7 @@ public class GuestController {
 			// Guest Identity
 			do {
 
-				print("\nUpdate identity type - (1) Driving License (2) Passport: ");
+				System.out.print("\nUpdate identity type - (1) Driving License (2) Passport: ");
 				Identity ident = updateguest.new Identity();
 				updateguest.setIdentity(ident);
 				identityType = sc.nextInt();
@@ -947,20 +993,20 @@ public class GuestController {
 
 				if (identityType != 1 && identityType != 2) {
 
-					println("Please select a valid identity type to be updated\n");
+					System.out.println("Please select a valid identity type to be updated\n");
 
 				} else {
 
 					switch (identityType) {
 
 					case 1:
-						print("Driving License: ");
+						System.out.print("Driving License: ");
 						lic = sc.nextLine();
 						updateguest.getIdentity().setLic(lic);
 						break;
 
 					case 2:
-						print("Passport No.: ");
+						System.out.print("Passport No.: ");
 						pp = sc.nextLine();
 						updateguest.getIdentity().setPp(pp);
 						break;
@@ -974,18 +1020,18 @@ public class GuestController {
 		case 7:
 			// Guest Nationality
 			do {
-				print("\nNew Nationality: ");
+				System.out.print("\nNew Nationality: ");
 				nationality = sc.nextLine();
 
 				if (nationality.equals("") || !nationality.matches(alpha)) {
 
-					println("Please enter a valid nationality to be updated");
+					System.out.println("Please enter a valid nationality to be updated");
 
 				}
 
 				else if ((nationality.equals(updateguest.getNationality()))) {
 
-					println("Error - Current nationality and new nationality is the same");
+					System.out.println("Error - Current nationality and new nationality is the same");
 
 				}
 
@@ -1003,18 +1049,18 @@ public class GuestController {
 		case 8:
 			// Guest Contact
 			do {
-				print("\nNew Contact No.: ");
+				System.out.print("\nNew Contact No.: ");
 				contact = sc.nextLine();
 
 				if (contact.equals("")) {
 
-					println("Please enter a valid contact no. to be updated");
+					System.out.println("Please enter a valid contact no. to be updated");
 
 				}
 
 				else if ((contact.equals(updateguest.getContact()))) {
 
-					println("Error - Current contact no. and new contact no. is the same");
+					System.out.println("Error - Current contact no. and new contact no. is the same");
 
 				}
 
@@ -1040,16 +1086,16 @@ public class GuestController {
 
 		} catch (
 
-		IOException e)
+				IOException e)
 
 		{
-			println("IOException > " + e.getMessage());
+			System.out.println("IOException > " + e.getMessage());
 		}
 
 	}
 
 	public void findGuest() {
-		println("\n------------ Search Guest ------------");
+		System.out.println("\n------------ Search Guest ------------");
 
 		// Initialize attributes
 		String lic = "null";
@@ -1070,7 +1116,7 @@ public class GuestController {
 
 		do {
 
-			print("Please select identity type - (1) Driving License (2) Passport: ");
+			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
 			identityType = sc.nextInt();
 			sc.nextLine();
 
@@ -1078,15 +1124,15 @@ public class GuestController {
 
 				do {
 
-					print("Please enter driving license: ");
+					System.out.print("Please enter driving license: ");
 					lic = sc.nextLine();
 
 					id.setLic(lic);
-					
+
 					guest = searchGuest(guest);
-					
+
 					if (guest == null)
-						println("\nError - Please enter a valid driving license");
+						System.out.println("\nError - Please enter a valid driving license");
 
 				} while (guest == null);
 			}
@@ -1095,20 +1141,20 @@ public class GuestController {
 
 				do {
 
-					print("Please enter passport no.: ");
+					System.out.print("Please enter passport no.: ");
 					pp = sc.nextLine();
 
 
 					id.setPp(pp);
-					
+
 					if (guest == null)
-						println("\nError - Please enter a valid passport no.");
+						System.out.println("\nError - Please enter a valid passport no.");
 
 				} while (guest == null);
 			}
 
 			else {
-				println("Error - Please select a valid identity type\n");
+				System.out.println("Error - Please select a valid identity type\n");
 			}
 
 		} while (identityType != 1 && identityType != 2);
@@ -1116,6 +1162,7 @@ public class GuestController {
 		printGuest(searchGuest(guest));
 
 	}
+
 
 	public Guest searchGuest(Guest guest) {
 		ArrayList alr = getGuest();
