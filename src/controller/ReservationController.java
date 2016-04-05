@@ -48,9 +48,10 @@ public class ReservationController {
         roomControl.printRooms();
  
         System.out.print("Room Number: ");
-        room.setRoomNo(sc.nextLine());
+		room.setRoomNo(sc.nextInt());
+		sc.nextLine();
  
-        room = roomControl.searchRoom(room.getRoomNo());
+        room = roomControl.searchRoom(room);
  
         while (room == null || !room.getStatus().equals("Vacant")) {
  
@@ -62,9 +63,10 @@ public class ReservationController {
             room = new Room();
              
             System.out.print("Room Number: ");
-            room.setRoomNo(sc.nextLine());
+			room.setRoomNo(sc.nextInt());
+			sc.nextLine();
  
-            room = roomControl.searchRoom(room.getRoomNo());
+            room = roomControl.searchRoom(room);
         }
  
         do {

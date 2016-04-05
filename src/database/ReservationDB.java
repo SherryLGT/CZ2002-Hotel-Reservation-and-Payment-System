@@ -36,7 +36,7 @@ public class ReservationDB {
             Guest guest = new Guest();
             guest.setName(star.nextToken().trim());
             Room room = new Room();
-            room.setRoomNo(star.nextToken().trim());
+            room.setRoomNo(Integer.parseInt(star.nextToken()));
             int billType = Integer.parseInt(star.nextToken().trim());
             Date checkIn = null;
             try {
@@ -74,7 +74,7 @@ public class ReservationDB {
             st.append(SEPARATOR);
             st.append(reserv.getGuest().getName().trim());
             st.append(SEPARATOR);
-            st.append(reserv.getRoom().getRoomNo().trim());
+            st.append(reserv.getRoom().getRoomNo());
             st.append(SEPARATOR);
             st.append(reserv.getBillType());
             st.append(SEPARATOR);

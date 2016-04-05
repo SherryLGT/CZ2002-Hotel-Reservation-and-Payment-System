@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
  
 public class Room implements Serializable {
-    private String roomNo;
+    private int roomNo;
     private String type;
     private double price;
     private String status;
@@ -38,7 +38,7 @@ public class Room implements Serializable {
      * @param details
      *            This room's details
      */
-    public Room(String roomNo, String type, double price, String status, String[] details) {
+    public Room(int roomNo, String type, double price, String status, String[] details) {
         super();
         this.roomNo = roomNo;
         this.type = type;
@@ -52,7 +52,7 @@ public class Room implements Serializable {
      * 
      * @return this room's number
      */
-    public String getRoomNo() {
+    public int getRoomNo() {
         return roomNo;
     }
  
@@ -62,7 +62,7 @@ public class Room implements Serializable {
      * @param roomNo
      *            This room's number
      */
-    public void setRoomNo(String roomNo) {
+    public void setRoomNo(int roomNo) {
         this.roomNo = roomNo;
     }
  

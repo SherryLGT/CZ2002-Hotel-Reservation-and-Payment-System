@@ -49,9 +49,6 @@ public class GuestController {
 
 		// Prompt user for guest details and set it into a guest object
 		Guest guest = new Guest();
-		Identity id = guest.new Identity();
-
-		guest.setIdentity(id);
 
 		System.out.println("Please enter the following guest information");
 
@@ -326,6 +323,7 @@ public class GuestController {
 		do {
 
 			System.out.print("Identity Type - (1) Driving License (2) Passport: ");
+			Guest checkGuest = new Guest();
 			Identity ident = guest.new Identity();
 			guest.setIdentity(ident);
 			identityType = sc.nextInt();
@@ -346,11 +344,11 @@ public class GuestController {
 						System.out.print("Driving License: ");
 						lic = sc.nextLine();
 
-						id.setLic(lic);
+						ident.setLic(lic);
 
-						guest = searchGuest(guest);
+						checkGuest = searchGuest(guest);
 
-						if (guest != null) 
+						if (checkGuest != null) 
 						{
 							System.out.println("Error - Driving license exists! Please enter a new driving license\n");
 						} 
@@ -362,9 +360,9 @@ public class GuestController {
 
 						else
 						{
-							guest.setIdentity(id);
+							guest.setIdentity(ident);
 						}
-					} while (guest != null || lic.equals(""));
+					} while (checkGuest != null || lic.equals(""));
 					break;
 
 				case 2:
@@ -374,11 +372,11 @@ public class GuestController {
 						System.out.print("Passport No.: ");
 						pp = sc.nextLine();
 
-						id.setPp(pp);
+						ident.setPp(pp);
 
-						guest = searchGuest(guest);
+						checkGuest = searchGuest(guest);
 
-						if (guest != null) 
+						if (checkGuest != null) 
 						{
 							System.out.println("\nError - Passport no. exists! Please enter a new driving license");
 						} 
@@ -390,11 +388,11 @@ public class GuestController {
 
 						else
 						{
-							guest.setIdentity(id);
+							guest.setIdentity(ident);
 						}
 						break;
 
-					} while (guest != null || pp.equals(""));
+					} while (checkGuest != null || pp.equals(""));
 					break;
 				} 
 

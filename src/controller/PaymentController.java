@@ -49,7 +49,7 @@ public class PaymentController {
         System.out.print("Enter guest ID: ");
 //        guest = guestControl.searchGuest(sc.nextLine()); // TODO getGuest function
         reservation = reservControl.searchReservation("20160324012229"); // TODO by guestID && checked-in status
-        room = roomControl.searchRoom(reservation.getRoom().getRoomNo());
+        room = roomControl.searchRoom(reservation.getRoom());
         
         daysStayed = (int) ((reservation.getCheckOut().getTime() - reservation.getCheckIn().getTime()) / (24 * 60 * 60 * 1000));
         charges = calculateCharges(reservation, room, daysStayed);

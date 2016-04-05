@@ -32,7 +32,7 @@ public class RoomDB {
             // Get individual 'fields' of the string separated by SEPARATOR
             StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using delimiter ","
  
-            String roomNo = star.nextToken().trim();
+            int roomNo = Integer.parseInt(star.nextToken());
             String type = star.nextToken().trim();
             double price = (Double.parseDouble(star.nextToken().trim()));
             String status = star.nextToken().trim();
@@ -53,7 +53,7 @@ public class RoomDB {
         for (int i = 0; i < al.size(); i++) {
             Room room = (Room) al.get(i);
             StringBuilder st = new StringBuilder();
-            st.append(room.getRoomNo().trim());
+            st.append(room.getRoomNo());
             st.append(SEPARATOR);
             st.append(room.getType().trim());
             st.append(SEPARATOR);
