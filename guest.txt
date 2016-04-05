@@ -3,3 +3,6 @@ Jane Chew|Female|Amex|1234|111|12/20|Ang Mo Kio Ave 2|Block 200 #02-02|Ang Mo Ki
 Dawn Yeo|Female|Master|0987|222|02/19|Holland Village Road|#01-02|Holland Village|Malaysia|560011|Msia|null|2w|Malaysian|12345678
 Gideon Yap|Male|Visa|3456|333|7/17|Tanjong Pagar Street 2|Block 100 #13-04|Tanjong Pagar|Singapore|560300|Sg|null|3e|Singaporean|90295454
 Tony Chan|Male|Amex|022|432|7/19|Bishan Street 2|#04-05|Bishan|New York|560400|United States|null|4r|US Citizen|874648212
+Hugo Chin|Male|Amex|123|456|11/17|Orchard Road City|#01-23|Orchard Road|Singapore|560423|Sg|null|5t|Singaporean|64758311
+Jillian Chan|Female|Visa|555666|778|1/21|Waterloo Street 21|Block 300 #12-01|Waterloo|Johor Bahru|646321|Malaysia|null|6y|Malaysian|11223344
+Polly Wee|Female|Master|1234567|555|6/16|Velda Street 2|#03-12|Velda|London|234234|United Kingdom|8i|null|Irish|123
