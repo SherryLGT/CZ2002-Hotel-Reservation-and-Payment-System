@@ -22,6 +22,8 @@ public class HRPSApp {
 		RoomServiceController roomServiceControl = new RoomServiceController();
 		MenuController menuControl = new MenuController();
 		
+		roomControl.printRooms();
+		
 		do {
 			System.out.print("\033[H\033[2J");
 			

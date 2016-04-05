@@ -59,7 +59,7 @@ public class Payment implements Serializable {
     /**
      * Gets the reservation details for this Payments.
      * 
-     * @return this Payment's reservation details.
+     * @return this payment's reservation details.
      */
     public Reservation getReservation() {
         return reservation;
@@ -78,7 +78,7 @@ public class Payment implements Serializable {
     /**
      * Gets the charges of this payment.
      * 
-     * @return this Payment's charges.
+     * @return this payment's charges.
      */
     public double getCharges() {
         return charges;
@@ -97,7 +97,7 @@ public class Payment implements Serializable {
     /**
      * Gets the tax of this payment.
      * 
-     * @return this Payment's tax
+     * @return this payment's tax
      */
     public double getTax() {
         return tax;
