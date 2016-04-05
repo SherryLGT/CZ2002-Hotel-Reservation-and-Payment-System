@@ -1,4 +1,3 @@
-901|Chairman Suite|1150.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 201|Deluxe|450.0|Under Maintenance|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 202|Deluxe|450.0|Reserved|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 203|Deluxe|450.0|Occupied|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
@@ -41,6 +40,7 @@
 804|Presidential Suite|1055.0|Occupied|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
 805|Presidential Suite|1055.0|Reserved|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
 806|Presidential Suite|1055.0|Under Maintenance|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+901|Chairman Suite|1150.0|Vacant|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 902|Chairman Suite|1150.0|Reserved|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 903|Chairman Suite|1150.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 904|Chairman Suite|1155.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
