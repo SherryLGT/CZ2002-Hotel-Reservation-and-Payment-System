@@ -65,11 +65,11 @@ public class HRPSApp {
 			case 2: // Room
 				reservationControl.kickOut();
 				HRPSApp.header("ROOM", "~", 37);
-				System.out.format("%1s %12s %8s %17s %n", "|", "1. ", "Add Room", "|");
-				System.out.format("%1s %12s %8s %6s %n", "|", "2. ", "Update Room Details", "|");
-				System.out.format("%1s %12s %8s %13s %n", "|", "3. ", "Room Service", "|");
-				System.out.format("%1s %12s %8s %9s %n", "|", "4. ", "Room Maintenance", "|");
-				System.out.format("%1s %12s %3s %21s %n", "|", "0. ", "Back", "|");
+				System.out.format("%1s %11s %8s %18s %n", "|", "1. ", "Add Room", "|");
+				System.out.format("%1s %11s %8s %7s %n", "|", "2. ", "Update Room Details", "|");
+				System.out.format("%1s %11s %8s %14s %n", "|", "3. ", "Room Service", "|");
+				System.out.format("%1s %11s %8s %10s %n", "|", "4. ", "Room Maintenance", "|");
+				System.out.format("%1s %11s %3s %22s %n", "|", "0. ", "Back", "|");
 				HRPSApp.line("~", 41);
 				
 				option = optionChecking(0, 4);

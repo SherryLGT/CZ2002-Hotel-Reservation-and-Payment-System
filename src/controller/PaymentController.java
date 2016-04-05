@@ -11,6 +11,7 @@ import java.util.Scanner;
  
 import database.PaymentDB;
 import entity.Guest;
+import entity.Guest.Identity;
 import entity.Payment;
 import entity.Reservation;
 import entity.Room;
@@ -45,17 +46,22 @@ public class PaymentController {
         double total = 0;
  
         Scanner sc = new Scanner(System.in);
-         
-        System.out.print("Enter guest ID: ");
-        guest = guestControl.getGuestDetails(); // TODO getGuest function
-        reservation.setGuest(guest);
-        reservation = reservControl.searchReservation(reservation); // TODO by guestID && checked-in status
+        
+    	System.out.print("Enter room number: ");
+    	room.setRoomNo(sc.nextLine());
+        reservation = reservControl.searchReservationByRoom(room);
         room = roomControl.searchRoom(reservation.getRoom());
+        
+		Identity ident = guest.new Identity();
+		ident.setLic(reservation.getGuest().getIdentity().getLic());
+		ident.setPp(reservation.getGuest().getIdentity().getPp());
+		guest.setIdentity(ident);
+        guest = guestControl.searchGuest(guest);
         
         daysStayed = (int) ((reservation.getCheckOut().getTime() - reservation.getCheckIn().getTime()) / (24 * 60 * 60 * 1000));
         charges = calculateCharges(reservation, room, daysStayed);
         
-        tax = charges * TAXRATE;
+        tax = charges * GST;
         tax = Double.valueOf(df.format(tax));
         
 //		TODO roomService
@@ -73,15 +79,15 @@ public class PaymentController {
                 Payment payments = (Payment) al.get(i);
             }
             al.add(payment);
-            paymentDB.savePayment(filename, al);
+//            paymentDB.savePayment(filename, al);
             
             System.out.print("\nPayment made by " + guest.getName() + " by ");
             if(reservation.getBillType() == 1)
-            	System.out.print("cash.");
+            	System.out.print("cash. ");
             else
-            	System.out.println("card.\n" + guest.getCard().getType() + " " + guest.getCard().getNum() +
-            			"(" + guest.getAddress().getAdd1() + " " + guest.getAddress().getAdd2() + " " + guest.getAddress().getCity() + " " + guest.getAddress().getState() + " " + guest.getAddress().getZip() + ")");
-            System.out.println("\nSuccessful!");
+            	System.out.println("card, " + guest.getCard().getType() + " " + guest.getCard().getNum() + " " + guest.getCard().getExp() +
+            			"\nAddress: " + guest.getAddress().getAdd1() + " " + guest.getAddress().getAdd2() + " " + guest.getAddress().getCity() + " " + guest.getAddress().getState() + " " + guest.getAddress().getZip());
+            System.out.println("Successful!");
             HRPSApp.header("BILL INVOICE", "*", 36);
             System.out.format("%1s %46s %n", "*", "*");
             System.out.format("%1s %16s %23s %5s %n", "*", "Days of stay:", daysStayed, "*");
@@ -91,8 +97,8 @@ public class PaymentController {
             System.out.format("%1s %16s %23s %5s %n", "*", "Total amount:", total, "*");
             HRPSApp.line("*", 48);
             
-            reservControl.updateReservation(reservation, 3);
-            roomControl.updateRoom(room, 3);
+//            reservControl.updateReservation(reservation, 3);
+//            roomControl.updateRoom(room, 3);
         } catch (IOException e) {
             System.out.println("IOException > " + e.getMessage());
         }
@@ -105,10 +111,10 @@ public class PaymentController {
     	Date date = res.getCheckIn();
     	DateFormat df = new SimpleDateFormat("EEE dd MMM yyyy");
     	
-		System.out.println("Room: " + r.getRoomNo() + ", " + r.getType() + " ($" + r.getPrice() + ")\n");
-		HRPSApp.line("-", 38);
-		System.out.format("%1s %3s %12s %16s %2s %n", "|", "DAY", "DATE", "CHARGE($)", "|");
-		HRPSApp.line("-", 38);
+		System.out.print("\nRoom: " + r.getRoomNo() + ", " + r.getType() + " (S$" + r.getPrice() + ")\n");
+		HRPSApp.line("-", 41);
+		System.out.format("%1s %4s %14s %17s %1s %n", "|", "DAY", "DATE", "CHARGE(S$)", "|");
+		HRPSApp.line("-", 41);
 		
 		for (int i = 1; i <= days; i++) {
     		c.setTime(date);
@@ -120,19 +126,19 @@ public class PaymentController {
     			rate = 1.2; // Weekends
     		
     		charges = r.getPrice() * rate;
-    		System.out.format("%1s %2s %18s %9s %4s %n", "|", i, df.format(date), charges, "|");
+    		System.out.format("%1s %3s %20s %9s %4s %n", "|", i, df.format(date), charges, "|");
     		
     		total += charges;
     		
     		c.add(Calendar.DATE, 1);
     		date = c.getTime();
     	}
-		HRPSApp.line("=", 38);
-		System.out.format("%1s %5s %15s %4s %n", "|", "TOTAL CHARGES: ", total, "|");
-		HRPSApp.line("=", 38);
+		HRPSApp.line("=", 41);
+		System.out.format("%1s %6s %18s %4s %n", "|", "TOTAL CHARGES: ", total, "|");
+		HRPSApp.line("=", 41);
 		
 		return total;
-    }
+	}
      
 //    public ArrayList getPayment() {
 //        ArrayList al = null;

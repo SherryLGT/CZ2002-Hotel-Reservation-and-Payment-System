@@ -362,6 +362,21 @@ public class ReservationController {
 
 		return null;
 	}
+	public Reservation searchReservationByRoom(Room room) {
+        ArrayList reservations = getReservation();
+		Date date = new Date();
+        
+        for(int i = 0; i < reservations.size(); i++) {
+        	Reservation reserv = (Reservation) reservations.get(i);
+        	
+        	if(reserv.getRoom().getRoomNo().equals(room.getRoomNo())
+					&& reserv.getStatus().equals("Checked-In")) {
+        		return reserv;
+        	}
+		}
+
+		return null;
+	}
 
 	public void printReservation() {
 		ArrayList al = getReservation();
