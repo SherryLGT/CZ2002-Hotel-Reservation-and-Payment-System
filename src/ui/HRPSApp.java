@@ -21,7 +21,7 @@ public class HRPSApp {
 		RoomController roomControl = new RoomController();
 		RoomServiceController roomServiceControl = new RoomServiceController();
 		MenuController menuControl = new MenuController();
-				
+		
 		do {
 			System.out.print("\033[H\033[2J");
 			
@@ -66,7 +66,7 @@ public class HRPSApp {
 				reservationControl.kickOut();
 				HRPSApp.header("ROOM", "~", 37);
 				System.out.format("%1s %12s %8s %17s %n", "|", "1. ", "Add Room", "|");
-				System.out.format("%1s %12s %8s %14s %n", "|", "2. ", "Update Room", "|");
+				System.out.format("%1s %12s %8s %6s %n", "|", "2. ", "Update Room Details", "|");
 				System.out.format("%1s %12s %8s %13s %n", "|", "3. ", "Room Service", "|");
 				System.out.format("%1s %12s %8s %9s %n", "|", "4. ", "Room Maintenance", "|");
 				System.out.format("%1s %12s %3s %21s %n", "|", "0. ", "Back", "|");
@@ -76,10 +76,10 @@ public class HRPSApp {
 	
 				switch (option) {
 				case 1:
-					
+						roomControl.createRoom();
 					break;
 				case 2:
-					
+						roomControl.updateRoomDetails();
 					break;
 				case 3: // Room Service
 					HRPSApp.header("ROOM SERVICE", "~", 29);
@@ -126,13 +126,14 @@ public class HRPSApp {
 			case 3: // Reservation
 				reservationControl.kickOut();
 				HRPSApp.header("RESERVATION", "~", 30);
-				System.out.format("%1s %10s %8s %19s %n", "|", "1. ", "Check-In", "|");
+				System.out.format("%1s %10s %8s %19s %n", "|", "1. ", "Check In", "|");
 				System.out.format("%1s %10s %8s %9s %n", "|", "2. ", "Create Reservation", "|");
 				System.out.format("%1s %10s %8s %9s %n", "|", "3. ", "Delete Reservation", "|");
+				System.out.format("%1s %10s %8s %10s %n", "|", "4. ", "Print Reservation", "|");
 				System.out.format("%1s %10s %3s %23s %n", "|", "0. ", "Back", "|");
 				HRPSApp.line("~", 41);
 				
-				option = optionChecking(0, 2);
+				option = optionChecking(0, 4);
 	
 				switch (option) {
 				case 1:
@@ -143,6 +144,9 @@ public class HRPSApp {
 					break;
 				case 3:
 					reservationControl.deleteReservation();
+					break;
+				case 4:
+					reservationControl.printReservation();
 					break;
 				}
 				break;

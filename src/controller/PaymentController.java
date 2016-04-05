@@ -83,6 +83,7 @@ public class PaymentController {
             			"(" + guest.getAddress().getAdd1() + " " + guest.getAddress().getAdd2() + " " + guest.getAddress().getCity() + " " + guest.getAddress().getState() + " " + guest.getAddress().getZip() + ")");
             System.out.println("\nSuccessful!");
             HRPSApp.header("BILL INVOICE", "*", 36);
+            System.out.format("%1s %46s %n", "*", "*");
             System.out.format("%1s %16s %23s %5s %n", "*", "Days of stay:", daysStayed, "*");
             System.out.format("%1s %28s %11s %5s %n", "*", "Room service order items:", 0, "*");
             System.out.format("%1s %31s %8s %5s %n", "*", "Total price of room service:", 0, "*");

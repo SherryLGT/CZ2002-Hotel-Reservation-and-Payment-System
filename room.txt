@@ -46,3 +46,4 @@
 0904|Chairman Suite|1155.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 0905|Chairman Suite|1155.0|Under Maintenance|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 0906|Chairman Suite|1155.0|Under Maintenance|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
+1234|single|12.0|Vacant|3 sq m, king bed, city view from the 1st floor or higher, wifi not enabled, smoking room

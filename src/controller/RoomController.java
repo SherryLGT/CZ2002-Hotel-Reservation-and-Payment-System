@@ -16,6 +16,348 @@ public class RoomController {
 	private RoomDB roomDB = new RoomDB();
 	private String filename = "room.txt";
 
+	public void createRoom() {
+		Room room = new Room();
+		Room checkRoom = new Room();
+		int option = 0;
+		boolean check = false;
+		ArrayList<String> details = new ArrayList<String>();
+
+		Scanner sc = new Scanner(System.in);
+
+		room.setStatus("Vacant");
+
+		System.out.print("Room Number: ");
+		room.setRoomNo(sc.nextLine());
+
+		checkRoom = searchRoom(room);
+
+		while (checkRoom != null) {
+			room = new Room();
+
+			System.out.println("Sorry! Room already exist. Please try again.");
+
+			System.out.print("Room Number: ");
+			room.setRoomNo(sc.nextLine());
+
+			checkRoom = searchRoom(room);
+
+		}
+
+		System.out.print("Room Type: ");
+		room.setType(sc.nextLine());
+
+		do {
+			System.out.print("Room Price ($): ");
+			try {
+				room.setPrice(sc.nextDouble());
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
+
+		System.out.println("Room Details: ");
+
+		do {
+			System.out.print("Room Size (sq m): ");
+			try {
+				details.add(sc.nextInt() + " sq m");
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
+
+		do {
+			System.out.println("Bed type? (1) Single (2) Double (3) Queen (4) King ");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 4)
+					System.out.println("You have not selected option between 1-4. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 4);
+
+		switch (option) {
+		case 1:
+			details.add("single bed");
+			break;
+		case 2:
+			details.add("double bed");
+			break;
+		case 3:
+			details.add("queen bed");
+			break;
+		case 4:
+			details.add("king bed");
+			break;
+		}
+
+		do {
+			System.out.println("City view from the how many floor or higher: ");
+			try {
+				option = sc.nextInt();
+				if (option > 0)
+					check = true;
+				else
+					System.out.println("You have to enter more than 0. Please try again.");
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check && option < 0);
+
+		if (option == 1) {
+			details.add("city view from the " + option + "st floor or higher");
+		} else if (option == 2) {
+			details.add("city view from the " + option + "nd floor or higher");
+		} else if (option == 3) {
+			details.add("city view from the " + option + "rd floor or higher");
+		}
+		if (option > 3) {
+			details.add("city view from the " + option + "th floor or higher");
+		}
+
+		do {
+			System.out.println("Wifi enabled? (1) Yes (2) No");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 2)
+					System.out.println("You have not selected option between 1-2. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 2);
+
+		switch (option) {
+		case 1:
+			details.add("wifi enabled");
+			break;
+		case 2:
+			details.add("wifi not enabled");
+			break;
+		}
+
+		do {
+			System.out.println("Non-smoking room? (1) Yes (2) No");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 2)
+					System.out.println("You have not selected option between 1-2. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 2);
+
+		switch (option) {
+		case 1:
+			details.add("non-smoking room");
+			break;
+		case 2:
+			details.add("smoking room");
+			break;
+		}
+
+		room.setDetails(details.toArray(new String[5]));
+
+		ArrayList al = getRoom();
+		al.add(room);
+
+		try {
+			// write Reservation record/s to file.
+			roomDB.saveRoom(filename, al);
+
+			System.out.println("\nRoom created successfully.");
+
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+	}
+
+	public void updateRoomDetails() {
+		Room room = new Room();
+		int option = 0;
+		boolean check = false;
+		ArrayList<String> details = new ArrayList<String>();
+
+		Scanner sc = new Scanner(System.in);
+
+		room.setStatus("Vacant");
+
+		System.out.print("Room Number: ");
+		room.setRoomNo(sc.nextLine());
+
+		room = searchRoom(room);
+
+		while (room == null) {
+			room = new Room();
+
+			System.out.println("Sorry! Room not found. Please try again.");
+
+			System.out.print("Room Number: ");
+			room.setRoomNo(sc.nextLine());
+
+			room = searchRoom(room);
+
+		}
+
+		System.out.print("Room Type: ");
+		room.setType(sc.nextLine());
+
+		do {
+			System.out.print("Room Price ($): ");
+			try {
+				room.setPrice(sc.nextDouble());
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
+
+		System.out.println("Room Details: ");
+
+		do {
+			System.out.print("Room Size (sq m): ");
+			try {
+				details.add(sc.nextInt() + " sq m");
+				check = true;
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check);
+
+		do {
+			System.out.println("Bed type? (1) Single (2) Double (3) Queen (4) King ");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 4)
+					System.out.println("You have not selected option between 1-4. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 4);
+
+		switch (option) {
+		case 1:
+			details.add("single bed");
+			break;
+		case 2:
+			details.add("double bed");
+			break;
+		case 3:
+			details.add("queen bed");
+			break;
+		case 4:
+			details.add("king bed");
+			break;
+		}
+
+		do {
+			System.out.print("City view from the how many floor or higher: ");
+			try {
+				option = sc.nextInt();
+				if (option > 0)
+					check = true;
+				else
+					System.out.println("You have to enter more than 0. Please try again.");
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (!check && option < 0);
+
+		if (option == 1) {
+			details.add("city view from the " + option + "st floor or higher");
+		} else if (option == 2) {
+			details.add("city view from the " + option + "nd floor or higher");
+		} else if (option == 3) {
+			details.add("city view from the " + option + "rd floor or higher");
+		}
+		if (option > 3) {
+			details.add("city view from the " + option + "th floor or higher");
+		}
+
+		do {
+			System.out.print("Wifi enabled? (1) Yes (2) No");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 2)
+					System.out.println("You have not selected option between 1-2. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 2);
+
+		switch (option) {
+		case 1:
+			details.add("wifi enabled");
+			break;
+		case 2:
+			details.add("wifi not enabled");
+			break;
+		}
+
+		do {
+			System.out.print("Non-smoking room? (1) Yes (2) No");
+			try {
+				option = sc.nextInt();
+				if (option < 1 || option > 2)
+					System.out.println("You have not selected option between 1-2. Please try again.");
+
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 2);
+
+		switch (option) {
+		case 1:
+			details.add("non-smoking room");
+			break;
+		case 2:
+			details.add("smoking room");
+			break;
+		}
+
+		room.setDetails(details.toArray(new String[5]));
+
+		ArrayList al = getRoom();
+
+		for (int i = 0; i < al.size(); i++) {
+			Room roomCur = (Room) al.get(i);
+
+			if (room.getRoomNo().equals(roomCur.getRoomNo())) {
+
+				al.set(i, room);
+				break;
+			}
+		}
+
+		try {
+			// Write reservation record/s to file.
+			roomDB.saveRoom(filename, al);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+
+	}
+
 	public void updateRoomMaintenance() {
 		Room room = new Room();
 		int option = 0;
@@ -69,7 +411,7 @@ public class RoomController {
 		for (int i = 0; i < al.size(); i++) {
 			Room roomCur = (Room) al.get(i);
 
-			if (room.getRoomNo() == roomCur.getRoomNo()) {
+			if (room.getRoomNo().equals(roomCur.getRoomNo())) {
 				switch (type) {
 				case 1:
 					roomCur.setStatus("Occupied");
@@ -104,7 +446,7 @@ public class RoomController {
 		for (int i = 0; i < al.size(); i++) {
 			Room roomCur = (Room) al.get(i);
 
-			if (roomCur.getRoomNo() == room.getRoomNo()) {
+			if (roomCur.getRoomNo().equals(room.getRoomNo())) {
 				return roomCur;
 			}
 		}
