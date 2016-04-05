@@ -172,7 +172,7 @@ public class GuestDB {
 	public static void main(String[] aArgs)  {
 		GuestDB guestDB = new GuestDB();
 		String filename = "guest.txt";
-
+		
 		try {
 
 			// read file containing Guest records
