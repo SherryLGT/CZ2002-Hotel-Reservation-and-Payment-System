@@ -485,7 +485,7 @@ public class GuestController {
 		Guest updateguest = new Guest();
 		updateguest = getGuestDetails();
 
-		System.out.print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Identity (7) Nationality (8) Contact No.: ");
+		System.out.print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Nationality (7) Contact No.: ");
 		updateType = sc.nextInt();
 		sc.nextLine();
 
@@ -931,43 +931,8 @@ public class GuestController {
 			} while (country.equals("") || !country.matches(alpha) || (country.equals(updateguest.getCountry())));
 			break;
 
+			
 		case 6:
-			// Guest Identity
-			do {
-
-				System.out.print("\nUpdate identity type - (1) Driving License (2) Passport: ");
-				Identity ident = updateguest.new Identity();
-				updateguest.setIdentity(ident);
-				identityType = sc.nextInt();
-				sc.nextLine();
-
-				if (identityType != 1 && identityType != 2) {
-
-					System.out.println("Please select a valid identity type to be updated\n");
-
-				} else {
-
-					switch (identityType) {
-
-					case 1:
-						System.out.print("Driving License: ");
-						lic = sc.nextLine();
-						updateguest.getIdentity().setLic(lic);
-						break;
-
-					case 2:
-						System.out.print("Passport No.: ");
-						pp = sc.nextLine();
-						updateguest.getIdentity().setPp(pp);
-						break;
-
-					}
-				}
-
-			} while (identityType != 1 && identityType != 2);
-			break;
-
-		case 7:
 			// Guest Nationality
 			do {
 				System.out.print("\nNew Nationality: ");
@@ -996,7 +961,7 @@ public class GuestController {
 					|| (nationality.equals(updateguest.getNationality())));
 			break;
 
-		case 8:
+		case 7:
 			// Guest Contact
 			do {
 				System.out.print("\nNew Contact No.: ");
