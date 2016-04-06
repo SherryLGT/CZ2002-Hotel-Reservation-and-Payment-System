@@ -6,4 +6,6 @@
 6|Lemon Meringue Tart|Fresh Lemon Curd & Toasted Meringue|5.0
 7|Milo Dinosaur|Iced Milo topped with Milo Powder|4.0
 8|Fishball Soup|Fishball Soup served with Rice|6.5
-9|item|blah|10.0
+9|Geraldine Porridge|Signature fish porridge by Chef Geraldine|7.5
+10|Sherry Prata|Speciality prata with chicken curry by Chef Sherry|2.0
+11|Nicole Rojak|Fruit Rojak with Secret Sauce done by Chef Nicole|6.0

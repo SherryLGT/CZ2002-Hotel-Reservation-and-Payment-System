@@ -91,15 +91,33 @@ public class HRPSApp {
 					option = optionChecking(0, 2);
 					switch (option) {
 					case 1:
-						System.out.println("Order Room Service");
+						System.out.println();
+						HRPSApp.header("ORDER SERVICE", "~", 29);
+						System.out.format("%1s %13s %8s %6s %n", "|", "1. ", "Order Room Service", "|");
+						System.out.format("%1s %13s %8s %5s %n", "|", "2. ", "Update Order Status", "|");
+						System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
+						HRPSApp.line("~", 41);
+						System.out.println();
+						option = optionChecking(0, 2);
+						
+						switch (option) {
+						case 1:
+							roomServiceControl.guestOrder();
+							break;
+						case 2:
+							//menuControl.updateItem(); NEED CHANGE
+							break;
+							}
 						break;
 					case 2:
-						HRPSApp.header("MENU ITEM", "~", 32);
-						System.out.format("%1s %12s %8s %12s %n", "|", "1. ", "Add Menu Item", "|");
-						System.out.format("%1s %12s %8s %9s %n", "|", "2. ", "Update Menu Item", "|");
-						System.out.format("%1s %12s %8s %9s %n", "|", "3. ", "Remove Menu Item", "|");
-						System.out.format("%1s %12s %3s %21s %n", "|", "0. ", "Back", "|");
+						System.out.println();
+						HRPSApp.header("MENU OPTIONS", "~", 29);
+						System.out.format("%1s %13s %8s %11s %n", "|", "1. ", "Add Menu Item", "|");
+						System.out.format("%1s %13s %8s %8s %n", "|", "2. ", "Update Menu Item", "|");
+						System.out.format("%1s %13s %8s %8s %n", "|", "3. ", "Remove Menu Item", "|");
+						System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
 						HRPSApp.line("~", 41);
+						System.out.println();
 						
 						option = optionChecking(0, 3);
 						
