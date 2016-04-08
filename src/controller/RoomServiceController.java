@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import database.GuestDB;
 import database.MenuDB;
 import database.RoomServiceDB;
 import entity.Guest;
@@ -19,33 +20,29 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class RoomServiceController {
-	private MenuController menuControl = new MenuController();
+	private RoomServiceDB RoomServiceDb = new RoomServiceDB();
+	private String filename = "roomservice.txt";
+	
 	private MenuDB menuDb = new MenuDB();
 	private String filenamemenu = "menu.txt";
-	private GuestController guestControl = new GuestController();
-	private RoomController roomControl = new RoomController();
 	
-	private RoomServiceDB roomserviceDb = new RoomServiceDB();
-	private String filename = "roomservice.txt";
 	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	Scanner sc = new Scanner(System.in);
 	int option = -1;
 	
+	
+	
 	public void guestOrder() {
+		GuestController guestControl = new GuestController();
+		
 		RoomService roomservice = new RoomService();
 		Menu item = new Menu();
 		Guest guest = new Guest();
 		Room room = new Room();
+		Date date = new Date();
 		
 		String remarks = "";
 		String status = "Confirmed";
-		int rsID = 0;
-		Date date;
-		//int identityType = 0;
-		//int room = 0;
-		//int item = 0;
-		//String guest = "";
-
 		
 		System.out.println();
 		System.out.println("~~~~~ORDER FOR GUEST~~~~~");
@@ -54,134 +51,247 @@ public class RoomServiceController {
 		System.out.println("Please enter guest orders: ");
 		System.out.println();
 		
-		ArrayList al = null;
+		
+		ArrayList al, almenu;
+		
 		try {
-			System.out.print("Enter Guest Identity Number: ");
-			Identity ident = guest.new Identity();
-			guest.setIdentity(ident);
-			//IdentityType = sc.nextInt();
-			sc.nextLine();
-					
-		//	guest = sc.nextLine();
-			//Identity ident = guest.new Identity();
-			//guest.setIdentity(ident);
-			//identityType = sc.nextInt();
-			//sc.nextLine();
+			
+		al = RoomServiceDb.readRoomService(filename);
+
+		for (int x = 0; x < al.size(); x++) {
+			RoomService rs = (RoomService) al.get(x);
+
+			guest = guestControl.getGuestDetails();
+			roomservice.setGuest(guest);
+			
+			if ((guest.getIdentity().getLic().equals(roomservice.getGuest().getIdentity().getLic()))
+					|| (guest.getIdentity().getPp().equals(roomservice.getGuest().getIdentity().getPp()))) {
+				roomservice.setGuest(guest);
 				
-			
-			System.out.println();
-			System.out.print("Enter Room Number: ");
-			room.setRoomNo(sc.nextLine());
-			sc.nextLine();
-			//Room r = room.new Room();
-			//room = sc.nextInt();
-			//room.setRoomNo(RoomNo);
-			//room.setRoomNo(sc.nextInt());
-			
-			
-			//if () {
-				// Do if-else. Check if the guest and room is same/correct. 
-				// If wrong, prompt them. If correct, let them choose menu	
-			//}
-			
-			/*
-			al = menuDb.readMenu(filenamemenu);
-			String repeated = new String(new char[92]).replace("\0", "-");
-			System.out.println(repeated);
-			System.out.printf("%3s %23s %53s %10s", "ID", "NAME", "DESCRIPTION", "S$ PRICE");
-			System.out.println();
-			System.out.println(repeated);
-			for (int i = 0; i < al.size(); i++) {
-				Menu menu = (Menu) al.get(i);
-				System.out.format("%3s %23s %53s %10s", menu.getID(), menu.getName(), menu.getDescription(),
-						menu.getPrice());
-				System.out.println();
-			}
-			System.out.println(repeated);
-			*/
-			
-			
-			System.out.println();
-			System.out.print("Enter Menu Item ID: ");
-			item.setID(sc.nextInt());
-			sc.nextLine();
-			//item = sc.nextInt();
-			
-			
-            Date date1 = new Date();
+				
+				System.out.print("Enter Room Number: ");
+				room.setRoomNo(sc.nextLine());
+				roomservice.setRoom(room);
+				
+				
+				if ((room.getRoomNo().equals(roomservice.getRoom().getRoomNo()))) {
 
-			
-			System.out.println();
-			System.out.print("Enter Remark for Item: ");
-			remarks = sc.nextLine();
-			
-			// Do a check whether they want to put remark or not.
-			
-			
-			do {
-				System.out.println();
-				System.out.print("Order Confirmation - (1) Yes   (2) No: ");
-				System.out.println();
-				try {
-					option = sc.nextInt();
+					
+					almenu = menuDb.readMenu(filenamemenu);
+					System.out.println();
+					String repeated = new String(new char[92]).replace("\0", "-");
+					System.out.println(repeated);
+					System.out.printf("%3s %23s %53s %10s", "ID", "NAME", "DESCRIPTION", "S$ PRICE");
+					System.out.println();
+					System.out.println(repeated);
+					for (int i = 0; i < almenu.size(); i++) {
+						Menu m = (Menu) almenu.get(i);
+						System.out.format("%3s %23s %53s %10s", m.getID(), m.getName(), m.getDescription(),
+								m.getPrice());
+						System.out.println();
+					}
+					System.out.println(repeated);
+					
+					System.out.println("Enter Menu Item ID: ");
+					item.setID(sc.nextInt());
 					roomservice.setItems(item);
-					roomservice.setDate(date1);
-					roomservice.setRemarks(remarks);
-					roomservice.setStatus(status);
-					roomservice.setGuest(guest);
-					roomservice.setRoom(room);
-
-				} catch (InputMismatchException e) {
-					System.out.println("You have entered an invalid input. Please try again.");
-					sc.next();
-				}
-			} while (option < 1 || option > 2);
+					sc.nextLine();
+					
+					System.out.println();
+					System.out.print("Enter Remark for Item: ");
+					remarks = sc.nextLine();
+					
+						
+					} else { // room if
+				System.out.println("Room don't exist. Please try again.");	
+			} 
+			} else {// guest if
+				System.out.println("Guest identity don't match. Please try again.");
+			}
 			
-			
-			
-			
+		do {
+			System.out.println();
+			System.out.print("Order Confirmation - (1) Yes   (2) No: ");
+			System.out.println();
 			try {
-				RoomService rs = (RoomService) al.get(al.size() - 1);
-				roomservice.setRoomServiceID(al.size() + 1);
+				option = sc.nextInt();
 
 				if (option == 1) {
-					item.setID(al.size() + 1); /*
-					System.out.println(repeated);
-					System.out.printf("%5s %5s %13s %55s %12s %5s %5s", "ID", "ITEM ID", "DATE", "REMARKS", "STATUS", "GUEST ID", "ROOM ID");
-					System.out.println();
-					System.out.println(repeated);
+					
+					roomservice.setItems(item);
+					roomservice.setDate(date);
+					roomservice.setRemarks(remarks);
+					roomservice.setStatus(status);
 
-					System.out.format("%3s %23s %53s %10s", al.size() + 1, item, date1, remarks, status, guest, room);
-					System.out.println();
-
-					System.out.println(repeated);
-*/
-					al.add(item);
-
-					// write item record/s to file.
-					menuDb.saveMenu(filename, al);
-					System.out.println();
-					System.out.println("Item stored successfully!");
-
+				roomservice.setRoomServiceID(al.size() +1);
+				
+				System.out.println();
+				String repeated = new String(new char[100]).replace("\0", "-");
+				System.out.println(repeated);
+				System.out.printf("%3s %9s %35s %16s %13s %10s %8s", "ID", "ITEM ID", "DATE", "REMARKS", 
+						"STATUS", "GUEST ID", "ROOM ID");
+				System.out.println();
+				System.out.println(repeated);
+				
+				if (roomservice.getGuest().getIdentity().getPp().equals("null")) {
+					System.out.format("%3s %9s %35s %16s %13s %10s %8s", al.size() + 1, rs.getItems().getID(), date, remarks, 
+							status, roomservice.getGuest().getIdentity().getLic(), roomservice.getRoom().getRoomNo());
 				} else {
-					System.out.println("Item not saved.");
+					System.out.format("%3s %9s %35s %16s %13s %10s %8s", al.size() + 1, rs.getItems().getID(), date, remarks, 
+							status, roomservice.getGuest().getIdentity().getPp(), roomservice.getRoom().getRoomNo());
 				}
+				System.out.println();
 
-			} catch (IOException e) {
-				System.out.println("IOException > " + e.getMessage());
+				System.out.println(repeated);
+
+				al.add(roomservice);
+				
+							
+				RoomServiceDb.saveRoomService(filename, al);
+				System.out.println();
+				System.out.println("Guest Order stored successfully!");
+
+			} else {
+				System.out.println("Guest Order not saved.");
 			}
-
-			
-		/*	
-		} catch (IOException e1) {
-			System.out.println("IOException > " + e1.getMessage());
-		}
-		*/
-		} catch (InputMismatchException e) {
-			System.out.println("You have entered an invalid input. Please try again.");
-			sc.next();
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+				sc.next();
+			}
+		} while (option < 1 || option > 2);
+		
+		break;
+		
 		}
 		
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());	
+		}	
+	}
+
+
+	
+	public void updateStatus() {
+		
+		GuestController guestControl = new GuestController();
+		
+		RoomService roomservice = new RoomService();
+		Guest guest = new Guest();
+		
+		Integer roomserviceID = 0;
+		
+		System.out.println("Enter Room Service ID: ");
+		roomserviceID = sc.nextInt();
+		
+		getRoomService();
+		
+		ArrayList al;
+		
+		try {
+			
+		al = RoomServiceDb.readRoomService(filename);
+		
+		for (int x = 0; x < al.size(); x++) {
+			RoomService rs = (RoomService) al.get(x);
+
+			guest = guestControl.getGuestDetails();
+			roomservice.setGuest(guest);
+			
+			if ((roomserviceID.equals(rs.getRoomServiceID())) && 
+					((guest.getIdentity().getLic().equals(roomservice.getGuest().getIdentity().getLic()))
+					|| (guest.getIdentity().getPp().equals(roomservice.getGuest().getIdentity().getPp())))) {
+				roomservice.setGuest(guest);
+				
+				System.out.print("\n~~~~~~~~~ ORDER STATUS ~~~~~~~~~~\n|");
+				System.out.format("%10s%8s", "1. ", "Preparing\t\t|\n|");
+				System.out.format("%10s%8s", "2. ", "Delivered\t\t|\n|");
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				
+				do {
+					System.out.print("Select an option: ");
+					try {
+						option = sc.nextInt();
+						if (option < 1 || option > 2) 
+							System.out.println("You have not selected option between 1-2. Please try again.");
+					} catch (InputMismatchException e) {
+						System.out.println("You have entered an invalid input. Please try again.");
+						sc.next();
+					}
+				} while (option < 1 || option > 2);
+				
+				
+				switch (option) {
+				case 1:
+					String status = "Preparing";
+					roomservice.setRoomServiceID(al.size() +1);
+					roomservice.setStatus(status);
+					
+					System.out.println();
+					String repeated = new String(new char[100]).replace("\0", "-");
+					System.out.println(repeated);
+					System.out.printf("%3s %9s %35s %16s %13s %10s %8s", "ID", "ITEM ID", "DATE", "REMARKS", 
+							"STATUS", "GUEST ID", "ROOM ID");
+					System.out.println();
+					System.out.println(repeated);
+					
+					if (roomservice.getGuest().getIdentity().getPp().equals("null")) {
+						System.out.format("%3s %9s %35s %16s %13s %10s %8s", rs.getRoomServiceID(), rs.getItems().getID(), 
+								rs.getDate(), rs.getRemarks(), roomservice.getStatus(), 
+								rs.getGuest().getIdentity().getLic(), rs.getRoom().getRoomNo());
+			
+						rs.getGuest().getIdentity().getLic();
+
+					} else {
+						System.out.format("%3s %9s %35s %16s %13s %10s %8s", rs.getRoomServiceID(), rs.getItems().getID(), 
+								rs.getDate(), rs.getRemarks(), roomservice.getStatus(), 
+								rs.getGuest().getIdentity().getPp(), rs.getRoom().getRoomNo());
+
+						rs.getGuest().getIdentity().getPp();
+
+					}
+					
+					rs.setStatus(status);
+					rs.getRoomServiceID();
+					rs.getItems();
+					rs.getDate();
+					rs.getRemarks();
+					rs.getRoom();
+					
+					System.out.println();
+
+					System.out.println(repeated);	
+								
+					RoomServiceDb.saveRoomService(filename, al);
+					System.out.println();
+					System.out.println("Guest Order updated successfully!");
+					break;
+				case 2:
+					break;
+				}
+				
+				
+			} else {
+				System.out.println("Guest identity don't match. Please try again.");
+			}
+			break;
+		}
+				
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+	}
+	
+	
+
+	
+	public ArrayList getRoomService() {
+		ArrayList al = null;
+		try {
+			al = RoomServiceDb.readRoomService(filename);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
+		return al;
 	}
 	
 	

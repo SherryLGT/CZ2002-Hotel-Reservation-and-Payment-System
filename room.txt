@@ -15,9 +15,9 @@
 0403|Club Room|650.0|Under Maintenance|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
 0404|Club Room|655.0|Occupied|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
 0405|Club Room|655.0|Reserved|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0406|Club Room|655.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0406|Club Room|655.0|Reserved|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
 0501|Grand Club Room|750.0|Reserved|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
-0502|Grand Club Room|750.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
+0502|Grand Club Room|750.0|Reserved|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0503|Grand Club Room|750.0|Occupied|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0504|Grand Club Room|755.0|Occupied|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0505|Grand Club Room|755.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room

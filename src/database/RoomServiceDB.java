@@ -53,10 +53,12 @@ public class RoomServiceDB {
 			
 			
 			// GUEST PART
-
 			Guest guest = new Guest();
-			GuestController guestControl = new GuestController();
-			guest = guestControl.getGuestDetails();
+			String id = star.nextToken().trim();
+			Identity ident = guest. new Identity();
+			ident.setLic(id);
+			ident.setPp(id);
+			guest.setIdentity(ident);
 			
 			
 			// ROOM PART
@@ -64,11 +66,9 @@ public class RoomServiceDB {
 			room.setRoomNo(star.nextToken().trim());
 			
 			
-			// create Professor object from file data
+			// create roomservice object from file data
 			RoomService roomservice = new RoomService(roomserviceID, items, date, remarks, status, guest, room);
-			roomservice.setGuest(guest);
-			roomservice.setRoom(room);
-			
+
 			// add to room service list
 			alr.add(roomservice);
 		}
@@ -91,9 +91,15 @@ public class RoomServiceDB {
 			st.append(SEPARATOR);
 			st.append(roomservice.getStatus());
 			st.append(SEPARATOR);
-			st.append(roomservice.getGuest());
+			
+			if (roomservice.getGuest().getIdentity().getPp().equals("null")) {
+				st.append(roomservice.getGuest().getIdentity().getLic());
+			} else {
+				st.append(roomservice.getGuest().getIdentity().getPp());
+			}
+
 			st.append(SEPARATOR);
-			st.append(roomservice.getRoom());
+			st.append(roomservice.getRoom().getRoomNo());
 			alw.add(st.toString());
 		}
 		UtilityDB.write(filename, alw);
