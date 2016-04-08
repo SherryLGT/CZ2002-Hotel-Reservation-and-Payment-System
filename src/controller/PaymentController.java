@@ -46,11 +46,41 @@ public class PaymentController {
         double total = 0;
  
         Scanner sc = new Scanner(System.in);
+
+        ArrayList rooms = roomControl.getRoom();
+        ArrayList<Room> occupiedRooms = new ArrayList<Room>();
+        int count = 0;
+        System.out.print("Checked-In rooms: ");
+        for(int i = 0; i < rooms.size(); i++) {
+        	Room rm = (Room) rooms.get(i);
+        	if(rm.getStatus().equals("Occupied")) {
+        		occupiedRooms.add(rm);
+        		count++;
+        		
+        		if(count > 1)
+        			System.out.print(", " + rm.getRoomNo());
+        		else
+        			System.out.print(rm.getRoomNo());
+        	}
+        }
         
-    	System.out.print("Enter room number: ");
-    	room.setRoomNo(sc.nextLine());
+        String roomNo;
+        boolean valid = false;
+    	do {
+    		System.out.print("\nEnter room number: ");
+    		roomNo = sc.nextLine();
+    		for(int index = 0; index < occupiedRooms.size(); index++) {
+    			if(occupiedRooms.get(index).getRoomNo().equals(roomNo)) {
+        			room = occupiedRooms.get(index);
+        			valid = true;
+    			}
+    		}
+    		if (!valid)
+    			System.out.println("Invalid room no. Please try again.");
+    	} while(!valid);
+		
         reservation = reservControl.searchReservationByRoom(room);
-        room = roomControl.searchRoom(reservation.getRoom());
+//        room = roomControl.searchRoom(reservation.getRoom());
         
 		Identity ident = guest.new Identity();
 		ident.setLic(reservation.getGuest().getIdentity().getLic());
@@ -66,10 +96,10 @@ public class PaymentController {
         
 //		TODO roomService
          
-//        System.out.print("Enter any discount: ");
-//        discount = sc.nextDouble();
+        System.out.print("Enter any discount (%): ");
+        discount = sc.nextDouble();
         
-        total = charges + tax - discount;        
+        total = charges + tax - ((charges + tax) * (discount / 100));
 		
         Payment payment = new Payment(reservation, charges, tax, roomService, discount, total, new Date());
          
@@ -89,7 +119,6 @@ public class PaymentController {
             			"\nAddress: " + guest.getAddress().getAdd1() + " " + guest.getAddress().getAdd2() + " " + guest.getAddress().getCity() + " " + guest.getAddress().getState() + " " + guest.getAddress().getZip());
             System.out.println("Successful!");
             HRPSApp.header("BILL INVOICE", "*", 36);
-            System.out.format("%1s %46s %n", "*", "*");
             System.out.format("%1s %16s %23s %5s %n", "*", "Days of stay:", daysStayed, "*");
             System.out.format("%1s %28s %11s %5s %n", "*", "Room service order items:", 0, "*");
             System.out.format("%1s %31s %8s %5s %n", "*", "Total price of room service:", 0, "*");

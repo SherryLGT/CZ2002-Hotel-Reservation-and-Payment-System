@@ -25,28 +25,28 @@ public class HRPSApp {
 		do {
 			System.out.print("\033[H\033[2J");
 			
-			HRPSApp.line("=", 41);
-			System.out.format("%1s %26s %12s %n", "|", "WELCOME TO HRPS", "|");
-			HRPSApp.line("=", 41);
-			System.out.format("%1s %8s %30s %n", "|", "Options:", "|");
-			System.out.format("%1s %11s %1s %21s %n", "|", "1.", "Guest", "|");
-			System.out.format("%1s %11s %1s %22s %n", "|", "2.", "Room", "|");
-			System.out.format("%1s %11s %1s %15s %n", "|", "3.", "Reservation", "|");
-			System.out.format("%1s %11s %1s %19s %n", "|", "4.", "Payment", "|");
-			System.out.format("%1s %11s %1s %10s %n", "|", "5.", "Occupancy Report", "|");
-			System.out.format("%1s %11s %1s %22s %n", "|", "0.", "Exit", "|");
-			HRPSApp.line("=", 41);
+			HRPSApp.line("=", 68);
+			System.out.format("%1s %59s %6s %n", "|", "WELCOME TO HOTEL RESERVATION AND PAYMENT SYSTEM (HRPS)", "|");
+			HRPSApp.line("=", 68);
+			System.out.format("%1s %13s %52s %n", "|", "OPTIONS:", "|");
+			System.out.format("%1s %16s %6s %42s %n", "|", "1.", "GUEST", "|");
+			System.out.format("%1s %16s %5s %43s %n", "|", "2.", "ROOM", "|");
+			System.out.format("%1s %16s %12s %36s %n", "|", "3.", "RESERVATION", "|");
+			System.out.format("%1s %16s %19s %29s %n", "|", "4.", "PAYMENT (CHECKOUT)", "|");
+			System.out.format("%1s %16s %17s %31s %n", "|", "5.", "OCCUPANCY REPORT", "|");
+			System.out.format("%1s %16s %5s %43s %n", "|", "0.", "EXIT", "|");
+			HRPSApp.line("=", 68);
 			
 			option = optionChecking(0, 5);
 			
 			switch (option) {
-			case 1: // Guest
-				HRPSApp.header("GUEST", "~", 36);
-				System.out.format("%1s %9s %8s %15s %n", "|", "1. ", "Add New Guest", "|");
-				System.out.format("%1s %9s %8s %8s %n", "|", "2. ", "Update Guest Details", "|");
-				System.out.format("%1s %9s %8s %16s %n", "|", "3. ", "Search Guest", "|");
-				System.out.format("%1s %9s %3s %24s %n", "|", "0. ", "Back", "|");
-				HRPSApp.line("~", 41);
+			case 1: // GUEST
+				HRPSApp.header("GUEST", "~", 63);
+				System.out.format("%1s %17s %8s %34s %n", "|", "1. ", "ADD NEW GUEST", "|");
+				System.out.format("%1s %17s %8s %27s %n", "|", "2. ", "UPDATE GUEST DETAILS", "|");
+				System.out.format("%1s %17s %8s %35s %n", "|", "3. ", "SEARCH GUEST", "|");
+				System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+				HRPSApp.line("~", 68);
 				
 				option = optionChecking(0, 3);
 	
@@ -62,15 +62,15 @@ public class HRPSApp {
 					break;
 				}
 				break;
-			case 2: // Room
+			case 2: // ROOM;
 				reservationControl.kickOut();
-				HRPSApp.header("ROOM", "~", 37);
-				System.out.format("%1s %11s %8s %18s %n", "|", "1. ", "Add Room", "|");
-				System.out.format("%1s %11s %8s %7s %n", "|", "2. ", "Update Room Details", "|");
-				System.out.format("%1s %11s %8s %14s %n", "|", "3. ", "Room Service", "|");
-				System.out.format("%1s %11s %8s %10s %n", "|", "4. ", "Room Maintenance", "|");
-				System.out.format("%1s %11s %3s %22s %n", "|", "0. ", "Back", "|");
-				HRPSApp.line("~", 41);
+				HRPSApp.header("ROOM", "~", 64);
+				System.out.format("%1s %17s %8s %39s %n", "|", "1. ", "ADD ROOM", "|");
+				System.out.format("%1s %17s %8s %28s %n", "|", "2. ", "UPDATE ROOM DETAILS", "|");
+				System.out.format("%1s %17s %8s %35s %n", "|", "3. ", "ROOM SERVICE", "|");
+				System.out.format("%1s %17s %8s %31s %n", "|", "4. ", "ROOM MAINTENANCE", "|");
+				System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+				HRPSApp.line("~", 68);
 				
 				option = optionChecking(0, 4);
 	
@@ -81,23 +81,23 @@ public class HRPSApp {
 				case 2:
 						roomControl.updateRoomDetails();
 					break;
-				case 3: // Room Service
-					HRPSApp.header("ROOM SERVICE", "~", 29);
-					System.out.format("%1s %13s %8s %12s %n", "|", "1. ", "Room Service", "|");
-					System.out.format("%1s %13s %8s %15s %n", "|", "2. ", "Menu Item", "|");
-					System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
-					HRPSApp.line("~", 41);
+				case 3: // ROOM SERVICE
+					HRPSApp.header("ROOM SERVICE", "~", 56);
+					System.out.format("%1s %17s %8s %35s %n", "|", "1. ", "ROOM SERVICE", "|");
+					System.out.format("%1s %17s %8s %38s %n", "|", "2. ", "MENU ITEM", "|");
+					System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+					HRPSApp.line("~", 68);
 					
 					option = optionChecking(0, 2);
+					
 					switch (option) {
 					case 1:
-						System.out.println();
-						HRPSApp.header("ORDER SERVICE", "~", 29);
-						System.out.format("%1s %13s %8s %6s %n", "|", "1. ", "Order Room Service", "|");
-						System.out.format("%1s %13s %8s %5s %n", "|", "2. ", "Update Order Status", "|");
-						System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
-						HRPSApp.line("~", 41);
-						System.out.println();
+						HRPSApp.header("ORDER SERVICE", "~", 55);
+						System.out.format("%1s %17s %8s %29s %n", "|", "1. ", "ORDER ROOM SERVICE", "|");
+						System.out.format("%1s %17s %8s %28s %n", "|", "2. ", "UPDATE ORDER STATUS", "|");
+						System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+						HRPSApp.line("~", 68);
+						
 						option = optionChecking(0, 2);
 						
 						switch (option) {
@@ -107,17 +107,15 @@ public class HRPSApp {
 						case 2:
 							//menuControl.updateItem(); NEED CHANGE
 							break;
-							}
+						}
 						break;
 					case 2:
-						System.out.println();
-						HRPSApp.header("MENU OPTIONS", "~", 29);
-						System.out.format("%1s %13s %8s %11s %n", "|", "1. ", "Add Menu Item", "|");
-						System.out.format("%1s %13s %8s %8s %n", "|", "2. ", "Update Menu Item", "|");
-						System.out.format("%1s %13s %8s %8s %n", "|", "3. ", "Remove Menu Item", "|");
-						System.out.format("%1s %13s %3s %20s %n", "|", "0. ", "Back", "|");
-						HRPSApp.line("~", 41);
-						System.out.println();
+						HRPSApp.header("MENU OPTIONS", "~", 56);
+						System.out.format("%1s %17s %8s %34s %n", "|", "1. ", "ADD MENU ITEM", "|");
+						System.out.format("%1s %17s %8s %31s %n", "|", "2. ", "UPDATE MENU ITEM", "|");
+						System.out.format("%1s %17s %8s %31s %n", "|", "3. ", "REMOVE MENU ITEM", "|");
+						System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+						HRPSApp.line("~", 68);
 						
 						option = optionChecking(0, 3);
 						
@@ -134,22 +132,22 @@ public class HRPSApp {
 						}
 					}					
 					break;
-				case 4: // Room Maintenance
-					HRPSApp.header("ROOM MAINTENANCE", "-", 25);
+				case 4: // ROOM MAINTENANCE
+					HRPSApp.header("ROOM MAINTENANCE", "-", 52);
 					roomControl.updateRoomMaintenance();
 					break;
 				}
 				
 				break;
-			case 3: // Reservation
+			case 3: // RESERVATION
 				reservationControl.kickOut();
-				HRPSApp.header("RESERVATION", "~", 30);
-				System.out.format("%1s %10s %8s %19s %n", "|", "1. ", "Check In", "|");
-				System.out.format("%1s %10s %8s %9s %n", "|", "2. ", "Create Reservation", "|");
-				System.out.format("%1s %10s %8s %9s %n", "|", "3. ", "Delete Reservation", "|");
-				System.out.format("%1s %10s %8s %10s %n", "|", "4. ", "Print Reservation", "|");
-				System.out.format("%1s %10s %3s %23s %n", "|", "0. ", "Back", "|");
-				HRPSApp.line("~", 41);
+				HRPSApp.header("RESERVATION", "~", 57);
+				System.out.format("%1s %17s %8s %39s %n", "|", "1. ", "CHECK IN", "|");
+				System.out.format("%1s %17s %8s %29s %n", "|", "2. ", "CREATE RESERVATION", "|");
+				System.out.format("%1s %17s %8s %29s %n", "|", "3. ", "DELETE RESERVATION", "|");
+				System.out.format("%1s %17s %8s %30s %n", "|", "4. ", "PRINT RESERVATION", "|");
+				System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+				HRPSApp.line("~", 68);
 				
 				option = optionChecking(0, 4);
 	
@@ -169,15 +167,16 @@ public class HRPSApp {
 				}
 				break;
 			case 4: // Payment
-				HRPSApp.header("PAYMENT", "-", 34);
+				HRPSApp.header("PAYMENT", "-", 61);
 				paymentControl.createPayment();
 				break;
-			case 5: // Occupancy Report
-				HRPSApp.header("OCCUPANCY REPORT", "~", 25);
-				System.out.format("%1s %6s %8s %4s %n", "|", "1. ", "Print Room Occupancy Status", "|");
-				System.out.format("%1s %6s %8s %14s %n", "|", "2. ", "Print Room Status", "|");
-				System.out.format("%1s %6s %3s %27s %n", "|", "0. ", "Back", "|");
-				HRPSApp.line("~", 41);
+			case 5: // OCCUPANCY REPORT
+				HRPSApp.header("OCCUPANCY REPORT", "~", 52);
+				System.out.format("%1s %17s %8s %20s %n", "|", "1. ", "PRINT ROOM OCCUPANCY STATUS", "|");
+				System.out.format("%1s %17s %8s %30s %n", "|", "2. ", "PRINT ROOM STATUS", "|");
+				System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");
+				HRPSApp.line("~", 68);
+				
 				option = optionChecking(0, 2);
 	
 				switch (option) {
@@ -190,7 +189,8 @@ public class HRPSApp {
 				}
 				break;
 			case 0: // Exit
-				System.out.print("Thank you for using HRPS!");
+				System.out.print("THANK YOU FOR USING HRPS!");
+				sc.nextLine();
 				System.exit(0);
 				break;
 			}
