@@ -105,7 +105,7 @@ public class HRPSApp {
 							roomServiceControl.guestOrder();
 							break;
 						case 2:
-							//menuControl.updateItem(); NEED CHANGE
+							roomServiceControl.updateStatus();
 							break;
 						}
 						break;
