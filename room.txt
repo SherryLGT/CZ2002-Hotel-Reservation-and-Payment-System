@@ -5,7 +5,7 @@
 0205|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0206|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0301|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0302|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
+0302|Premier|550.0|Occupied|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
 0303|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
 0304|Premier|555.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
 0305|Premier|555.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
