@@ -1030,9 +1030,10 @@ public class GuestController {
 		Identity id = guest.new Identity();
 
 		guest.setIdentity(id);
+		
+		Guest checkGuest = new Guest();
 
 		do {
-			Guest checkGuest = new Guest();
 			
 			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
 			identityType = sc.nextInt();
