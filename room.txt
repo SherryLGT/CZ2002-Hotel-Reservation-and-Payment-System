@@ -1,4 +1,4 @@
-0201|Deluxe|450.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
+0201|Deluxe|450.0|Occupied|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0202|Deluxe|450.0|Reserved|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0203|Deluxe|450.0|Occupied|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0204|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room

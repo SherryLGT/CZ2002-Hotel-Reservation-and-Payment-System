@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import database.ReservationDB;
 import entity.Guest;
+import entity.Menu;
 import entity.Reservation;
 import entity.Room;
 import ui.HRPSApp;
@@ -157,16 +158,20 @@ public class ReservationController {
 
 			roomControl.updateRoom(room, 4);
 
-            HRPSApp.header("RECEIPT", "*", 50);
-            System.out.format("%1s %55s %n", "*", "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Name:", guest.getName(), "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Identity Number:", (!guest.getIdentity().getLic().trim().equals("null")) ? guest.getIdentity().getLic()
-					: guest.getIdentity().getPp(), "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Room No:", room.getRoomNo(), "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Room Type:", room.getType(), "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Check in date (MM/DD/YYYY):", formatter.format(reservation.getCheckIn()), "*");
-            System.out.format("%1s %28s %20s %5s %n", "*", "Check out date (MM/DD/YYYY):", formatter.format(reservation.getCheckOut()), "*");
-            HRPSApp.line("*", 57);
+			HRPSApp.header("RECEIPT", "*", 50);
+			System.out.format("%1s %55s %n", "*", "*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Name:", guest.getName(), "*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Identity Number:",
+					(!guest.getIdentity().getLic().trim().equals("null")) ? guest.getIdentity().getLic()
+							: guest.getIdentity().getPp(),
+					"*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Room No:", room.getRoomNo(), "*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Room Type:", room.getType(), "*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Check in date (MM/DD/YYYY):",
+					formatter.format(reservation.getCheckIn()), "*");
+			System.out.format("%1s %28s %20s %5s %n", "*", "Check out date (MM/DD/YYYY):",
+					formatter.format(reservation.getCheckOut()), "*");
+			HRPSApp.line("*", 57);
 
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
@@ -192,15 +197,34 @@ public class ReservationController {
 
 		Date date = new Date();
 
+		System.out.print("Room Number: ");
+		room.setRoomNo(sc.nextLine());
+
+		room = roomControl.searchRoom(room);
+
+		while (room == null || !room.getStatus().equals("Reserved")) {
+
+			if (room == null)
+				System.out.println("Sorry! Room not found. Please try again.");
+			else if (!room.getStatus().equals("Vacant"))
+				System.out.println("Sorry! Room not not avaliable. Please try other rooms.");
+
+			room = new Room();
+
+			System.out.print("Room Number: ");
+			room.setRoomNo(sc.nextLine());
+
+			room = roomControl.searchRoom(room);
+		}
+
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 
 			if ((guest.getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic())
 					|| guest.getIdentity().getPp().equals(reserv.getGuest().getIdentity().getPp()))
 					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
-					&& reserv.getStatus().equals("Waitlist")) {
+					&& reserv.getStatus().equals("Waitlist") && room.getRoomNo().equals(reserv.getRoom().getRoomNo())) {
 				reserv = updateReservation(reserv, 1);
-				room = reserv.getRoom();
 				al.set(i, reserv);
 				check = true;
 			}
@@ -276,6 +300,7 @@ public class ReservationController {
 		Guest guest = new Guest();
 		Boolean check = false;
 		Date date = null;
+		int option = 0;
 
 		Scanner sc = new Scanner(System.in);
 
@@ -299,11 +324,31 @@ public class ReservationController {
 
 		check = false;
 
+		System.out.print("Room Number: ");
+		room.setRoomNo(sc.nextLine());
+
+		room = roomControl.searchRoom(room);
+
+		while (room == null || !room.getStatus().equals("Reserved")) {
+
+			if (room == null)
+				System.out.println("Sorry! Room not found. Please try again.");
+			else if (!room.getStatus().equals("Vacant"))
+				System.out.println("Sorry! Room not not avaliable. Please try other rooms.");
+
+			room = new Room();
+
+			System.out.print("Room Number: ");
+			room.setRoomNo(sc.nextLine());
+
+			room = roomControl.searchRoom(room);
+		}
+
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 
 			if ((guestControl.searchGuest(guest) != null) && date.equals(reserv.getCheckIn())
-					&& reserv.getStatus().equals("Waitlist")) {
+					&& reserv.getStatus().equals("Waitlist") && room.getRoomNo().equals(reserv.getRoom().getRoomNo())) {
 				reserv = updateReservation(reserv, 1);
 				room = reserv.getRoom();
 				al.remove(i);
@@ -311,17 +356,31 @@ public class ReservationController {
 			}
 		}
 
-		if (check) {
+		do {
+			System.out.println();
+			System.out.print("Remove Item Confirmation - (1) Yes   (2) No: ");
+
 			try {
-				// write Reservation record/s to file.
-				reservationDB.saveReservation(filename, al);
+				option = sc.nextInt();
 
-				roomControl.updateRoom(room, 3);
+			} catch (InputMismatchException e) {
+				System.out.println("You have entered an invalid input. Please try again.");
+			}
+		} while (option < 1 || option > 2);
 
-				System.out.println("\nReservation deleted successfully.");
+		if (check) {
+			if (option == 1) {
+				try {
+					// write Reservation record/s to file.
+					reservationDB.saveReservation(filename, al);
 
-			} catch (IOException e) {
-				System.out.println("IOException > " + e.getMessage());
+					roomControl.updateRoom(room, 3);
+
+					System.out.println("\nReservation deleted successfully.");
+
+				} catch (IOException e) {
+					System.out.println("IOException > " + e.getMessage());
+				}
 			}
 		} else {
 			System.out.println("\nSorry! No reservation found.");
@@ -361,17 +420,17 @@ public class ReservationController {
 
 		return null;
 	}
+
 	public Reservation searchReservationByRoom(Room room) {
-        ArrayList reservations = getReservation();
+		ArrayList reservations = getReservation();
 		Date date = new Date();
-        
-        for(int i = 0; i < reservations.size(); i++) {
-        	Reservation reserv = (Reservation) reservations.get(i);
-        	
-        	if(reserv.getRoom().getRoomNo().equals(room.getRoomNo())
-					&& reserv.getStatus().equals("Checked-In")) {
-        		return reserv;
-        	}
+
+		for (int i = 0; i < reservations.size(); i++) {
+			Reservation reserv = (Reservation) reservations.get(i);
+
+			if (reserv.getRoom().getRoomNo().equals(room.getRoomNo()) && reserv.getStatus().equals("Checked-In")) {
+				return reserv;
+			}
 		}
 
 		return null;
@@ -423,7 +482,7 @@ public class ReservationController {
 							formatter.format(reser.getCheckOut()), "|");
 
 					check = true;
-				
+
 				}
 			}
 
