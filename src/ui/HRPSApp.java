@@ -58,7 +58,7 @@ public class HRPSApp {
 					guestControl.updateGuest();
 					break;
 				case 3:
-					
+					guestControl.printGuest(guestControl.getGuestDetails());
 					break;
 				}
 				break;
