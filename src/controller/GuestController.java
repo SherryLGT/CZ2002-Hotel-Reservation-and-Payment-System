@@ -1079,7 +1079,7 @@ public class GuestController {
 
 		} while (identityType != 1 && identityType != 2);
 
-		return guest;
+		return checkGuest;
 	}
 
 	public Guest searchGuest(Guest guest) {
