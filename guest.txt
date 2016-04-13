@@ -9,3 +9,5 @@ Polly Wee|Female|Master|1234567|555|6/16|Velda Street 2|#03-12|Velda|London|2342
 Sherry Lau|Female|Master|123123|321|03/17|NTU Street|#01-01|Jurong East|Singapore|760321|Singapore|dl|null|Singaporean|98645588
 Cherry Tan|Female|Visa|123|456|11/16|Pasir Ris St 51|Block 552|Singapore|Singapore|510552|Singapore|null|cherry123|Singaporean|85331639
 Jessi|Female|Master|0123|456|05/19|Hello|Address 2|Singapore|Singapore|510552|Singapore|hey|null|Singapore|123
+Jeannie|Female|Visa|12345678|123|12/18|Toa Payoh Lorong 12|Block 400 #12-01|Singapore|Singapore|555111|Singapore|12345|null|Singaporean|83746212
+e|Female|Amex|21312321|123|12/19|ef|er|fer|erf|23423|erg|null|erffff2f42|df|12312

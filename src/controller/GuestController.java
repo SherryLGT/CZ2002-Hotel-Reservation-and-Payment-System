@@ -433,8 +433,6 @@ public class GuestController {
 
 		} while (contact.equals(""));
 
-		sc.close();
-
 		ArrayList alr = getGuest();
 		alr.add(guest);
 
@@ -443,6 +441,7 @@ public class GuestController {
 			guestDB.saveGuest(filename, alr);
 
 			System.out.println("New guest details has been successfully saved!");
+			sc.nextLine();
 
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
@@ -1008,6 +1007,7 @@ public class GuestController {
 			guestDB.saveGuest(filename, alr);
 
 			System.out.println("Guest details has been successfully updated!");
+			sc.nextLine();
 
 		} catch (
 
