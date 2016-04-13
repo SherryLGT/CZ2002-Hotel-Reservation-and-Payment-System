@@ -33,7 +33,7 @@ public class HRPSApp {
 			System.out.format("%1s %16s %5s %43s %n", "|", "2.", "ROOM", "|");
 			System.out.format("%1s %16s %12s %36s %n", "|", "3.", "RESERVATION", "|");
 			System.out.format("%1s %16s %19s %29s %n", "|", "4.", "PAYMENT (CHECKOUT)", "|");
-			System.out.format("%1s %16s %17s %31s %n", "|", "5.", "OCCUPANCY REPORT", "|");
+			System.out.format("%1s %16s %17s %31s %n", "|", "5.", "OCCUPANCY STATUS", "|");
 			System.out.format("%1s %16s %5s %43s %n", "|", "0.", "EXIT", "|");
 			HRPSApp.line("=", 68);
 			
@@ -170,8 +170,8 @@ public class HRPSApp {
 				HRPSApp.header("PAYMENT", "-", 61);
 				paymentControl.createPayment();
 				break;
-			case 5: // OCCUPANCY REPORT
-				HRPSApp.header("OCCUPANCY REPORT", "~", 52);
+			case 5: // OCCUPANCY STATUS
+				HRPSApp.header("OCCUPANCY STATUS", "~", 52);
 				System.out.format("%1s %17s %8s %20s %n", "|", "1. ", "PRINT ROOM OCCUPANCY STATUS", "|");
 				System.out.format("%1s %17s %8s %30s %n", "|", "2. ", "PRINT ROOM STATUS", "|");
 				System.out.format("%1s %17s %3s %43s %n", "|", "0. ", "BACK", "|");

@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -197,7 +196,7 @@ public class ReservationController {
 			Reservation reserv = (Reservation) al.get(i);
 
 			if ((guest.getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic())
-					|| guest.getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic()))
+					|| guest.getIdentity().getPp().equals(reserv.getGuest().getIdentity().getPp()))
 					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
 					&& reserv.getStatus().equals("Waitlist")) {
 				reserv = updateReservation(reserv, 1);
@@ -353,7 +352,7 @@ public class ReservationController {
 			Reservation reserv = (Reservation) al.get(i);
 
 			if ((reservation.getGuest().getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic())
-					|| reservation.getGuest().getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic()))
+					|| reservation.getGuest().getIdentity().getPp().equals(reserv.getGuest().getIdentity().getPp()))
 					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckOut()))
 					&& reserv.getStatus().equals("Checked-In")) {
 				return reserv;
@@ -380,7 +379,7 @@ public class ReservationController {
 
 	public void printReservation() {
 		ArrayList al = getReservation();
-		String[] status = { "Checked-In", "Checked-Out" };
+		String[] status = { "Checked-In", "Checked-Out", "Waitlist" };
 		boolean check = false;
 
 		System.out.println("Reservation Details: \n");

@@ -11,7 +11,6 @@ import java.util.StringTokenizer;
 
 import entity.Payment;
 import entity.Reservation;
-import entity.RoomService;
  
 public class PaymentDB {
     private static final String SEPARATOR = "|";
@@ -43,16 +42,12 @@ public class PaymentDB {
             
             double charges = (Double.parseDouble(star.nextToken().trim()));
             double tax = (Double.parseDouble(star.nextToken().trim()));
-            
-            // Room Service
-            RoomService roomService = new RoomService();
-            //roomService.(star.nextToken().trim());
            
             double discount = (Double.parseDouble(star.nextToken().trim()));
             double total = (Double.parseDouble(star.nextToken().trim()));
              
             // Create payment object from file data
-            Payment payment = new Payment(reservation, charges, tax, roomService, discount, total, date);
+            Payment payment = new Payment(reservation, charges, tax, discount, total, date);
             
             // Add to payment list
             alr.add(payment);

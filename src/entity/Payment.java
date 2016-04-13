@@ -15,7 +15,6 @@ public class Payment implements Serializable {
     private Reservation reservation;
     private double charges;
     private double tax;
-    private RoomService roomService;
     private double discount;
     private double total;
     private Date date;
@@ -36,8 +35,6 @@ public class Payment implements Serializable {
      *            This payment's charges.
      * @param tax
      *            This payment's tax.
-     * @param roomService
-     *            This payment's room service.
      * @param discount
      *            This payment's discount.
      * @param total
@@ -45,12 +42,11 @@ public class Payment implements Serializable {
      * @param date
      *            This payment's date.
      */
-    public Payment(Reservation reservation, double charges, double tax, RoomService roomService, double discount,
+    public Payment(Reservation reservation, double charges, double tax, double discount,
             double total, Date date) {
         this.reservation = reservation;
         this.charges = charges;
         this.tax = tax;
-        this.roomService = roomService;
         this.discount = discount;
         this.total = total;
         this.date = date;
@@ -111,25 +107,6 @@ public class Payment implements Serializable {
      */
     public void setTax(double tax) {
         this.tax = tax;
-    }
- 
-    /**
-     * Gets the roomService details for this payment.
-     * 
-     * @return this payment's roomService.
-     */
-    public RoomService getRoomService() {
-        return roomService;
-    }
- 
-    /**
-     * Changes the roomService details of this payment.
-     * 
-     * @param roomService
-     *            This payment's roomService
-     */
-    public void setRoomService(RoomService roomService) {
-        this.roomService = roomService;
     }
  
     /**

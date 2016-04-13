@@ -1,23 +1,19 @@
 package controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import database.GuestDB;
 import database.MenuDB;
 import database.RoomServiceDB;
 import entity.Guest;
 import entity.Menu;
-import entity.Reservation;
 import entity.Room;
 import entity.RoomService;
-import entity.Guest.Identity;
-
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class RoomServiceController {
 	private RoomServiceDB RoomServiceDb = new RoomServiceDB();
@@ -30,7 +26,7 @@ public class RoomServiceController {
 	Scanner sc = new Scanner(System.in);
 	int option = -1;
 	
-	
+    private MenuController menuControl = new MenuController();
 	
 	public void guestOrder() {
 		GuestController guestControl = new GuestController();
@@ -292,6 +288,26 @@ public class RoomServiceController {
 			System.out.println("IOException > " + e.getMessage());
 		}
 		return al;
+	}
+	
+	
+
+	
+	public ArrayList<RoomService> searchRoomService(ArrayList<RoomService> rms, Guest guest) {
+		ArrayList roomServices = getRoomService();
+		
+		for (int i = 0; i < roomServices.size(); i++) {
+			RoomService roomService = (RoomService) roomServices.get(i);
+			
+			if (guest.getIdentity().getLic().equals(roomService.getGuest().getIdentity().getLic())
+					|| guest.getIdentity().getPp().equals(roomService.getGuest().getIdentity().getPp())) {
+				Menu item = new Menu();
+				item = menuControl.getItemById(roomService.getItems());
+				roomService.setItems(item);
+				rms.add(roomService);
+			}
+		}
+		return rms;
 	}
 	
 	

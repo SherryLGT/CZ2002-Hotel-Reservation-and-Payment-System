@@ -358,4 +358,16 @@ public class MenuController {
 		return al;
 	}
 
+	public Menu getItemById(Menu menu) {
+		ArrayList items = getItem();
+		Menu item = new Menu();
+		
+		for(int i = 0; i < items.size(); i++) {
+			item = (Menu) items.get(i);
+			
+			if(item.getID().equals(menu.getID()))
+				return item;
+		}
+		return null;
+	}
 }
