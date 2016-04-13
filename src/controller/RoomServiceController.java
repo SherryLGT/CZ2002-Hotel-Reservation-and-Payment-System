@@ -293,14 +293,15 @@ public class RoomServiceController {
 	
 
 	
-	public ArrayList<RoomService> searchRoomService(ArrayList<RoomService> rms, Guest guest) {
+	public ArrayList<RoomService> searchRoomService(ArrayList<RoomService> rms, Guest guest, Room room) {
 		ArrayList roomServices = getRoomService();
 		
 		for (int i = 0; i < roomServices.size(); i++) {
 			RoomService roomService = (RoomService) roomServices.get(i);
 			
-			if (guest.getIdentity().getLic().equals(roomService.getGuest().getIdentity().getLic())
-					|| guest.getIdentity().getPp().equals(roomService.getGuest().getIdentity().getPp())) {
+			if ((guest.getIdentity().getLic().equals(roomService.getGuest().getIdentity().getLic())
+					|| guest.getIdentity().getPp().equals(roomService.getGuest().getIdentity().getPp()))
+					&& roomService.getRoom().getRoomNo().equals(room.getRoomNo())) {
 				Menu item = new Menu();
 				item = menuControl.getItemById(roomService.getItems());
 				roomService.setItems(item);

@@ -114,7 +114,7 @@ public class PaymentController {
 				guest = g;
 		}
 		
-		roomServices = rsControl.searchRoomService(roomServices, guest);
+		roomServices = rsControl.searchRoomService(roomServices, guest, room);
 		for (int i = 0; i < roomServices.size(); i++) {
 			totalService += roomServices.get(i).getItems().getPrice();
 		}
@@ -134,7 +134,7 @@ public class PaymentController {
 			}
         } while(!valid);
         
-        total = charges + totalService + tax - ((charges + totalService + tax) * (discount / 100));
+        total = Double.valueOf(df.format(charges + totalService + tax - ((charges + totalService + tax) * (discount / 100))));
 		
         Payment payment = new Payment(reservation, charges, tax, discount, total, new Date());
          
@@ -209,7 +209,7 @@ public class PaymentController {
 		
 		return total;
 	}
-     
+    
 //    public ArrayList getPayment() {
 //        ArrayList al = null;
 //        try {

@@ -1,47 +1,47 @@
 0201|Deluxe|450.0|Occupied|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
-0202|Deluxe|450.0|Reserved|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
-0203|Deluxe|450.0|Occupied|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
+0202|Deluxe|450.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
+0203|Deluxe|450.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0204|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0205|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
-0206|Deluxe|455.0|Reserved|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
+0206|Deluxe|455.0|Vacant|43 sq m, single bed, city view from the 10th floor or higher, wifi enabled, non-smoking room
 0301|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0302|Premier|550.0|Reserved|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0303|Premier|550.0|Reserved|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0304|Premier|555.0|Reserved|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
+0302|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
+0303|Premier|550.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
+0304|Premier|555.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
 0305|Premier|555.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0306|Premier|555.0|Occupied|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
-0401|Club Room|650.0|Reserved|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0402|Club Room|650.0|Occupied|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0306|Premier|555.0|Vacant|56 sq m, single bed, city view from the 15th floor or higher, wifi enabled, non-smoking room
+0401|Club Room|650.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0402|Club Room|650.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
 0403|Club Room|650.0|Under Maintenance|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0404|Club Room|655.0|Occupied|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0405|Club Room|655.0|Reserved|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0406|Club Room|655.0|Reserved|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
-0501|Grand Club Room|750.0|Reserved|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
-0502|Grand Club Room|750.0|Reserved|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
+0404|Club Room|655.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0405|Club Room|655.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0406|Club Room|655.0|Vacant|67 sq m, double bed, city view from the 20th floor or higher, wifi enabled, non-smoking room
+0501|Grand Club Room|750.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
+0502|Grand Club Room|750.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0503|Grand Club Room|750.0|Occupied|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
-0504|Grand Club Room|755.0|Occupied|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
+0504|Grand Club Room|755.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0505|Grand Club Room|755.0|Vacant|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
 0506|Grand Club Room|755.0|Under Maintenance|78 sq m, double bed, city view from the 25th floor or higher, wifi enabled, non-smoking room
-0601|Family Room|850.0|Reserved|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
-0602|Family Room|850.0|Occupied|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
-0603|Family Room|850.0|Reserved|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
+0601|Family Room|850.0|Vacant|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
+0602|Family Room|850.0|Vacant|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
+0603|Family Room|850.0|Vacant|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
 0604|Family Room|855.0|Under Maintenance|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
-0605|Family Room|855.0|Reserved|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
+0605|Family Room|855.0|Vacant|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
 0606|Family Room|855.0|Vacant|86 sq m, queen bed, city view from the 30th floor or higher, wifi enabled, non-smoking room
-0701|Straits Suite|950.0|Occupied|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
-0702|Straits Suite|950.0|Reserved|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
+0701|Straits Suite|950.0|Vacant|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
+0702|Straits Suite|950.0|Vacant|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
 0703|Straits Suite|950.0|Vacant|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
-0704|Straits Suite|955.0|Reserved|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
+0704|Straits Suite|955.0|Vacant|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
 0705|Straits Suite|955.0|Under Maintenance|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
-0706|Straits Suite|955.0|Reserved|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
-0801|Presidential Suite|1050.0|Reserved|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
-0802|Presidential Suite|1050.0|Occupied|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
-0803|Presidential Suite|1050.0|Vacant|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
-0804|Presidential Suite|1055.0|Occupied|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
-0805|Presidential Suite|1055.0|Reserved|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+0706|Straits Suite|955.0|Vacant|250 sq m, queen bed, city view from the 35th floor or higher, wifi enabled, non-smoking room
+0801|Presidential Suite|1050.0|Vacant|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+0802|Presidential Suite|1050.0|Vacant|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+0803|Presidential Suite|1050.0|Occupied|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+0804|Presidential Suite|1055.0|Vacant|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
+0805|Presidential Suite|1055.0|Vacant|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
 0806|Presidential Suite|1055.0|Under Maintenance|450 sq m, king bed, city view from the 40th floor or higher, wifi enabled, non-smoking room
 0901|Chairman Suite|1150.0|Vacant|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
-0902|Chairman Suite|1150.0|Reserved|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
+0902|Chairman Suite|1150.0|Vacant|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 0903|Chairman Suite|1150.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 0904|Chairman Suite|1155.0|Occupied|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room
 0905|Chairman Suite|1155.0|Under Maintenance|600 sq m, king bed, city view from the 45th floor or higher, wifi enabled, non-smoking room

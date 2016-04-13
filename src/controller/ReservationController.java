@@ -388,6 +388,34 @@ public class ReservationController {
 	}
 
 	public Reservation updateReservation(Reservation reservation, int type) {
+		ArrayList al = getReservation();
+		
+		for(int i = 0; i < al.size(); i++) {
+			Reservation rs = (Reservation) al.get(i);
+			
+			if(reservation.getReservationID().equals(rs.getReservationID())) {
+				switch (type) {
+				case 1:
+					rs.setStatus("Checked-In");
+					break;
+				case 2:
+					rs.setStatus("Expired");
+					break;
+				case 3:
+					rs.setStatus("Checked-Out");
+					break;
+				}
+			}
+			al.set(i, rs);
+
+			try {
+				// Write reservation record/s to file.
+				reservationDB.saveReservation(filename, al);
+			} catch (IOException e) {
+				System.out.println("IOException > " + e.getMessage());
+			}
+		}
+		
 		switch (type) {
 		case 1:
 			reservation.setStatus("Checked-In");

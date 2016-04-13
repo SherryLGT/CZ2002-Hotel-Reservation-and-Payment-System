@@ -188,14 +188,14 @@ public class HRPSApp {
 					break;
 				}
 				break;
-			case 0: // Exit
+			case 0: // EXIT
 				System.out.print("THANK YOU FOR USING HRPS!");
 				sc.nextLine();
 				System.exit(0);
 				break;
 			}
 			
-			System.out.print("Press any key to continue...");
+			System.out.print("Press enter key to continue...");
 			sc.nextLine();
 			option = 0;
 		} while(option == 0);

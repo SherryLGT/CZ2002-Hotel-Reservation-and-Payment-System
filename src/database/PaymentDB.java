@@ -76,9 +76,6 @@ public class PaymentDB {
             st.append(SEPARATOR);
             st.append(payment.getTax());
             st.append(SEPARATOR);
-            
-            // Room Service
-            st.append(SEPARATOR);
             st.append(payment.getDiscount());
             st.append(SEPARATOR);
             st.append(payment.getTotal());
