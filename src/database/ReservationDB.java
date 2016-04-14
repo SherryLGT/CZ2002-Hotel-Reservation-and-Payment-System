@@ -14,29 +14,51 @@ import entity.Guest.Identity;
 import entity.Reservation;
 import entity.Room;
 
+/**
+ * DB Class for data access for reservation controller.
+ * 
+ * @author Toh Ling Li Geraldine
+ * @version 1.0
+ * @since 2016-03-22
+ */
+
 public class ReservationDB {
+
+	/**
+	 * Delimiter for data in text file.
+	 */
+
 	private static final String SEPARATOR = "|";
 
+	/**
+	 * Reading of reservation data in text file.
+	 * 
+	 * @param filename
+	 *            To specify the name of text file to read.
+	 * @return arraylist the list of guest data taken from the text file.
+	 */
 	public ArrayList readReservation(String filename) throws IOException {
 
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
 		// Read String from text file
 		ArrayList stringArray = (ArrayList) UtilityDB.read(filename);
-		ArrayList alr = new ArrayList(); // To store Reservation data
+
+		// To store Reservation data
+		ArrayList alr = new ArrayList();
 
 		for (int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
 
 			// Get individual 'fields' of the string separated by SEPARATOR
-			StringTokenizer star = new StringTokenizer(st, SEPARATOR); // Pass in the string to the string tokenizer using delimiter ","
+			StringTokenizer star = new StringTokenizer(st, SEPARATOR);  // Pass in the string to the string tokenizer using delimiter ","
 
 			String reservationID = star.nextToken().trim();
-			
+
 			// Guest ID
 			Guest guest = new Guest();
 			String id = star.nextToken().trim();
-			Identity ident = guest. new Identity();
+			Identity ident = guest.new Identity();
 			ident.setLic(id);
 			ident.setPp(id);
 			guest.setIdentity(ident);
@@ -44,9 +66,9 @@ public class ReservationDB {
 			// Room Number
 			Room room = new Room();
 			room.setRoomNo(star.nextToken().trim());
-			
+
 			int billType = Integer.parseInt(star.nextToken().trim());
-			
+
 			Date checkIn = null;
 			try {
 				checkIn = (Date) formatter.parse(star.nextToken().trim());
@@ -75,21 +97,31 @@ public class ReservationDB {
 		return alr;
 	}
 
+	/**
+	 * Saving of reservation data to the text file.
+	 * 
+	 * @param filename
+	 *            To specify the name of text file to read.
+	 * @param al
+	 *            The list of reservation data to store into the text file.
+	 */
 	public void saveReservation(String filename, List al) throws IOException {
-		
+
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
-		List alw = new ArrayList();// To store Reservation data
+		// To store Reservation data
+		List alw = new ArrayList();
 
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 			StringBuilder st = new StringBuilder();
-			
+
 			st.append(reserv.getReservationID().trim());
 			st.append(SEPARATOR);
 
 			// Guest ID
-			st.append((!reserv.getGuest().getIdentity().getLic().trim().equals("null")) ? reserv.getGuest().getIdentity().getLic().trim() : reserv.getGuest().getIdentity().getPp().trim());
+			st.append((!reserv.getGuest().getIdentity().getLic().trim().equals("null"))
+					? reserv.getGuest().getIdentity().getLic().trim() : reserv.getGuest().getIdentity().getPp().trim());
 			st.append(SEPARATOR);
 
 			// Room Number
@@ -107,7 +139,7 @@ public class ReservationDB {
 			st.append(reserv.getNumChild());
 			st.append(SEPARATOR);
 			st.append(reserv.getStatus());
-			
+
 			alw.add(st.toString());
 		}
 		UtilityDB.write(filename, alw);

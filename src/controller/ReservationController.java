@@ -12,17 +12,41 @@ import java.util.Scanner;
 
 import database.ReservationDB;
 import entity.Guest;
-import entity.Menu;
 import entity.Reservation;
 import entity.Room;
 import ui.HRPSApp;
 
+/**
+ * Controller class for reservation.
+ * 
+ * @author Toh Ling Li Geraldine
+ * @version 1.0
+ * @since 2016-03-22
+ */
+
 public class ReservationController {
+
+	/**
+	 * For DB access to room text file.
+	 */
 	private ReservationDB reservationDB = new ReservationDB();
+
+	/**
+	 * Name of room text file.
+	 */
 	private String filename = "reservation.txt";
+
+	/**
+	 * Standard date format.
+	 */
 	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
+	/**
+	 * To create a new reservation with prompts and validation checking.
+	 */
 	public void createReservation() {
+
+		// Initialize attributes
 		String reservationID;
 		Guest guest = new Guest();
 		Room room = new Room();
@@ -32,7 +56,6 @@ public class ReservationController {
 		int numAdult = 0;
 		int numChild = 0;
 		boolean check = false;
-
 		RoomController roomControl = new RoomController();
 		GuestController guestControl = new GuestController();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -41,16 +64,21 @@ public class ReservationController {
 
 		System.out.println("\n-------- Make Reservation --------\n");
 
+		// Reservation ID
 		Date date = new Date();
 		reservationID = dateFormat.format(date).trim();
 
+		// Reservation Guest ID
 		guest = guestControl.getGuestDetails();
 
+		// Display rooms available
 		roomControl.printRooms();
 
+		// Reservation Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		room = roomControl.searchRoom(room);
 
 		while (room == null || !room.getStatus().equals("Vacant")) {
@@ -68,6 +96,7 @@ public class ReservationController {
 			room = roomControl.searchRoom(room);
 		}
 
+		// Reservation Bill Type
 		do {
 			System.out.println("Billing type? (1) Cash (2) Credit Card ");
 			try {
@@ -82,6 +111,7 @@ public class ReservationController {
 
 		sc.nextLine();
 
+		// Reservation Check In Date
 		do {
 			System.out.print("Check In Date (MM/DD/YYYY):");
 
@@ -104,6 +134,7 @@ public class ReservationController {
 
 		check = false;
 
+		// Reservation Check Out Date
 		do {
 			System.out.print("Check Out Date (MM/DD/YYYY):");
 
@@ -124,6 +155,7 @@ public class ReservationController {
 
 		check = false;
 
+		// Reservation Number of Adults
 		do {
 			System.out.print("Number of Adults: ");
 			try {
@@ -135,6 +167,7 @@ public class ReservationController {
 			}
 		} while (!check);
 
+		// Reservation Number of Children
 		do {
 			System.out.print("Number of Children: ");
 			try {
@@ -158,6 +191,7 @@ public class ReservationController {
 
 			roomControl.updateRoom(room, 4);
 
+			// Display acknowledge receipt
 			HRPSApp.header("RECEIPT", "*", 50);
 			System.out.format("%1s %55s %n", "*", "*");
 			System.out.format("%1s %28s %20s %5s %n", "*", "Name:", guest.getName(), "*");
@@ -179,27 +213,35 @@ public class ReservationController {
 
 	}
 
+	/**
+	 * To update reservation status to check in
+	 */
 	public void checkIn() {
+
+		// Initialize attributes
 		RoomController roomControl = new RoomController();
 		GuestController guestControl = new GuestController();
 		Room room = new Room();
-
 		Guest guest = new Guest();
-		Boolean check = false;
+		boolean check = false;
 
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("\n-------- Check In --------\n");
 
+		// Reservation Guest ID
 		guest = guestControl.getGuestDetails();
 
 		ArrayList al = getReservation();
 
+		// Today's date
 		Date date = new Date();
 
+		// Reservation Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		room = roomControl.searchRoom(room);
 
 		while (room == null || !room.getStatus().equals("Reserved")) {
@@ -217,6 +259,7 @@ public class ReservationController {
 			room = roomControl.searchRoom(room);
 		}
 
+		// Check for existing reservation
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 
@@ -224,79 +267,79 @@ public class ReservationController {
 					|| guest.getIdentity().getPp().equals(reserv.getGuest().getIdentity().getPp()))
 					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
 					&& reserv.getStatus().equals("Waitlist") && room.getRoomNo().equals(reserv.getRoom().getRoomNo())) {
-				reserv = updateReservation(reserv, 1);
-				al.set(i, reserv);
+				updateReservation(reserv, 1);
 				check = true;
 			}
 		}
 
 		if (check) {
-			try {
-				// write Reservation record/s to file.
-				reservationDB.saveReservation(filename, al);
 
-				roomControl.updateRoom(room, 1);
+			// Update room status to reserved
+			roomControl.updateRoom(room, 1);
 
-				System.out.println("\nGuest successfully checked in.");
+			System.out.println("\nGuest successfully checked in.");
 
-			} catch (IOException e) {
-				System.out.println("IOException > " + e.getMessage());
-			}
 		} else {
 			System.out.println("\nSorry! No reserevation found. Guest cannot be checked in.");
 		}
 	}
 
+	/**
+	 * Update reservation status to expired when time pass 2pm
+	 */
 	public void kickOut() {
+		// Initialize attributes
 		RoomController roomControl = new RoomController();
 		Room room = null;
 
 		ArrayList al = getReservation();
+
+		// Today's date
 		Date date = new Date();
 
+		// Check for existing reservation that needs to be expired
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 			if ((formatter.format(date)).equals(formatter.format(reserv.getCheckIn()))
 					&& reserv.getStatus().equals("Waitlist")) {
 
 				if (Integer.parseInt(reserv.getReservationID().substring(8)) < 140000) {
-					reserv = updateReservation(reserv, 2);
+					updateReservation(reserv, 2);
 					room = reserv.getRoom();
 
-					al.set(i, reserv);
+					// Update room status to vacant
+					if (room != null)
+						roomControl.updateRoom(room, 3);
+
 				}
 			} else
 				try {
 					if (formatter.parse((formatter.format(date)))
 							.after(formatter.parse(formatter.format(reserv.getCheckIn())))
 							&& reserv.getStatus().equals("Waitlist")) {
-						reserv = updateReservation(reserv, 2);
+						updateReservation(reserv, 2);
 						room = reserv.getRoom();
 
-						al.set(i, reserv);
+						// Update room status to vacant
+						if (room != null)
+							roomControl.updateRoom(room, 3);
+
 					}
 				} catch (ParseException e) {
 
 				}
 		}
-
-		try {
-			// write Reservation record/s to file.
-			reservationDB.saveReservation(filename, al);
-
-			if (room != null)
-				roomControl.updateRoom(room, 3);
-
-		} catch (IOException e) {
-			System.out.println("IOException > " + e.getMessage());
-		}
 	}
 
+	/**
+	 * Delete reservation
+	 */
 	public void deleteReservation() {
+
+		// Initialize attributes
 		RoomController roomControl = new RoomController();
 		GuestController guestControl = new GuestController();
 		Room room = new Room();
-
 		Guest guest = new Guest();
 		Boolean check = false;
 		Date date = null;
@@ -306,10 +349,12 @@ public class ReservationController {
 
 		System.out.println("\n-------- Delete Reservation ---------\n");
 
+		// Reservation Guest ID
 		guest = guestControl.getGuestDetails();
 
 		ArrayList al = getReservation();
 
+		// Reservation Check In Date
 		do {
 			System.out.print("Check In Date (MM/DD/YYYY): ");
 
@@ -324,9 +369,11 @@ public class ReservationController {
 
 		check = false;
 
+		// Reservation Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		room = roomControl.searchRoom(room);
 
 		while (room == null || !room.getStatus().equals("Reserved")) {
@@ -344,18 +391,19 @@ public class ReservationController {
 			room = roomControl.searchRoom(room);
 		}
 
+		// Check for existing reservation
 		for (int i = 0; i < al.size(); i++) {
 			Reservation reserv = (Reservation) al.get(i);
 
 			if ((guestControl.searchGuest(guest) != null) && date.equals(reserv.getCheckIn())
 					&& reserv.getStatus().equals("Waitlist") && room.getRoomNo().equals(reserv.getRoom().getRoomNo())) {
-				reserv = updateReservation(reserv, 1);
 				room = reserv.getRoom();
 				al.remove(i);
 				check = true;
 			}
 		}
 
+		// Confirmation to delete
 		do {
 			System.out.println();
 			System.out.print("Remove Item Confirmation - (1) Yes   (2) No: ");
@@ -374,6 +422,7 @@ public class ReservationController {
 					// write Reservation record/s to file.
 					reservationDB.saveReservation(filename, al);
 
+					// Update room status to vacant
 					roomControl.updateRoom(room, 3);
 
 					System.out.println("\nReservation deleted successfully.");
@@ -387,13 +436,21 @@ public class ReservationController {
 		}
 	}
 
-	public Reservation updateReservation(Reservation reservation, int type) {
+	/**
+	 * To update the reservation's status.
+	 * 
+	 * @param reservation
+	 *            Reservation to update.
+	 * @param type
+	 *            Reservation status to set.
+	 */
+	public void updateReservation(Reservation reservation, int type) {
 		ArrayList al = getReservation();
-		
-		for(int i = 0; i < al.size(); i++) {
+
+		for (int i = 0; i < al.size(); i++) {
 			Reservation rs = (Reservation) al.get(i);
-			
-			if(reservation.getReservationID().equals(rs.getReservationID())) {
+
+			if (reservation.getReservationID().equals(rs.getReservationID())) {
 				switch (type) {
 				case 1:
 					rs.setStatus("Checked-In");
@@ -408,47 +465,23 @@ public class ReservationController {
 			}
 			al.set(i, rs);
 
-			try {
-				// Write reservation record/s to file.
-				reservationDB.saveReservation(filename, al);
-			} catch (IOException e) {
-				System.out.println("IOException > " + e.getMessage());
-			}
-		}
-		
-		switch (type) {
-		case 1:
-			reservation.setStatus("Checked-In");
-			break;
-		case 2:
-			reservation.setStatus("Expired");
-			break;
-		case 3:
-			reservation.setStatus("Checked-Out");
-			break;
 		}
 
-		return reservation;
+		try {
+			// Write reservation record/s to file.
+			reservationDB.saveReservation(filename, al);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
 	}
 
-	public Reservation searchReservation(Reservation reservation) {
-		ArrayList al = getReservation();
-		Date date = new Date();
-
-		for (int i = 0; i < al.size(); i++) {
-			Reservation reserv = (Reservation) al.get(i);
-
-			if ((reservation.getGuest().getIdentity().getLic().equals(reserv.getGuest().getIdentity().getLic())
-					|| reservation.getGuest().getIdentity().getPp().equals(reserv.getGuest().getIdentity().getPp()))
-					&& (formatter.format(date)).equals(formatter.format(reserv.getCheckOut()))
-					&& reserv.getStatus().equals("Checked-In")) {
-				return reserv;
-			}
-		}
-
-		return null;
-	}
-
+	/**
+	 * To search for a reservation's detail by room.
+	 * 
+	 * @param room
+	 *            Room to search
+	 * @return reservation's detail
+	 */
 	public Reservation searchReservationByRoom(Room room) {
 		ArrayList reservations = getReservation();
 		Date date = new Date();
@@ -464,6 +497,9 @@ public class ReservationController {
 		return null;
 	}
 
+	/**
+	 * Display all reservations by different reservation status.
+	 */
 	public void printReservation() {
 		ArrayList al = getReservation();
 		String[] status = { "Checked-In", "Checked-Out", "Waitlist" };
@@ -523,6 +559,11 @@ public class ReservationController {
 		}
 	}
 
+	/**
+	 * Retrieval of reservations details.
+	 * 
+	 * @return arraylist of all reservation sorted in ascending order by check in date.
+	 */
 	public ArrayList getReservation() {
 		ArrayList al = null;
 		try {

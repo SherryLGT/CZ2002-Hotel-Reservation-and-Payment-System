@@ -11,12 +11,32 @@ import database.RoomDB;
 import entity.Room;
 import ui.HRPSApp;
 
+/**
+ * Controller class for room.
+ * 
+ * @author Toh Ling Li Geraldine
+ * @version 1.0
+ * @since 2016-04-01
+ */
+
 public class RoomController {
 
+	/**
+	 * For DB access to room text file.
+	 */
 	private RoomDB roomDB = new RoomDB();
+
+	/**
+	 * Name of room text file.
+	 */
 	private String filename = "room.txt";
 
+	/**
+	 * To create a new room with prompts and validation checking.
+	 */
 	public void createRoom() {
+
+		// Initialize attributes
 		Room room = new Room();
 		Room checkRoom = new Room();
 		int option = 0;
@@ -25,11 +45,14 @@ public class RoomController {
 
 		Scanner sc = new Scanner(System.in);
 
+		// Room Status
 		room.setStatus("Vacant");
 
+		// Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		checkRoom = searchRoom(room);
 
 		while (checkRoom != null) {
@@ -44,9 +67,11 @@ public class RoomController {
 
 		}
 
+		// Room Type
 		System.out.print("Room Type: ");
 		room.setType(sc.nextLine());
 
+		// Room Price
 		do {
 			System.out.print("Room Price ($): ");
 			try {
@@ -58,6 +83,7 @@ public class RoomController {
 			}
 		} while (!check);
 
+		// Room Details
 		System.out.println("Room Details: ");
 
 		do {
@@ -184,7 +210,12 @@ public class RoomController {
 		}
 	}
 
+	/**
+	 * To update changes in room's details.
+	 */
 	public void updateRoomDetails() {
+
+		// Initialize attributes
 		Room room = new Room();
 		int option = 0;
 		boolean check = false;
@@ -192,11 +223,14 @@ public class RoomController {
 
 		Scanner sc = new Scanner(System.in);
 
+		// Room Status
 		room.setStatus("Vacant");
 
+		// Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		room = searchRoom(room);
 
 		while (room == null) {
@@ -211,9 +245,11 @@ public class RoomController {
 
 		}
 
+		// Room Type
 		System.out.print("Room Type: ");
 		room.setType(sc.nextLine());
 
+		// Room Price
 		do {
 			System.out.print("Room Price ($): ");
 			try {
@@ -225,6 +261,7 @@ public class RoomController {
 			}
 		} while (!check);
 
+		// Room Details
 		System.out.println("Room Details: ");
 
 		do {
@@ -339,6 +376,7 @@ public class RoomController {
 
 		ArrayList al = getRoom();
 
+		// Update room arraylist
 		for (int i = 0; i < al.size(); i++) {
 			Room roomCur = (Room) al.get(i);
 
@@ -358,15 +396,22 @@ public class RoomController {
 
 	}
 
+	/**
+	 * To update changes in room's status to maintenance or vacant.
+	 */
 	public void updateRoomMaintenance() {
+		
+		// Initialize attributes
 		Room room = new Room();
 		int option = 0;
 
 		Scanner sc = new Scanner(System.in);
 
+		// Room Number
 		System.out.print("Room Number: ");
 		room.setRoomNo(sc.nextLine());
 
+		// Check for existing room
 		room = searchRoom(room);
 
 		while (room == null) {
@@ -380,6 +425,7 @@ public class RoomController {
 			room = searchRoom(room);
 		}
 
+		// Room Status
 		do {
 			System.out.println("(1) Under Maintenance (2) Maintenance Completed: ");
 			try {
@@ -392,6 +438,7 @@ public class RoomController {
 			}
 		} while (option < 1 || option > 2);
 
+		// Update Room status
 		switch (option) {
 		case 1:
 			updateRoom(room, 2);
@@ -405,9 +452,20 @@ public class RoomController {
 
 	}
 
+	/**
+	 * To update the room's status.
+	 * 
+	 * @param room
+	 *            Room to update.
+	 * @param type
+	 *            Room status to set.
+	 */
 	public void updateRoom(Room room, int type) {
+		
+		// Initialize attributes
 		ArrayList al = getRoom();
 
+		// Set Room status
 		for (int i = 0; i < al.size(); i++) {
 			Room roomCur = (Room) al.get(i);
 
@@ -440,9 +498,19 @@ public class RoomController {
 		}
 	}
 
+	/**
+	 * Retrieval of existing room's details by room number.
+	 * 
+	 * @param room
+	 *            Room to check.
+	 * @return room's details.
+	 */
 	public Room searchRoom(Room room) {
+		
+		// Initialize attributes
 		ArrayList al = getRoom();
 
+		// Check for existing room
 		for (int i = 0; i < al.size(); i++) {
 			Room roomCur = (Room) al.get(i);
 
@@ -454,7 +522,12 @@ public class RoomController {
 		return null;
 	}
 
+	/**
+	 * Display all rooms with status vacant.
+	 */
 	public void printRooms() {
+		
+		// Initialize attributes
 		ArrayList al = getRoom();
 
 		System.out.println("\nRooms Avaliable: ");
@@ -462,6 +535,7 @@ public class RoomController {
 		System.out.format("%1s %4s %18s %16s %52s %43s %n", "|", "NO.", "TYPE", "PRICE($)", "DETAILS", "|");
 		HRPSApp.line("-", 139);
 
+		// Display vacant room
 		for (int i = 0; i < al.size(); i++) {
 			Room room = (Room) al.get(i);
 
@@ -478,17 +552,24 @@ public class RoomController {
 
 	}
 
+	/**
+	 * Display all rooms by different room status.
+	 */
 	public void printRoomStatus() {
+		
+		// Initialize attributes
 		ArrayList al = getRoom();
 		String[] status = { "Vacant", "Reserved", "Occupied", "Under Maintenance" };
 		int count = 0;
 
+		// Display different room status
 		for (int i = 0; i < status.length; i++) {
 			System.out.println("\n" + status[i] + " :");
 			System.out.print("\tRooms :");
 
 			count = 0;
 
+			// Display room numbers
 			for (int j = 0; j < al.size(); j++) {
 				Room room = (Room) al.get(j);
 				if (room.getStatus().equals(status[i])) {
@@ -507,7 +588,11 @@ public class RoomController {
 		System.out.println("");
 	}
 
+	/**
+	 * Display all rooms by different room type.
+	 */
 	public void printRoomOccupancy() {
+		// Initialize attributes
 		ArrayList al = getRoom();
 		ArrayList<String> type = new ArrayList<String>();
 		ArrayList<Integer> slotLeft = new ArrayList<Integer>();
@@ -515,6 +600,7 @@ public class RoomController {
 		boolean check;
 		int count;
 
+		// Get different room type and , total and vacant room count
 		for (int i = 0; i < al.size(); i++) {
 			Room room = (Room) al.get(i);
 			check = false;
@@ -540,6 +626,8 @@ public class RoomController {
 					slotLeft.add(0);
 			}
 		}
+		
+		// Display different room type and it's room count information
 		for (int i = 0; i < type.size(); i++) {
 			System.out.println("\n" + type.get(i) + ":");
 			System.out.println("\tNumbers: " + slotLeft.get(i) + " out of " + slot.get(i));
@@ -549,6 +637,7 @@ public class RoomController {
 			if (slotLeft.get(i) == 0) {
 				System.out.print("\tNo rooms avaliable.");
 			} else {
+				// Display room numbers
 				for (int j = 0; j < al.size(); j++) {
 					Room room = (Room) al.get(j);
 					if (room.getType().equals(type.get(i)) && room.getStatus().equals("Vacant")) {
@@ -569,8 +658,16 @@ public class RoomController {
 		System.out.println();
 	}
 
+	/**
+	 * Retrieval of rooms details.
+	 * 
+	 * @return arraylist of all room sorted in ascending order by room number.
+	 */
 	public ArrayList getRoom() {
+		
+		// Initialize attributes
 		ArrayList al = null;
+		
 		try {
 			// Read file containing reservation records.
 			al = roomDB.readRoom(filename);
