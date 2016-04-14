@@ -17,23 +17,24 @@ import controller.RoomServiceController;
  * @version 1.0
  * @since 2016-03-21
  */
+
 public class HRPSApp {
-	
+
 	/**
 	 * Main method, on start access to main menu.
 	 */
 	public static void main(String[] aArgs) {
-		
+
 		/**
 		 * Scanner for user input.
 		 */
 		Scanner sc = new Scanner(System.in);
-		
+
 		/**
 		 * Object for checking of user's selection.
 		 */
 		int option = -1;
-		
+
 		/**
 		 * Declaration of controllers.
 		 */
@@ -46,10 +47,9 @@ public class HRPSApp {
 
 		do {
 			System.out.print("\033[H\033[2J");
-			
+
 			/**
-			 * Main menu of HRPS.
-			 * Require valid user input to access sub-menus.
+			 * Main menu of HRPS. Require valid user input to access sub-menus.
 			 */
 			HRPSApp.line("=", 68);
 			System.out.format("%1s %59s %6s %n", "|", "WELCOME TO HOTEL RESERVATION AND PAYMENT SYSTEM (HRPS)", "|");
@@ -66,7 +66,7 @@ public class HRPSApp {
 			option = optionChecking(0, 5);
 
 			switch (option) {
-			
+
 			/**
 			 * Guest menu. Includes add, update and search guest.
 			 */
@@ -92,10 +92,10 @@ public class HRPSApp {
 					break;
 				}
 				break;
-				
+
 			/**
-			 * Room menu. Includes add and update of room, room service related methods
-			 * and update room maintenance status.
+			 * Room menu. Includes add and update of room, room service related
+			 * methods and update room maintenance status.
 			 */
 			case 2: // ROOM
 				reservationControl.kickOut();
@@ -118,7 +118,8 @@ public class HRPSApp {
 					break;
 
 				/**
-				 * Room sub-menu. Includes room service and menu related methods.
+				 * Room sub-menu. Includes room service and menu related
+				 * methods.
 				 */
 				case 3: // ROOM SERVICE
 					HRPSApp.header("ROOM SERVICE", "~", 56);
@@ -128,11 +129,12 @@ public class HRPSApp {
 					HRPSApp.line("~", 68);
 
 					option = optionChecking(0, 2);
-					
+
 					switch (option) {
-					
+
 					/**
-					 * Room service sub-menu. Includes ordering of room service and updates of order status.
+					 * Room service sub-menu. Includes ordering of room service
+					 * and updates of order status.
 					 */
 					case 1:
 						HRPSApp.header("ORDER SERVICE", "~", 55);
@@ -152,9 +154,10 @@ public class HRPSApp {
 							break;
 						}
 						break;
-						
+
 					/**
-					 * Menu item menu. Includes add, update and removal of menu item.
+					 * Menu item menu. Includes add, update and removal of menu
+					 * item.
 					 */
 					case 2:
 						HRPSApp.header("MENU OPTIONS", "~", 56);
@@ -190,9 +193,10 @@ public class HRPSApp {
 				}
 
 				break;
-			
+
 			/**
-			 * Reservation menu. Includes check in, creation, deletion and printing of reservations.
+			 * Reservation menu. Includes check in, creation, deletion and
+			 * printing of reservations.
 			 */
 			case 3: // RESERVATION
 				reservationControl.kickOut();
@@ -229,9 +233,10 @@ public class HRPSApp {
 				HRPSApp.header("PAYMENT", "-", 61);
 				paymentControl.createPayment();
 				break;
-				
+
 			/**
-			 * Status report menu. Includes printing of room occupancy status and room status.
+			 * Status report menu. Includes printing of room occupancy status
+			 * and room status.
 			 */
 			case 5: // STATUS REPORT
 				HRPSApp.header("STATUS REPORT", "~", 55);
@@ -257,9 +262,9 @@ public class HRPSApp {
 				System.exit(0);
 				break;
 			}
-			
+
 			/**
-			 *  In cases where user wants to go back to main menu.
+			 * In cases where user wants to go back to main menu.
 			 */
 			System.out.print("Press enter key to continue...");
 			sc.nextLine();
@@ -271,9 +276,11 @@ public class HRPSApp {
 	 * Checking user input to ensure proper value is used.
 	 * 
 	 * @param min
-	 * 		Ensure that user's input is within minimum range of option provided.
+	 *            Ensure that user's input is within minimum range of option
+	 *            provided.
 	 * @param max
-	 * 		Ensure that user's input is within maximum range of option provided.
+	 *            Ensure that user's input is within maximum range of option
+	 *            provided.
 	 * @return valid option selection.
 	 */
 	private static int optionChecking(int min, int max) {
@@ -300,11 +307,11 @@ public class HRPSApp {
 	 * To display a header with appropriate text, pattern and length.
 	 * 
 	 * @param text
-	 * 		Text to display on the header.
+	 *            Text to display on the header.
 	 * @param pattern
-	 * 		Pattern to display as the line.
+	 *            Pattern to display as the line.
 	 * @param size
-	 * 		Size to determine how long the header would be.
+	 *            Size to determine how long the header would be.
 	 */
 	public static void header(String text, String pattern, int size) {
 		System.out.print(new String(new char[(size / 2) - 1]).replace("\0", pattern));
@@ -318,9 +325,9 @@ public class HRPSApp {
 	 * To display a straight line with appropriate pattern and length.
 	 * 
 	 * @param pattern
-	 * 		Pattern to display as the line.
+	 *            Pattern to display as the line.
 	 * @param size
-	 * 		Size to determine how long the line would be.
+	 *            Size to determine how long the line would be.
 	 */
 	public static void line(String pattern, int size) {
 		System.out.println(new String(new char[size]).replace("\0", pattern));

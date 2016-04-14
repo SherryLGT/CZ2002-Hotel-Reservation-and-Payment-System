@@ -10,7 +10,7 @@ import java.util.Date;
  * @version 1.0
  * @since 2016-03-22
  */
- 
+
 public class Payment implements Serializable {
     private Reservation reservation;
     private double charges;
