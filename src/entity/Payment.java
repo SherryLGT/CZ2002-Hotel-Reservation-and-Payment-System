@@ -30,7 +30,7 @@ public class Payment implements Serializable {
      * addition of charges, tax and discount(s) taken into consideration.
      * 
      * @param reservation
-     *            This payment's reservation details
+     *            This payment's reservation details.
      * @param charges
      *            This payment's charges.
      * @param tax
@@ -53,7 +53,7 @@ public class Payment implements Serializable {
     }
  
     /**
-     * Gets the reservation details for this Payments.
+     * Gets the reservation details for this payment.
      * 
      * @return this payment's reservation details.
      */
@@ -65,7 +65,7 @@ public class Payment implements Serializable {
      * Changes the reservation details of this payment.
      * 
      * @param reservation
-     *            This payment's reservation details
+     *            This payment's reservation details.
      */
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
@@ -84,7 +84,7 @@ public class Payment implements Serializable {
      * Changes the charges of this payment.
      * 
      * @param charges
-     *            This payment's charges
+     *            This payment's charges.
      */
     public void setCharges(double charges) {
         this.charges = charges;
@@ -93,7 +93,7 @@ public class Payment implements Serializable {
     /**
      * Gets the tax of this payment.
      * 
-     * @return this payment's tax
+     * @return this payment's tax.
      */
     public double getTax() {
         return tax;
@@ -103,7 +103,7 @@ public class Payment implements Serializable {
      * Changes the tax of this payment.
      * 
      * @param tax
-     *            This payment's tax
+     *            This payment's tax.
      */
     public void setTax(double tax) {
         this.tax = tax;
@@ -112,7 +112,7 @@ public class Payment implements Serializable {
     /**
      * Gets the discount of this payment.
      * 
-     * @return this payment's discount
+     * @return this payment's discount.
      */
     public double getDiscount() {
         return discount;
@@ -122,7 +122,7 @@ public class Payment implements Serializable {
      * Changes the discount of this payment.
      * 
      * @param discount
-     *            This payment's discount
+     *            This payment's discount.
      */
     public void setDiscount(double discount) {
         this.discount = discount;
@@ -131,7 +131,7 @@ public class Payment implements Serializable {
     /**
      * Gets the total bill of this payment.
      * 
-     * @return this payment total
+     * @return this payment total.
      */
     public double getTotal() {
         return total;
@@ -141,7 +141,7 @@ public class Payment implements Serializable {
      * Changes the total of this payment.
      * 
      * @param total
-     *            This payment's total
+     *            This payment's total.
      */
     public void setTotal(double total) {
         this.total = total;
@@ -150,7 +150,7 @@ public class Payment implements Serializable {
     /**
      * Gets the date of this payment.
      * 
-     * @return this payment's date
+     * @return this payment's date.
      */
     public Date getDate() {
         return date;
@@ -160,7 +160,7 @@ public class Payment implements Serializable {
      * Changes the date of this payment.
      * 
      * @param date
-     *            This payment's date
+     *            This payment's date.
      */
     public void setDate(Date date) {
         this.date = date;
