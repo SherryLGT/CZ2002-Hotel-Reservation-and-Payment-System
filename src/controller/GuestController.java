@@ -14,12 +14,34 @@ import entity.Guest.Address;
 import entity.Guest.CreditCard;
 import entity.Guest.Identity;
 
+/**
+ * Controller class for guest.
+ * 
+ * @author Nicole Liow Wei Xuan
+ * @version 1.0
+ * @since 2016-03-30
+ */
+
 public class GuestController {
 
+	/**
+	 * For DB access to guest text file.
+	 */
 	private GuestDB guestDB = new GuestDB();
+
+	/**
+	 * Name of guest text file.
+	 */
 	private String filename = "guest.txt";
+
+	/**
+	 * Scanner for user input.
+	 */
 	Scanner sc = new Scanner(System.in);
 
+	/**
+	 * To create a new guest with prompts and validation checking.
+	 */
 	public void createGuest() {
 		System.out.println("\n------------ Guest Registration ------------");
 
@@ -339,8 +361,7 @@ public class GuestController {
 
 				case 1:
 
-					do
-					{
+					do {
 						System.out.print("Driving License: ");
 						lic = sc.nextLine();
 
@@ -348,18 +369,15 @@ public class GuestController {
 
 						checkGuest = searchGuest(guest);
 
-						if (checkGuest != null) 
-						{
+						if (checkGuest != null) {
 							System.out.println("Error - Driving license exists! Please enter a new driving license\n");
-						} 
+						}
 
-						else if (lic.equals(""))
-						{
+						else if (lic.equals("")) {
 							System.out.println("Error - Please enter a valid driving license\n");
 						}
 
-						else
-						{
+						else {
 							guest.setIdentity(ident);
 						}
 					} while (checkGuest != null || lic.equals(""));
@@ -367,8 +385,7 @@ public class GuestController {
 
 				case 2:
 
-					do
-					{
+					do {
 						System.out.print("Passport No.: ");
 						pp = sc.nextLine();
 
@@ -376,27 +393,24 @@ public class GuestController {
 
 						checkGuest = searchGuest(guest);
 
-						if (checkGuest != null) 
-						{
+						if (checkGuest != null) {
 							System.out.println("\nError - Passport no. exists! Please enter a new driving license");
-						} 
+						}
 
-						else if (pp.equals(""))
-						{
+						else if (pp.equals("")) {
 							System.out.println("\nError - Please enter a valid passport no.");
 						}
 
-						else
-						{
+						else {
 							guest.setIdentity(ident);
 						}
 						break;
 
 					} while (checkGuest != null || pp.equals(""));
 					break;
-				} 
+				}
 
-			} 
+			}
 		} while (identityType != 1 && identityType != 2);
 
 		// Guest Nationality
@@ -449,7 +463,9 @@ public class GuestController {
 
 	}
 
-
+	/**
+	 * To update changes in guest's details.
+	 */
 	public void updateGuest() {
 		System.out.println("\n------------ Update Guest ------------");
 
@@ -484,7 +500,8 @@ public class GuestController {
 		Guest updateguest = new Guest();
 		updateguest = getGuestDetails();
 
-		System.out.print("\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Nationality (7) Contact No.: ");
+		System.out.print(
+				"\nPlease select guest details to update - \n(1) Name (2) Gender (3) Credit Card (4) Address (5) Country (6) Nationality (7) Contact No.: ");
 		updateType = sc.nextInt();
 		sc.nextLine();
 
@@ -564,7 +581,8 @@ public class GuestController {
 		case 3:
 			// Guest Credit Card
 			do {
-				System.out.println("\nUpdate Credit Card Details - \n(1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
+				System.out.println(
+						"\nUpdate Credit Card Details - \n(1) Card Type (2) Card No. (3) Card CVV (4) Card Exp:  ");
 
 				CreditCard cc = updateguest.getCard();
 				updateguest.setCard(cc);
@@ -594,9 +612,10 @@ public class GuestController {
 
 							else if ((cardType == 1 && (updateguest.getCard().getType().equals("Visa"))
 									|| (cardType == 2 && (updateguest.getCard().getType().equals("Master"))
-									|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex")))))) {
+											|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex")))))) {
 
-								System.out.println("Error - Current credit card type and new credit card type is the same");
+								System.out.println(
+										"Error - Current credit card type and new credit card type is the same");
 
 							}
 
@@ -620,12 +639,10 @@ public class GuestController {
 								break;
 							}
 
-						} while ((cardType != 1 && cardType != 2 && cardType != 3)
-								|| (cardType == 1
-								&& (updateguest.getCard().getType().equals(
-										"Visa"))
+						} while ((cardType != 1 && cardType != 2 && cardType != 3) || (cardType == 1
+								&& (updateguest.getCard().getType().equals("Visa"))
 								|| (cardType == 2 && (updateguest.getCard().getType().equals("Master"))
-								|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex"))))));
+										|| (cardType == 3 && (updateguest.getCard().getType().equals("Amex"))))));
 						break;
 
 					case 2:
@@ -642,7 +659,8 @@ public class GuestController {
 
 							else if ((cardNum.equals(updateguest.getCard().getNum()))) {
 
-								System.out.println("Error - Current credit card number and new credit card number is the same");
+								System.out.println(
+										"Error - Current credit card number and new credit card number is the same");
 
 							}
 
@@ -671,7 +689,8 @@ public class GuestController {
 
 							else if ((cvv.equals(updateguest.getCard().getCvv()))) {
 
-								System.out.println("Error - Current credit card CVV and new credit card CVV is the same");
+								System.out
+										.println("Error - Current credit card CVV and new credit card CVV is the same");
 
 							}
 
@@ -704,11 +723,13 @@ public class GuestController {
 
 								if (inputdate.before(todaysdate)) {
 
-									System.out.println("Please enter a valid credit card expiration date to be updated");
+									System.out
+											.println("Please enter a valid credit card expiration date to be updated");
 
 								} else if ((exp.equals(updateguest.getCard().getExp()))) {
 
-									System.out.println("Error - Current credit card expiration date and new credit card expiration date is the same");
+									System.out.println(
+											"Error - Current credit card expiration date and new credit card expiration date is the same");
 
 								} else {
 
@@ -721,7 +742,8 @@ public class GuestController {
 							} catch (ParseException e1) {
 								if (inputdate == null) {
 
-									System.out.println("Please enter a valid credit card expiration date to be updated");
+									System.out
+											.println("Please enter a valid credit card expiration date to be updated");
 
 								}
 							}
@@ -738,7 +760,8 @@ public class GuestController {
 		case 4:
 			// Guest Address
 			do {
-				System.out.print("\nUpdate Address - \n(1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
+				System.out.print(
+						"\nUpdate Address - \n(1) Address Line 1 (2) Address Line 2 (3) City (4) State (5) Zip Code: ");
 
 				Address add = updateguest.getAddress();
 				updateguest.setAddress(add);
@@ -930,7 +953,6 @@ public class GuestController {
 			} while (country.equals("") || !country.matches(alpha) || (country.equals(updateguest.getCountry())));
 			break;
 
-			
 		case 6:
 			// Guest Nationality
 			do {
@@ -1002,7 +1024,7 @@ public class GuestController {
 					alr.set(i, updateguest);
 				}
 			}
-			
+
 			// Write Guest records to file
 			guestDB.saveGuest(filename, alr);
 
@@ -1011,7 +1033,7 @@ public class GuestController {
 
 		} catch (
 
-				IOException e)
+		IOException e)
 
 		{
 			System.out.println("IOException > " + e.getMessage());
@@ -1019,6 +1041,11 @@ public class GuestController {
 
 	}
 
+	/**
+	 * Retrieval of guest's details by driving license or passport number.
+	 * 
+	 * @return guest details.
+	 */
 	public Guest getGuestDetails() {
 		// Initialize attributes
 		String lic = "null";
@@ -1030,11 +1057,11 @@ public class GuestController {
 		Identity id = guest.new Identity();
 
 		guest.setIdentity(id);
-		
+
 		Guest checkGuest = new Guest();
 
 		do {
-			
+
 			System.out.print("Please select identity type - (1) Driving License (2) Passport: ");
 			identityType = sc.nextInt();
 			sc.nextLine();
@@ -1064,7 +1091,7 @@ public class GuestController {
 					pp = sc.nextLine();
 
 					id.setPp(pp);
-					
+
 					checkGuest = searchGuest(guest);
 
 					if (checkGuest == null)
@@ -1082,6 +1109,13 @@ public class GuestController {
 		return checkGuest;
 	}
 
+	/**
+	 * Retrieval of specific guest's details.
+	 * 
+	 * @param guest
+	 *            Parameter to search for guest details.
+	 * @return guest if found else return null.
+	 */
 	public Guest searchGuest(Guest guest) {
 		ArrayList alr = getGuest();
 
@@ -1097,7 +1131,12 @@ public class GuestController {
 
 		return null;
 	}
-	
+
+	/**
+	 * Retrieval of guest details.
+	 * 
+	 * @return arraylist of all guests.
+	 */
 	public ArrayList getGuest() {
 		ArrayList alr = null;
 		try {
@@ -1110,6 +1149,12 @@ public class GuestController {
 		return alr;
 	}
 
+	/**
+	 * Display of guest details.
+	 * 
+	 * @param guest
+	 *            Details of guest to display.
+	 */
 	public void printGuest(Guest guest) {
 		System.out.println("\nName: " + guest.getName());
 		System.out.println("Gender: " + guest.getGender());

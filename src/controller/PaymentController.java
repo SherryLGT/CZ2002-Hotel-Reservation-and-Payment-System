@@ -41,13 +41,20 @@ public class PaymentController {
 	 * For DB access to payment text file.
 	 */
 	private PaymentDB paymentDB = new PaymentDB();
+	
+	/**
+	 * Name of payment text file.
+	 */
 	private String filename = "payment.txt";
 
 	/**
-	 * For value formatting.
+	 * For formatting decimal to 2 decimal places.
 	 */
-	Calendar c = Calendar.getInstance();
 	DecimalFormat df = new DecimalFormat(".##");
+	
+	/**
+	 * For formatting date to appropriate format.
+	 */
 	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 	/**
@@ -262,6 +269,7 @@ public class PaymentController {
 		double charges = 0;
 		double total = 0;
 		Date date = res.getCheckIn();
+		Calendar c = Calendar.getInstance();
 		DateFormat df = new SimpleDateFormat("EEE dd MMM yyyy");
 
 		System.out.print("\nRoom: " + r.getRoomNo() + ", " + r.getType() + " (S$" + r.getPrice() + ")\n");
