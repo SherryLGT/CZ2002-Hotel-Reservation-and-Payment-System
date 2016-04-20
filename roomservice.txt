@@ -1,5 +1,6 @@
 1|10|2016/04/08 17:26:48|give more curry|Preparing|lol|0803
 2|11|2016/04/08 19:47:04|More rojak sauce|Confirmed|cherry123|0201
 3|10|2016/04/08 23:27:25|More curry sauce|Confirmed|cherry123|0201
-4|5|2016/04/15  00:22:44|More gravy|Confirmed|dl|0903
-5|2|2016/04/15  00:22:44|More prawn|Confirmed|dl|0904
+4|5|2016/04/15 00:22:44|More gravy|Confirmed|dl|0903
+5|2|2016/04/15 00:22:44|More prawn|Confirmed|dl|0904
+6|3|2016/04/14 17:36:38|Add more sauce|Confirmed|E1231234A|0802

@@ -7,12 +7,32 @@ import database.MenuDB;
 import entity.Menu;
 import java.io.IOException;
 
+/**
+ * Controller class for Menu.
+ * 
+ * @author Tan Wanyi Cherry
+ * @version 1.0
+ * @since 2016-03-30
+ */
+
 public class MenuController {
+	
+	/**
+	 * For DB access to menu item text file.
+	 */
 	private MenuDB menuDb = new MenuDB();
+	
+	/**
+	 * Name of menu text file.
+	 */
 	private String filename = "menu.txt";
 	Scanner sc = new Scanner(System.in);
 	int option = -1;
-
+	
+	
+	/**
+	 * Method to create new menu items.
+	 */
 	public void createItem() {
 		System.out.println();
 		System.out.println("~~~~~CREATE NEW ITEM~~~~~");
@@ -107,7 +127,9 @@ public class MenuController {
 
 	
 	
-	
+	/**
+	 * Method for updating menu items.
+	 */
 	public void updateItem() {
 		System.out.println();
 		System.out.println("~~~~~UPDATE ITEM~~~~~");
@@ -266,7 +288,9 @@ public class MenuController {
 
 	
 	
-	
+	/**
+	 * Method for removing menu items.
+	 */
 	public void removeItem() {
 		System.out.println();
 		System.out.println("~~~~~REMOVE ITEM~~~~~");
@@ -320,7 +344,10 @@ public class MenuController {
 							System.out.println();
 
 							System.out.println(repeated);
-
+							
+							/**
+							 * Remove menu item that is selected
+							 */
 							al.remove(i);
 						}
 					}
@@ -347,7 +374,11 @@ public class MenuController {
 	
 	
 	
-	
+	/**
+	 * Method for getting the menu item
+	 * 
+	 * @return menu item
+	 */
 	public ArrayList getItem() {
 		ArrayList al = null;
 		try {

@@ -21,20 +21,38 @@ import entity.Reservation;
 import entity.Room;
 import entity.RoomService;
 
+/**
+ * DB Class for data access for the room service controller.
+ * 
+ * @author Tan Wanyi Cherry
+ * @version 1.0
+ * @since 2016-04-05
+ */
+
 public class RoomServiceDB {
+	
+	/**
+	 * Delimiter for data in text file.
+	 */
 	public static final String SEPARATOR = "|";
 	static DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Scanner sc = new Scanner(System.in);
 	
+	/**
+	 * Reading of room service data from text file.
+	 * 
+	 * @param filename
+	 *            To specify the name of text file to read.
+	 * @return arraylist the list of room service data taken from the text file.
+	 */
 	public ArrayList readRoomService(String filename) throws IOException {
-		// UtilityDB.read String from text file
+		
 		ArrayList stringArray = (ArrayList) UtilityDB.read(filename);
-		ArrayList alr = new ArrayList();// to store Menu data
+		ArrayList alr = new ArrayList();
 
 		for (int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
-			// get individual 'fields' of the string separated by SEPARATOR
-			StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using delimiter ","
+			StringTokenizer star = new StringTokenizer(st, SEPARATOR); 
 
 			int roomserviceID = Integer.parseInt(star.nextToken().trim());
 
@@ -75,8 +93,17 @@ public class RoomServiceDB {
 		return alr;
 	}
 
+	
+	/**
+	 * Saving of room service order data to the text file.
+	 * 
+	 * @param filename
+	 *            To specify the name of text file to read.
+	 * @param al
+	 *            The list of room service order data to store into the text file.
+	 */
 	public void saveRoomService(String filename, List al) throws IOException {
-		List alw = new ArrayList();// to store Professors data
+		List alw = new ArrayList();
 
 		for (int i = 0; i < al.size(); i++) {
 			RoomService roomservice = (RoomService) al.get(i);

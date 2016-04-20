@@ -1,12 +1,13 @@
-Flora Lim|Female|Master|1244|555|12/23|Jurong Street 2|Block 345 #01-01|Jurong|Singapore|555222|Sg|lol|null|Singaporean|99887766
-Jane Chew|Female|Amex|1234|111|12/20|Ang Mo Kio Ave 2|Block 200 #02-02|Ang Mo Kio|Singapore|560200|Sg|1q|null|Singaporean|90295555
+Flora Lim|Female|Master|1244|555|12/23|Jurong Street 2|Block 345 #01-01|Jurong|Singapore|555222|Sg|S7654321A|null|Singaporean|99887766
+Jane Chew|Female|Amex|1244|111|12/20|Ang Mo Kio Ave 2|Block 200 #02-02|Ang Mo Kio|Singapore|560200|Sg|S1231234A|null|Singaporean|90295555
 Dawn Yeo|Female|Master|0987|222|02/19|Holland Village Road|#01-02|Holland Village|Malaysia|560011|Msia|null|2w|Malaysian|12345678
 Gideon Yap|Male|Visa|3456|333|7/17|Tanjong Pagar Street 2|Block 100 #13-04|Tanjong Pagar|Singapore|560300|Sg|null|3e|Singaporean|90295454
-Tony Chan|Male|Amex|022|432|7/19|Bishan Street 2|#04-05|Bishan|New York|560400|United States|null|4r|US Citizen|874648212
-Hugo Chin|Male|Amex|123|456|11/17|Orchard Road City|#01-23|Orchard Road|Singapore|560423|Sg|null|5t|Singaporean|64758311
+Tony Chan|Male|Amex|022|432|7/19|Bishan Street 2|#04-05|Bishan|New York|560400|United States|null|E1234567K|US Citizen|874648212
+Hugo Chin|Male|Amex|123|456|11/17|Orchard Road City|#01-23|Orchard Road|Singapore|560423|Sg|null|E1231234A|Singaporean|64758311
 Jillian Chan|Female|Visa|555666|778|1/21|Waterloo Street 21|Block 300 #12-01|Waterloo|Johor Bahru|646321|Malaysia|null|6y|Malaysian|11223344
 Polly Wee|Female|Master|1234567|555|6/16|Velda Street 2|#03-12|Velda|London|234234|United Kingdom|8i|null|Irish|123
-Sherry Lau|Female|Master|123123|321|03/17|NTU Street|#01-01|Jurong East|Singapore|760321|Singapore|dl|null|Singaporean|98645588
-Cherry Tan|Female|Visa|123|456|11/16|Pasir Ris St 51|Block 552|Singapore|Singapore|510552|Singapore|null|cherry123|Singaporean|85331639
+Sherry Lau|Female|Master|123123|321|03/17|NTU Street|#01-01|Jurong East|Singapore|760321|Singapore|S1234567F|null|Singaporean|98645588
+Cherry Tan|Female|Visa|123|456|11/16|Pasir Ris St 51|Block 552|Singapore|Singapore|510552|Singapore|null|E7654321A|Singaporean|85331639
 Jessi|Female|Master|0123|456|05/19|Hello|Address 2|Singapore|Singapore|510552|Singapore|hey|null|Singapore|123
 Jeannie|Female|Visa|12345678|123|12/18|Toa Payoh Lorong 12|Block 400 #12-01|Singapore|Singapore|555111|Singapore|12345|null|Singaporean|83746212
+Kelly Tan Min En|Female|Visa|12345678|111|12/18|Bishan Street 21|Block 222 #12-01|Singapore|Singapore|560222|Singapore|null|IQ2W3E4R|Singaporean|98765432

@@ -15,19 +15,52 @@ import entity.Menu;
 import entity.Room;
 import entity.RoomService;
 
+/**
+ * Controller class for Room Service.
+ * 
+ * @author Tan Wanyi Cherry
+ * @version 1.0
+ * @since 2016-04-05
+ */
+
 public class RoomServiceController {
+	
+	/**
+	 * For DB access to room service text file.
+	 */
 	private RoomServiceDB RoomServiceDb = new RoomServiceDB();
+	
+	/**
+	 * Name of room service text file.
+	 */
 	private String filename = "roomservice.txt";
 	
+	/**
+	 * For DB access to menu item text file.
+	 */
 	private MenuDB menuDb = new MenuDB();
+	
+	/**
+	 * Name of menu item text file.
+	 */
 	private String filenamemenu = "menu.txt";
 	
+	/**
+	 * Date Format.
+	 */
 	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	Scanner sc = new Scanner(System.in);
 	int option = -1;
 	
+	/**
+	 * Declaration of menu controller
+	 */
     private MenuController menuControl = new MenuController();
 	
+    
+    /**
+	 * Method to create room service order for guests.
+	 */
 	public void guestOrder() {
 		GuestController guestControl = new GuestController();
 		
@@ -56,7 +89,10 @@ public class RoomServiceController {
 
 		for (int x = 0; x < al.size(); x++) {
 			RoomService rs = (RoomService) al.get(x);
-
+			
+			/**
+			 * Retrieval of guest details.
+			 */
 			guest = guestControl.getGuestDetails();
 			roomservice.setGuest(guest);
 			
@@ -72,7 +108,9 @@ public class RoomServiceController {
 				
 				if ((room.getRoomNo().equals(roomservice.getRoom().getRoomNo()))) {
 
-					
+					/**
+					 * Retrieval of menu item details.
+					 */
 					almenu = menuDb.readMenu(filenamemenu);
 					System.out.println();
 					String repeated = new String(new char[92]).replace("\0", "-");
@@ -98,10 +136,10 @@ public class RoomServiceController {
 					remarks = sc.nextLine();
 					
 						
-					} else { // room if
+					} else { 
 				System.out.println("Room don't exist. Please try again.");	
 			} 
-			} else {// guest if
+			} else {
 				System.out.println("Guest identity don't match. Please try again.");
 			}
 			
@@ -142,7 +180,9 @@ public class RoomServiceController {
 
 				al.add(roomservice);
 				
-							
+				/**
+				 * Saving room service order details into DB.
+				 */			
 				RoomServiceDb.saveRoomService(filename, al);
 				System.out.println();
 				System.out.println("Guest Order stored successfully!");
@@ -166,7 +206,9 @@ public class RoomServiceController {
 	}
 
 
-	
+	/**
+	 * Method to update room service status for order.
+	 */
 	public void updateStatus() {
 		
 		GuestController guestControl = new GuestController();
@@ -256,7 +298,10 @@ public class RoomServiceController {
 					System.out.println();
 
 					System.out.println(repeated);	
-								
+					
+					/**
+					 * Updated room service status for a particular order into DB.
+					 */
 					RoomServiceDb.saveRoomService(filename, al);
 					System.out.println();
 					System.out.println("Guest Order updated successfully!");
@@ -279,7 +324,9 @@ public class RoomServiceController {
 	
 	
 
-	
+	/**
+	 * Method to get room service orders.
+	 */
 	public ArrayList getRoomService() {
 		ArrayList al = null;
 		try {
@@ -292,7 +339,9 @@ public class RoomServiceController {
 	
 	
 
-	
+	/**
+	 * Method to search room service orders.
+	 */
 	public ArrayList<RoomService> searchRoomService(ArrayList<RoomService> rms, Guest guest, Room room) {
 		ArrayList roomServices = getRoomService();
 		
